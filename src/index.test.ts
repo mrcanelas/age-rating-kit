@@ -24,6 +24,17 @@ describe('age-rating-kit', () => {
     });
   });
 
+  it('normalizes ESRB values', () => {
+    expect(normalizeRating('esrb', 'Everyone')).toEqual({
+      system: 'esrb',
+      code: 'e',
+    });
+    expect(normalizeRating('ESRB', 'E10+')).toEqual({
+      system: 'esrb',
+      code: 'e10-plus',
+    });
+  });
+
   it('normalizes MPA and TV-PG values', () => {
     expect(normalizeRating('mpaa', 'PG-13')).toEqual({
       system: 'mpa',

@@ -1,3 +1,6 @@
 node_modules
 *.log
 .DS_Store
+tmp-esrb
+tmp-esrb-preview.html
+assets/esrb
