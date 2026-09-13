@@ -1,2 +1,5 @@
 Roboto Condensed Bold (Apache License 2.0)
 https://github.com/googlefonts/roboto-2
+
+MPAA_Ratings.ttf is an unofficial recreation used only at generate time.
+Not affiliated with or endorsed by the Motion Picture Association.

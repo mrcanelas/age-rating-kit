@@ -16,9 +16,13 @@ function loadFont(file) {
 const robotoCondensedBold = loadFont(
   path.join(root, 'fonts/RobotoCondensed-Bold.ttf')
 );
+const mpaaRatings = loadFont(path.join(root, 'fonts/MPAA_Ratings.ttf'));
 const bold = loadFont('C:/Windows/Fonts/arialbd.ttf');
 const arialNarrowBold = loadFont('C:/Windows/Fonts/ARIALNB.TTF');
 const impact = loadFont('C:/Windows/Fonts/impact.ttf');
+const swissBlackCondensed = loadFont(
+  'C:/Windows/Fonts/Swis721 BlkCn BT Black.ttf'
+);
 
 const SIZE = 512;
 const CX = SIZE / 2;
@@ -51,6 +55,83 @@ function classindIcon(label, bg, fg) {
 function badgeIcon(label, bg, fg, font, fontSize) {
   return svgWrap(
     `${roundedRect(48, 80, 416, 352, 48, bg)}${textPath(font, label, fontSize, CX, CY + 8, fg)}`
+  );
+}
+
+function headerLines(font, lines, cx, top, maxW, maxH, fill) {
+  const lineH = maxH / lines.length;
+  let fontSize = lineH * 0.82;
+  for (const line of lines) {
+    const widthAt = font.getAdvanceWidth(line, 100);
+    const byWidth = (maxW / widthAt) * 100;
+    const box = font.getPath(line, 0, 0, 100).getBoundingBox();
+    const byHeight = ((lineH * 0.88) / (box.y2 - box.y1)) * 100;
+    fontSize = Math.min(fontSize, byWidth, byHeight);
+  }
+  return lines
+    .map((line, i) =>
+      textPath(font, line, fontSize, cx, top + lineH * i + lineH / 2, fill)
+    )
+    .join('');
+}
+
+function mpaIcon(code) {
+  const spec = {
+    g: { lines: ['GENERAL AUDIENCES'], letter: 'G', color: '#006838' },
+    pg: {
+      lines: ['PARENTAL GUIDANCE', 'SUGGESTED'],
+      letter: 'PG',
+      color: '#F15A29',
+    },
+    'pg-13': {
+      lines: ['PARENTS STRONGLY', 'CAUTIONED'],
+      letter: 'PG-13',
+      color: '#7F3F98',
+    },
+    r: { lines: ['RESTRICTED'], letter: 'R', color: '#D71920' },
+    'nc-17': {
+      lines: ['NO ONE 17 AND UNDER', 'ADMITTED'],
+      letter: 'NC-17',
+      color: '#21409A',
+    },
+  }[code];
+  const pad = 8;
+  const S = SIZE - pad * 2;
+  const X = pad;
+  const Y = pad;
+  const border = S * 0.065;
+  const headerH = S * 0.205;
+  const bodyX = X + border;
+  const bodyY = Y + headerH;
+  const bodyW = S - border * 2;
+  const bodyH = S - headerH - border;
+  const letterPad = Math.min(bodyW, bodyH) * (spec.letter.length > 2 ? 0.08 : 0.1);
+  const glyph = mpaaRatings.getPath(spec.letter, 0, 0, 100);
+  const box = glyph.getBoundingBox();
+  const scale = Math.min(
+    (bodyW - letterPad * 2) / (box.x2 - box.x1),
+    (bodyH - letterPad * 2) / (box.y2 - box.y1)
+  );
+  const fontSize = 100 * scale;
+  const placed = mpaaRatings.getPath(spec.letter, 0, 0, fontSize);
+  const placedBox = placed.getBoundingBox();
+  const dx = bodyX + bodyW / 2 - (placedBox.x1 + placedBox.x2) / 2;
+  const dy = bodyY + bodyH / 2 - (placedBox.y1 + placedBox.y2) / 2;
+  const shifted = mpaaRatings.getPath(spec.letter, dx, dy, fontSize);
+  const letter = `<path fill="${spec.color}" fill-rule="evenodd" d="${shifted.toPathData(2)}"/>`;
+  return svgWrap(
+    `<rect x="${X}" y="${Y}" width="${S}" height="${S}" fill="#000000"/>` +
+      `<rect x="${bodyX.toFixed(2)}" y="${bodyY.toFixed(2)}" width="${bodyW.toFixed(2)}" height="${bodyH.toFixed(2)}" fill="${PAPER}"/>` +
+      headerLines(
+        swissBlackCondensed,
+        spec.lines,
+        X + S / 2,
+        Y,
+        S - border * 2.4,
+        headerH,
+        PAPER
+      ) +
+      letter
   );
 }
 
@@ -370,11 +451,11 @@ const catalog = [
   [
     'mpa',
     [
-      ['g', badgeIcon('G', '#2e7d32', '#ffffff', impact, 220)],
-      ['pg', badgeIcon('PG', '#f9a825', '#111111', impact, 170)],
-      ['pg-13', badgeIcon('PG-13', '#ef6c00', '#ffffff', impact, 128)],
-      ['r', badgeIcon('R', '#c62828', '#ffffff', impact, 220)],
-      ['nc-17', badgeIcon('NC-17', '#111111', '#ffffff', impact, 120)],
+      ['g', mpaIcon('g')],
+      ['pg', mpaIcon('pg')],
+      ['pg-13', mpaIcon('pg-13')],
+      ['r', mpaIcon('r')],
+      ['nc-17', mpaIcon('nc-17')],
     ],
   ],
   [
