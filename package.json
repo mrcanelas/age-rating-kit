@@ -1,0 +1,71 @@
+{
+  "name": "age-rating-kit",
+  "version": "0.1.0",
+  "description": "SVG age-rating icons and helpers for ClassInd, MPA, TV-PG, PEGI, ESRB, and more.",
+  "type": "module",
+  "license": "MIT",
+  "author": "mrcanelas",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mrcanelas/age-rating-kit.git"
+  },
+  "homepage": "https://mrcanelas.github.io/age-rating-kit/",
+  "bugs": {
+    "url": "https://github.com/mrcanelas/age-rating-kit/issues"
+  },
+  "keywords": [
+    "age-rating",
+    "classind",
+    "mpaa",
+    "mpa",
+    "tv-pg",
+    "pegi",
+    "esrb",
+    "svg",
+    "icons",
+    "react"
+  ],
+  "sideEffects": false,
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./react": {
+      "types": "./dist/react/index.d.ts",
+      "import": "./dist/react/index.js"
+    },
+    "./icons/*": "./icons/*"
+  },
+  "files": [
+    "dist",
+    "icons"
+  ],
+  "scripts": {
+    "generate": "node scripts/generate-icons.mjs",
+    "build": "node scripts/generate-icons.mjs && tsup",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit"
+  },
+  "peerDependencies": {
+    "react": ">=18"
+  },
+  "peerDependenciesMeta": {
+    "react": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@types/react": "^19.0.0",
+    "opentype.js": "1.3.4",
+    "react": "^19.0.0",
+    "tsup": "^8.5.0",
+    "typescript": "^5.8.0",
+    "vitest": "^3.2.0"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": ["esbuild"]
+  }
+}
