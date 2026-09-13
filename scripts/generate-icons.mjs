@@ -13,7 +13,7 @@ function loadFont(file) {
   );
 }
 
-const narrow = loadFont('C:/Windows/Fonts/ARIALNB.TTF');
+const black = loadFont('C:/Windows/Fonts/Swis721 BlkCn BT Black.ttf');
 const bold = loadFont('C:/Windows/Fonts/arialbd.ttf');
 const impact = loadFont('C:/Windows/Fonts/impact.ttf');
 
@@ -34,18 +34,14 @@ function textPath(font, text, fontSize, cx, cy, fill) {
   return `<path fill="${fill}" d="${shifted.toPathData(2)}"/>`;
 }
 
-function diamond(fill) {
-  return `<rect x="109" y="109" width="294" height="294" rx="28" fill="${fill}" transform="rotate(45 256 256)"/>`;
-}
-
 function roundedRect(x, y, w, h, r, fill) {
   return `<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="${r}" fill="${fill}"/>`;
 }
 
 function classindIcon(label, bg, fg) {
-  const fontSize = label.length === 1 ? 210 : 168;
+  const fontSize = label.length === 1 ? 340 : 250;
   return svgWrap(
-    `${diamond(bg)}${textPath(narrow, label, fontSize, CX, CY + 6, fg)}`
+    `${roundedRect(0, 0, SIZE, SIZE, 48, bg)}${textPath(black, label, fontSize, CX, CY + 4, fg)}`
   );
 }
 
@@ -71,8 +67,8 @@ const catalog = [
       ['l', classindIcon('L', '#338933', '#ffffff')],
       ['6', classindIcon('6', '#00aeef', '#ffffff')],
       ['10', classindIcon('10', '#2474b9', '#ffffff')],
-      ['12', classindIcon('12', '#f2c400', '#111111')],
-      ['14', classindIcon('14', '#e87722', '#111111')],
+      ['12', classindIcon('12', '#f2c400', '#ffffff')],
+      ['14', classindIcon('14', '#e87722', '#ffffff')],
       ['16', classindIcon('16', '#c8102e', '#ffffff')],
       ['18', classindIcon('18', '#111111', '#ffffff')],
     ],

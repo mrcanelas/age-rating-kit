@@ -57,7 +57,7 @@ export const classindSystem: RatingSystem = {
       label: '12',
       description: 'Não recomendado para menores de 12 anos',
       color: '#f2c400',
-      textColor: '#111111',
+      textColor: '#ffffff',
     },
     {
       code: '14',
@@ -65,7 +65,7 @@ export const classindSystem: RatingSystem = {
       label: '14',
       description: 'Não recomendado para menores de 14 anos',
       color: '#e87722',
-      textColor: '#111111',
+      textColor: '#ffffff',
     },
     {
       code: '16',
