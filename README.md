@@ -6,6 +6,8 @@ Icons are original redraws of the official shapes (same idea as [circle-flags](h
 
 These marks belong to the rating bodies. This project is not affiliated with SNJ/DJCTQ, MPA, the FCC, PEGI or ESRB. Use the icons to identify a rating, and credit ClassInd / SNJ–DJCTQ when showing Brazilian ratings.
 
+<br/><img src="https://cdn.jsdelivr.net/gh/mrcanelas/age-rating-kit@latest/icons/classind/l.svg" width="48"> <img src="https://cdn.jsdelivr.net/gh/mrcanelas/age-rating-kit@latest/icons/classind/6.svg" width="48"> <img src="https://cdn.jsdelivr.net/gh/mrcanelas/age-rating-kit@latest/icons/classind/10.svg" width="48"> <img src="https://cdn.jsdelivr.net/gh/mrcanelas/age-rating-kit@latest/icons/classind/12.svg" width="48"> <img src="https://cdn.jsdelivr.net/gh/mrcanelas/age-rating-kit@latest/icons/classind/14.svg" width="48"> <img src="https://cdn.jsdelivr.net/gh/mrcanelas/age-rating-kit@latest/icons/classind/16.svg" width="48"> <img src="https://cdn.jsdelivr.net/gh/mrcanelas/age-rating-kit@latest/icons/classind/18.svg" width="48">
+
 ## Usage
 
 ```tsx
