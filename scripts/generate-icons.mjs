@@ -13,7 +13,9 @@ function loadFont(file) {
   );
 }
 
-const black = loadFont('C:/Windows/Fonts/Swis721 BlkCn BT Black.ttf');
+const robotoCondensedBold = loadFont(
+  path.join(root, 'fonts/RobotoCondensed-Bold.ttf')
+);
 const bold = loadFont('C:/Windows/Fonts/arialbd.ttf');
 const impact = loadFont('C:/Windows/Fonts/impact.ttf');
 
@@ -41,7 +43,7 @@ function roundedRect(x, y, w, h, r, fill) {
 function classindIcon(label, bg, fg) {
   const fontSize = label.length === 1 ? 340 : 250;
   return svgWrap(
-    `${roundedRect(0, 0, SIZE, SIZE, 48, bg)}${textPath(black, label, fontSize, CX, CY + 4, fg)}`
+    `${roundedRect(0, 0, SIZE, SIZE, 48, bg)}${textPath(robotoCondensedBold, label, fontSize, CX, CY + 4, fg)}`
   );
 }
 
@@ -64,13 +66,13 @@ const catalog = [
   [
     'classind',
     [
-      ['l', classindIcon('L', '#338933', '#ffffff')],
-      ['6', classindIcon('6', '#00aeef', '#ffffff')],
-      ['10', classindIcon('10', '#2474b9', '#ffffff')],
-      ['12', classindIcon('12', '#f2c400', '#ffffff')],
-      ['14', classindIcon('14', '#e87722', '#ffffff')],
-      ['16', classindIcon('16', '#c8102e', '#ffffff')],
-      ['18', classindIcon('18', '#111111', '#ffffff')],
+      ['l', classindIcon('L', '#00A651', '#ffffff')],
+      ['6', classindIcon('6', '#E43493', '#ffffff')],
+      ['10', classindIcon('10', '#0095DA', '#ffffff')],
+      ['12', classindIcon('12', '#FBC115', '#ffffff')],
+      ['14', classindIcon('14', '#F58220', '#ffffff')],
+      ['16', classindIcon('16', '#EC1D25', '#ffffff')],
+      ['18', classindIcon('18', '#000000', '#ffffff')],
     ],
   ],
   [

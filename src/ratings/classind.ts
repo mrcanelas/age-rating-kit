@@ -32,7 +32,7 @@ export const classindSystem: RatingSystem = {
       aliases: ['l', 'livre', 'al', 'g', 'all'],
       label: 'Livre',
       description: 'Livre para todos os públicos',
-      color: '#338933',
+      color: '#00A651',
       textColor: '#ffffff',
     },
     {
@@ -40,7 +40,7 @@ export const classindSystem: RatingSystem = {
       aliases: ['6', '6 anos', 'a6'],
       label: '6',
       description: 'Não recomendado para menores de 6 anos',
-      color: '#00aeef',
+      color: '#E43493',
       textColor: '#ffffff',
     },
     {
@@ -48,7 +48,7 @@ export const classindSystem: RatingSystem = {
       aliases: ['10', '10 anos', 'a10'],
       label: '10',
       description: 'Não recomendado para menores de 10 anos',
-      color: '#2474b9',
+      color: '#0095DA',
       textColor: '#ffffff',
     },
     {
@@ -56,7 +56,7 @@ export const classindSystem: RatingSystem = {
       aliases: ['12', '12 anos', 'a12'],
       label: '12',
       description: 'Não recomendado para menores de 12 anos',
-      color: '#f2c400',
+      color: '#FBC115',
       textColor: '#ffffff',
     },
     {
@@ -64,7 +64,7 @@ export const classindSystem: RatingSystem = {
       aliases: ['14', '14 anos', 'a14'],
       label: '14',
       description: 'Não recomendado para menores de 14 anos',
-      color: '#e87722',
+      color: '#F58220',
       textColor: '#ffffff',
     },
     {
@@ -72,7 +72,7 @@ export const classindSystem: RatingSystem = {
       aliases: ['16', '16 anos', 'a16'],
       label: '16',
       description: 'Não recomendado para menores de 16 anos',
-      color: '#c8102e',
+      color: '#EC1D25',
       textColor: '#ffffff',
     },
     {
@@ -80,7 +80,7 @@ export const classindSystem: RatingSystem = {
       aliases: ['18', '18 anos', 'a18'],
       label: '18',
       description: 'Não recomendado para menores de 18 anos',
-      color: '#111111',
+      color: '#000000',
       textColor: '#ffffff',
     },
   ],
