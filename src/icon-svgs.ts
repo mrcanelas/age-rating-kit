@@ -54,6 +54,42 @@ import acbM from '../icons/acb/m.svg';
 import acbMa15Plus from '../icons/acb/ma15-plus.svg';
 import acbR18Plus from '../icons/acb/r18-plus.svg';
 import acbX18Plus from '../icons/acb/x18-plus.svg';
+import iarc3Plus from '../icons/iarc/3-plus.svg';
+import iarc7Plus from '../icons/iarc/7-plus.svg';
+import iarc12Plus from '../icons/iarc/12-plus.svg';
+import iarc16Plus from '../icons/iarc/16-plus.svg';
+import iarc18Plus from '../icons/iarc/18-plus.svg';
+import kijkwijzerAl from '../icons/kijkwijzer/al.svg';
+import kijkwijzer6 from '../icons/kijkwijzer/6.svg';
+import kijkwijzer9 from '../icons/kijkwijzer/9.svg';
+import kijkwijzer12 from '../icons/kijkwijzer/12.svg';
+import kijkwijzer14 from '../icons/kijkwijzer/14.svg';
+import kijkwijzer16 from '../icons/kijkwijzer/16.svg';
+import kijkwijzer18 from '../icons/kijkwijzer/18.svg';
+import eirinG from '../icons/eirin/g.svg';
+import eirinPg12 from '../icons/eirin/pg12.svg';
+import eirinR15Plus from '../icons/eirin/r15-plus.svg';
+import eirinR18Plus from '../icons/eirin/r18-plus.svg';
+import oflcG from '../icons/oflc/g.svg';
+import oflcPg from '../icons/oflc/pg.svg';
+import oflcM from '../icons/oflc/m.svg';
+import oflcR13 from '../icons/oflc/r13.svg';
+import oflcR15 from '../icons/oflc/r15.svg';
+import oflcR16 from '../icons/oflc/r16.svg';
+import oflcR18 from '../icons/oflc/r18.svg';
+import oflcRp13 from '../icons/oflc/rp13.svg';
+import oflcRp16 from '../icons/oflc/rp16.svg';
+import oflcRp18 from '../icons/oflc/rp18.svg';
+import rtcAa from '../icons/rtc/aa.svg';
+import rtcA from '../icons/rtc/a.svg';
+import rtcB from '../icons/rtc/b.svg';
+import rtcC from '../icons/rtc/c.svg';
+import rtcD from '../icons/rtc/d.svg';
+import gsrrG from '../icons/gsrr/g.svg';
+import gsrrP from '../icons/gsrr/p.svg';
+import gsrrPg12 from '../icons/gsrr/pg12.svg';
+import gsrrPg15 from '../icons/gsrr/pg15.svg';
+import gsrrR from '../icons/gsrr/r.svg';
 
 export const ICON_SVGS: Record<string, Record<string, string>> = {
   classind: {
@@ -131,5 +167,53 @@ export const ICON_SVGS: Record<string, Record<string, string>> = {
     'ma15-plus': acbMa15Plus,
     'r18-plus': acbR18Plus,
     'x18-plus': acbX18Plus,
+  },
+  iarc: {
+    '3-plus': iarc3Plus,
+    '7-plus': iarc7Plus,
+    '12-plus': iarc12Plus,
+    '16-plus': iarc16Plus,
+    '18-plus': iarc18Plus,
+  },
+  kijkwijzer: {
+    al: kijkwijzerAl,
+    '6': kijkwijzer6,
+    '9': kijkwijzer9,
+    '12': kijkwijzer12,
+    '14': kijkwijzer14,
+    '16': kijkwijzer16,
+    '18': kijkwijzer18,
+  },
+  eirin: {
+    g: eirinG,
+    pg12: eirinPg12,
+    'r15-plus': eirinR15Plus,
+    'r18-plus': eirinR18Plus,
+  },
+  oflc: {
+    g: oflcG,
+    pg: oflcPg,
+    m: oflcM,
+    r13: oflcR13,
+    r15: oflcR15,
+    r16: oflcR16,
+    r18: oflcR18,
+    rp13: oflcRp13,
+    rp16: oflcRp16,
+    rp18: oflcRp18,
+  },
+  rtc: {
+    aa: rtcAa,
+    a: rtcA,
+    b: rtcB,
+    c: rtcC,
+    d: rtcD,
+  },
+  gsrr: {
+    g: gsrrG,
+    p: gsrrP,
+    pg12: gsrrPg12,
+    pg15: gsrrPg15,
+    r: gsrrR,
   },
 };

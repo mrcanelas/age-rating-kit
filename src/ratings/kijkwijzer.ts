@@ -1,0 +1,65 @@
+import type { RatingSystem } from './classind.js';
+
+export const kijkwijzerSystem: RatingSystem = {
+  id: 'kijkwijzer',
+  aliases: ['kijkwijzer', 'netherlands', 'nederland'],
+  name: 'Kijkwijzer',
+  codes: [
+    {
+      code: 'al',
+      aliases: ['al', 'alle leeftijden', 'all ages'],
+      label: 'AL',
+      description: 'Alle leeftijden',
+      color: '#2E9E45',
+      textColor: '#ffffff',
+    },
+    {
+      code: '6',
+      aliases: ['6'],
+      label: '6',
+      description: 'Niet geschikt voor kinderen jonger dan 6 jaar',
+      color: '#F6C445',
+      textColor: '#111111',
+    },
+    {
+      code: '9',
+      aliases: ['9'],
+      label: '9',
+      description: 'Niet geschikt voor kinderen jonger dan 9 jaar',
+      color: '#F08A24',
+      textColor: '#ffffff',
+    },
+    {
+      code: '12',
+      aliases: ['12'],
+      label: '12',
+      description: 'Niet geschikt voor kinderen jonger dan 12 jaar',
+      color: '#E4572E',
+      textColor: '#ffffff',
+    },
+    {
+      code: '14',
+      aliases: ['14'],
+      label: '14',
+      description: 'Niet geschikt voor kinderen jonger dan 14 jaar',
+      color: '#D63A2F',
+      textColor: '#ffffff',
+    },
+    {
+      code: '16',
+      aliases: ['16'],
+      label: '16',
+      description: 'Niet geschikt voor kinderen jonger dan 16 jaar',
+      color: '#C4282C',
+      textColor: '#ffffff',
+    },
+    {
+      code: '18',
+      aliases: ['18'],
+      label: '18',
+      description: 'Niet geschikt voor personen jonger dan 18 jaar',
+      color: '#111111',
+      textColor: '#ffffff',
+    },
+  ],
+};

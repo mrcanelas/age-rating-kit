@@ -1,6 +1,6 @@
 # age-rating-kit
 
-SVG age-rating icons and helpers for ClassInd, MPA, TV Parental Guidelines, PEGI, ESRB, BBFC, FSK, USK, CERO and the Australian Classification Board.
+SVG age-rating icons and helpers for ClassInd, MPA, TV Parental Guidelines, PEGI, ESRB, BBFC, FSK, USK, CERO, the Australian Classification Board, IARC, Kijkwijzer, Eirin, OFLC, RTC and GSRR.
 
 Each rating is one SVG file from [Wikimedia Commons](https://commons.wikimedia.org/).
 
@@ -51,6 +51,12 @@ https://mrcanelas.github.io/age-rating-kit/icons/classind/12.svg
 | `usk` | `icons/usk/` | Unterhaltungssoftware Selbstkontrolle | `0`, `6`, `12`, `16`, `18` |
 | `cero` | `icons/cero/` | Computer Entertainment Rating Organization | `a`, `b`, `c`, `d`, `z` |
 | `acb` | `icons/acb/` | Australian Classification Board, Australia | `g`, `pg`, `m`, `ma15-plus`, `r18-plus`, `x18-plus` |
+| `iarc` | `icons/iarc/` | International Age Rating Coalition | `3-plus`, `7-plus`, `12-plus`, `16-plus`, `18-plus` |
+| `kijkwijzer` | `icons/kijkwijzer/` | Kijkwijzer, Netherlands | `al`, `6`, `9`, `12`, `14`, `16`, `18` |
+| `eirin` | `icons/eirin/` | Eirin | `g`, `pg12`, `r15-plus`, `r18-plus` |
+| `oflc` | `icons/oflc/` | New Zealand | `g`, `pg`, `m`, `r13`, `r15`, `r16`, `r18`, `rp13`, `rp16`, `rp18` |
+| `rtc` | `icons/rtc/` | RTC, Mexico | `aa`, `a`, `b`, `c`, `d` |
+| `gsrr` | `icons/gsrr/` | GSRR, Taiwan | `g`, `p`, `pg12`, `pg15`, `r` |
 
 Gallery: <https://mrcanelas.github.io/age-rating-kit/>
 

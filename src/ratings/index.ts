@@ -9,6 +9,12 @@ export { fskSystem } from './fsk.js';
 export { uskSystem } from './usk.js';
 export { ceroSystem } from './cero.js';
 export { acbSystem } from './acb.js';
+export { iarcSystem } from './iarc.js';
+export { kijkwijzerSystem } from './kijkwijzer.js';
+export { eirinSystem } from './eirin.js';
+export { oflcSystem } from './oflc.js';
+export { rtcSystem } from './rtc.js';
+export { gsrrSystem } from './gsrr.js';
 
 import { classindSystem } from './classind.js';
 import { mpaSystem } from './mpa.js';
@@ -20,6 +26,12 @@ import { fskSystem } from './fsk.js';
 import { uskSystem } from './usk.js';
 import { ceroSystem } from './cero.js';
 import { acbSystem } from './acb.js';
+import { iarcSystem } from './iarc.js';
+import { kijkwijzerSystem } from './kijkwijzer.js';
+import { eirinSystem } from './eirin.js';
+import { oflcSystem } from './oflc.js';
+import { rtcSystem } from './rtc.js';
+import { gsrrSystem } from './gsrr.js';
 
 export const RATING_SYSTEMS = [
   classindSystem,
@@ -32,4 +44,10 @@ export const RATING_SYSTEMS = [
   uskSystem,
   ceroSystem,
   acbSystem,
+  iarcSystem,
+  kijkwijzerSystem,
+  eirinSystem,
+  oflcSystem,
+  rtcSystem,
+  gsrrSystem,
 ] as const;

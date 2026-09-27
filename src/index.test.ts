@@ -71,6 +71,25 @@ describe('age-rating-kit', () => {
     expect(getIconPath('acb', 'R 18+')).toBe('icons/acb/r18-plus.svg');
   });
 
+  it('normalizes IARC, Kijkwijzer, Eirin, OFLC, RTC and GSRR values', () => {
+    expect(normalizeRating('IARC', '12+')).toEqual({ system: 'iarc', code: '12-plus' });
+    expect(normalizeRating('Kijkwijzer', 'AL')).toEqual({
+      system: 'kijkwijzer',
+      code: 'al',
+    });
+    expect(normalizeRating('Eirin', 'R15+')).toEqual({
+      system: 'eirin',
+      code: 'r15-plus',
+    });
+    expect(normalizeRating('New Zealand', 'RP16')).toEqual({
+      system: 'oflc',
+      code: 'rp16',
+    });
+    expect(normalizeRating('Mexico', 'AA')).toEqual({ system: 'rtc', code: 'aa' });
+    expect(normalizeRating('GSRR', 'PG 15')).toEqual({ system: 'gsrr', code: 'pg15' });
+    expect(getIconPath('iarc', '3+')).toBe('icons/iarc/3-plus.svg');
+  });
+
   it('returns undefined for unknown ratings', () => {
     expect(normalizeRating('classind', '99')).toBeUndefined();
     expect(getIconUrl('unknown', '12')).toBeUndefined();

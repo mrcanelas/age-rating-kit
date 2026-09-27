@@ -13,7 +13,7 @@ interface RatingSystem {
     codes: RatingCode[];
 }
 
-declare const RATING_SYSTEMS: readonly [RatingSystem, RatingSystem, RatingSystem, RatingSystem, RatingSystem, RatingSystem, RatingSystem, RatingSystem, RatingSystem, RatingSystem];
+declare const RATING_SYSTEMS: readonly [RatingSystem, RatingSystem, RatingSystem, RatingSystem, RatingSystem, RatingSystem, RatingSystem, RatingSystem, RatingSystem, RatingSystem, RatingSystem, RatingSystem, RatingSystem, RatingSystem, RatingSystem, RatingSystem];
 
 interface RatingMeta {
     system: string;
