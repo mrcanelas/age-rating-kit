@@ -1,10 +1,10 @@
 # age-rating-kit
 
-SVG age-rating icons and helpers for ClassInd, MPA, TV Parental Guidelines, PEGI and ESRB.
+SVG age-rating icons and helpers for ClassInd, MPA, TV Parental Guidelines, PEGI, ESRB, BBFC, FSK, USK, CERO and the Australian Classification Board.
 
-Each rating is one SVG file from [Wikimedia Commons](https://commons.wikimedia.org/): Classificação Indicativa, MPA rating marks, TV Parental Guidelines icons, current PEGI marks, and ESRB 2013 marks.
+Each rating is one SVG file from [Wikimedia Commons](https://commons.wikimedia.org/).
 
-These marks belong to the rating bodies. This project is not affiliated with SNJ/DJCTQ, MPA, the FCC, PEGI or ESRB. Use the icons to identify a rating, and credit ClassInd / SNJ–DJCTQ when showing Brazilian ratings.
+These marks belong to the rating bodies. This project is not affiliated with them. Use the icons to identify a rating, and credit ClassInd / SNJ–DJCTQ when showing Brazilian ratings.
 
 <br/><img src="https://cdn.jsdelivr.net/gh/mrcanelas/age-rating-kit@latest/icons/classind/l.svg" width="48"> <img src="https://cdn.jsdelivr.net/gh/mrcanelas/age-rating-kit@latest/icons/classind/6.svg" width="48"> <img src="https://cdn.jsdelivr.net/gh/mrcanelas/age-rating-kit@latest/icons/classind/10.svg" width="48"> <img src="https://cdn.jsdelivr.net/gh/mrcanelas/age-rating-kit@latest/icons/classind/12.svg" width="48"> <img src="https://cdn.jsdelivr.net/gh/mrcanelas/age-rating-kit@latest/icons/classind/14.svg" width="48"> <img src="https://cdn.jsdelivr.net/gh/mrcanelas/age-rating-kit@latest/icons/classind/16.svg" width="48"> <img src="https://cdn.jsdelivr.net/gh/mrcanelas/age-rating-kit@latest/icons/classind/18.svg" width="48">
 
@@ -46,6 +46,11 @@ https://mrcanelas.github.io/age-rating-kit/icons/classind/12.svg
 | `tv-pg` | `icons/tv-pg/` | TV Parental Guidelines | `tv-y`, `tv-y7`, `tv-g`, `tv-pg`, `tv-14`, `tv-ma` |
 | `pegi` | `icons/pegi/` | PEGI | `3`, `7`, `12`, `16`, `18` |
 | `esrb` | `icons/esrb/` | ESRB | `e`, `e10-plus`, `t`, `m`, `ao` |
+| `bbfc` | `icons/bbfc/` | British Board of Film Classification | `u`, `pg`, `12a`, `12`, `15`, `18`, `r18` |
+| `fsk` | `icons/fsk/` | Freiwillige Selbstkontrolle der Filmwirtschaft | `0`, `6`, `12`, `16`, `18` |
+| `usk` | `icons/usk/` | Unterhaltungssoftware Selbstkontrolle | `0`, `6`, `12`, `16`, `18` |
+| `cero` | `icons/cero/` | Computer Entertainment Rating Organization | `a`, `b`, `c`, `d`, `z` |
+| `acb` | `icons/acb/` | Australian Classification Board, Australia | `g`, `pg`, `m`, `ma15-plus`, `r18-plus`, `x18-plus` |
 
 Gallery: <https://mrcanelas.github.io/age-rating-kit/>
 

@@ -21,6 +21,11 @@
     "tv-pg",
     "pegi",
     "esrb",
+    "bbfc",
+    "fsk",
+    "usk",
+    "cero",
+    "acb",
     "svg",
     "icons",
     "react"

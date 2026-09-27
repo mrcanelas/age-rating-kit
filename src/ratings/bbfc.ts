@@ -1,0 +1,65 @@
+import type { RatingSystem } from './classind.js';
+
+export const bbfcSystem: RatingSystem = {
+  id: 'bbfc',
+  aliases: ['bbfc', 'british board of film classification'],
+  name: 'BBFC',
+  codes: [
+    {
+      code: 'u',
+      aliases: ['u', 'universal'],
+      label: 'U',
+      description: 'Universal, suitable for all',
+      color: '#21B24B',
+      textColor: '#ffffff',
+    },
+    {
+      code: 'pg',
+      aliases: ['pg', 'parental guidance'],
+      label: 'PG',
+      description: 'Parental Guidance',
+      color: '#FFD100',
+      textColor: '#111111',
+    },
+    {
+      code: '12a',
+      aliases: ['12a', '12-a'],
+      label: '12A',
+      description: 'Suitable for 12 years and over, under 12s with an adult',
+      color: '#FF7F00',
+      textColor: '#ffffff',
+    },
+    {
+      code: '12',
+      aliases: ['12'],
+      label: '12',
+      description: 'Suitable only for 12 years and over',
+      color: '#FF7F00',
+      textColor: '#ffffff',
+    },
+    {
+      code: '15',
+      aliases: ['15'],
+      label: '15',
+      description: 'Suitable only for 15 years and over',
+      color: '#E6007E',
+      textColor: '#ffffff',
+    },
+    {
+      code: '18',
+      aliases: ['18'],
+      label: '18',
+      description: 'Suitable only for adults',
+      color: '#E30613',
+      textColor: '#ffffff',
+    },
+    {
+      code: 'r18',
+      aliases: ['r18', 'r-18'],
+      label: 'R18',
+      description: 'Adults only, licensed cinemas and sex shops',
+      color: '#1B3A8C',
+      textColor: '#ffffff',
+    },
+  ],
+};

@@ -58,6 +58,19 @@ describe('age-rating-kit', () => {
     expect(getRatingMeta('classind', '14')?.description).toMatch(/14 anos/);
   });
 
+  it('normalizes BBFC, FSK, USK, CERO and ACB values', () => {
+    expect(normalizeRating('BBFC', '12A')).toEqual({ system: 'bbfc', code: '12a' });
+    expect(normalizeRating('FSK', 'ab 16')).toEqual({ system: 'fsk', code: '16' });
+    expect(normalizeRating('USK', '0')).toEqual({ system: 'usk', code: '0' });
+    expect(normalizeRating('CERO', 'Z')).toEqual({ system: 'cero', code: 'z' });
+    expect(normalizeRating('Australia', 'MA 15+')).toEqual({
+      system: 'acb',
+      code: 'ma15-plus',
+    });
+    expect(getIconSvg('bbfc', 'U')?.startsWith('<svg ')).toBe(true);
+    expect(getIconPath('acb', 'R 18+')).toBe('icons/acb/r18-plus.svg');
+  });
+
   it('returns undefined for unknown ratings', () => {
     expect(normalizeRating('classind', '99')).toBeUndefined();
     expect(getIconUrl('unknown', '12')).toBeUndefined();
