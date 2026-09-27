@@ -4,493 +4,2426 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>age-rating-kit</title>
+  <meta name="description" content="SVG age-rating icons for ClassInd, MPA, TV Parental Guidelines, PEGI, ESRB, and other boards. Browse the marks and copy a path or CDN URL." />
+  <link rel="canonical" href="https://mrcanelas.github.io/age-rating-kit/" />
   <style>
-    :root { color-scheme: light dark; font-family: system-ui, sans-serif; }
-    body { max-width: 960px; margin: 2rem auto; padding: 0 1.25rem; }
-    h1 { font-size: 1.6rem; }
-    h2 { font-size: 1.1rem; margin: 2rem 0 0.75rem; }
-    code { font-size: 0.9em; }
-    .row { display: flex; flex-wrap: wrap; gap: 1rem; }
-    figure { margin: 0; text-align: center; }
-    figcaption { font-size: 0.8rem; margin-top: 0.35rem; }
-    img { display: block; height: 72px; width: auto; margin: 0 auto; }
+    :root {
+      --bg: oklch(0.975 0.006 250);
+      --ink: oklch(0.24 0.028 258);
+      --muted: oklch(0.34 0.028 258);
+      --line: oklch(0.86 0.012 250);
+      --accent: oklch(0.38 0.11 258);
+      --plate-light: oklch(0.995 0 0);
+      --plate-dark: oklch(0.22 0.03 258);
+      --focus: oklch(0.48 0.16 258);
+      --copied: oklch(0.36 0.08 155);
+      color-scheme: light;
+      font-family: system-ui, "Segoe UI", sans-serif;
+      line-height: 1.5;
+    }
+    html { overflow-x: clip; }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+    }
+    a { color: var(--accent); }
+    a:hover { color: oklch(0.3 0.12 258); }
+    :focus { outline: none; }
+    :focus-visible {
+      outline: 2px solid var(--focus);
+      outline-offset: 2px;
+    }
+    .skip {
+      position: absolute;
+      left: 1rem;
+      top: -4rem;
+      z-index: 30;
+      background: var(--plate-light);
+      color: var(--ink);
+      padding: 0.5rem 0.75rem;
+    }
+    .skip:focus { top: 0.75rem; }
+    .wrap {
+      width: min(1120px, calc(100% - 2rem));
+      max-width: calc(100% - 2rem);
+      margin-inline: auto;
+    }
+    .mast {
+      padding: 1.75rem 0 1.25rem;
+      border-bottom: 3px solid var(--ink);
+    }
+    .mast-top {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 1rem 2rem;
+      align-items: flex-end;
+    }
+    h1 {
+      margin: 0;
+      font-size: clamp(1.75rem, 3vw, 2.4rem);
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      font-weight: 680;
+      text-wrap: balance;
+    }
+    .lede {
+      max-width: 65ch;
+      margin: 0.75rem 0 0;
+      font-size: 1.05rem;
+      text-wrap: pretty;
+    }
+    .meta-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem 1rem;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+    .meta-links a {
+      color: var(--ink);
+      text-decoration-thickness: 1px;
+      text-underline-offset: 0.2em;
+    }
+    .toolbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: var(--bg);
+      border-bottom: 1px solid var(--line);
+      padding: 0.75rem 0;
+    }
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem 1.25rem;
+      align-items: end;
+    }
+    label.find, .preview legend {
+      display: block;
+      font-size: 0.75rem;
+      font-weight: 650;
+      margin-bottom: 0.3rem;
+    }
+    .find { flex: 1 1 16rem; }
+    input[type="search"] {
+      width: 100%;
+      min-height: 2.75rem;
+      padding: 0.4rem 0.75rem;
+      border: 1px solid var(--ink);
+      border-radius: 999px;
+      background: var(--plate-light);
+      color: var(--ink);
+      font: inherit;
+    }
+    input[type="search"]::placeholder { color: var(--muted); opacity: 1; }
+    .preview {
+      border: 0;
+      margin: 0;
+      padding: 0;
+      min-width: 0;
+    }
+    .preview-options {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      width: 100%;
+    }
+    .preview-options label {
+      min-height: 2.75rem;
+      display: inline-flex;
+      align-items: center;
+      padding: 0 0.85rem;
+      border: 1px solid var(--ink);
+      margin-left: -1px;
+      cursor: pointer;
+      background: var(--plate-light);
+    }
+    .preview-options label:first-child { margin-left: 0; border-radius: 999px 0 0 999px; }
+    .preview-options label:last-child { border-radius: 0 999px 999px 0; }
+    .preview-options input { position: absolute; opacity: 0; pointer-events: none; }
+    .preview-options label:has(input:checked) {
+      background: var(--ink);
+      color: var(--plate-light);
+    }
+    .preview-options label:has(input:focus-visible) {
+      outline: 2px solid var(--focus);
+      outline-offset: 2px;
+      z-index: 1;
+    }
+    .systems {
+      display: flex;
+      gap: 0.4rem 1rem;
+      overflow-x: auto;
+      margin: 0.75rem 0 0;
+      padding-bottom: 0.15rem;
+      list-style: none;
+    }
+    .systems a {
+      color: var(--ink);
+      text-decoration: none;
+      white-space: nowrap;
+      font-size: 0.92rem;
+      border-bottom: 1px solid transparent;
+    }
+    .systems a:hover,
+    .systems a[aria-current="true"] { border-bottom-color: var(--ink); }
+    .status {
+      min-height: 1.25rem;
+      margin: 0.55rem 0 0;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+    main { padding-bottom: 3rem; }
+    .system, .usage { scroll-margin-top: 10.5rem; padding-top: 2.25rem; }
+    .usage { margin-top: 3.5rem; padding-top: 2rem; border-top: 1px solid var(--line); max-width: 75ch; }
+    .system-head {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 0.25rem 1rem;
+      align-items: baseline;
+      margin-bottom: 1rem;
+    }
+    h2, h3 {
+      margin: 0;
+      letter-spacing: -0.02em;
+      text-wrap: balance;
+    }
+    h2 { font-size: 1.45rem; }
+    .system-head p, .meaning, .usage p { color: var(--muted); }
+    .system-head p { margin: 0; }
+    .marks {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.75rem 1.25rem;
+      align-items: flex-start;
+    }
+    .mark { width: 12.5rem; margin: 0; }
+    .window {
+      display: flex;
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    .plate {
+      flex: 1 1 0;
+      min-width: 0;
+      height: 5.75rem;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      place-items: center;
+      padding: 0.45rem;
+    }
+    .plate-light { background: var(--plate-light); }
+    .plate-dark { background: var(--plate-dark); }
+    .plate img {
+      display: block;
+      width: 100%;
+      height: 4.5rem;
+      object-fit: contain;
+    }
+    body[data-preview="light"] .plate-dark,
+    body[data-preview="dark"] .plate-light { display: none; }
+    .identity { margin: 0.55rem 0 0; }
+    .identity code { font-size: 0.95rem; }
+    .label { font-weight: 650; }
+    .meaning {
+      margin: 0.15rem 0 0;
+      font-size: 0.84rem;
+      text-wrap: pretty;
+    }
+    code, pre, .identity code {
+      font-family: ui-monospace, "Cascadia Mono", "Segoe UI Mono", monospace;
+    }
+    .actions { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.55rem; }
+    button {
+      min-height: 2.75rem;
+      padding: 0.35rem 0.7rem;
+      border: 1px solid var(--ink);
+      border-radius: 999px;
+      background: transparent;
+      color: var(--ink);
+      font: inherit;
+      font-size: 0.82rem;
+      cursor: pointer;
+    }
+    button:hover { background: oklch(0.93 0.012 250); }
+    button[data-state="copied"] {
+      background: var(--copied);
+      border-color: var(--copied);
+      color: white;
+    }
+    .empty {
+      margin: 2rem 0;
+      font-size: 1.05rem;
+    }
+    .usage h2 { font-size: 1.45rem; }
+    .usage > p { margin: 0.6rem 0 0; text-wrap: pretty; }
+    .example { margin-top: 1.5rem; }
+    h3 { font-size: 1.05rem; }
+    .example-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 0.45rem;
+    }
+    pre {
+      margin: 0;
+      padding: 0.9rem 1rem;
+      overflow: auto;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: var(--plate-light);
+      font-size: 0.84rem;
+      line-height: 1.55;
+    }
+    footer {
+      padding: 1.5rem 0 2.5rem;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+    footer p { max-width: 70ch; margin: 0.4rem 0; text-wrap: pretty; }
+    footer a { color: var(--ink); }
+    @media (max-width: 42rem) {
+      .controls { align-items: stretch; }
+      .find, .preview, .preview-options { flex: 1 1 100%; width: 100%; }
+      .preview-options label {
+        flex: 1 1 0;
+        min-width: 0;
+        justify-content: center;
+        padding-inline: 0.35rem;
+      }
+      .systems { flex-wrap: wrap; overflow: visible; max-width: 100%; }
+      .system-head { flex-direction: column; align-items: flex-start; }
+      .marks {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        min-width: 0;
+      }
+      .mark { width: auto; min-width: 0; max-width: 100%; }
+      .plate { height: 4.75rem; overflow: hidden; }
+      .plate img { height: 3.4rem; }
+      .actions { flex-direction: column; }
+      .actions button { width: 100%; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      * { scroll-behavior: auto !important; }
+    }
   </style>
 </head>
-<body>
-  <h1>age-rating-kit</h1>
-  <p>SVG age-rating icons. CDN: <code>https://cdn.jsdelivr.net/gh/mrcanelas/age-rating-kit@latest/icons/{system}/{code}.svg</code></p>
-    <section>
-      <h2>ClassInd</h2>
-      <div class="row">
-      <figure>
-        <img src="icons/classind/l.svg" width="72" height="72" alt="classind l" />
-        <figcaption>l</figcaption>
-      </figure>
-      <figure>
-        <img src="icons/classind/6.svg" width="72" height="72" alt="classind 6" />
-        <figcaption>6</figcaption>
-      </figure>
-      <figure>
-        <img src="icons/classind/10.svg" width="72" height="72" alt="classind 10" />
-        <figcaption>10</figcaption>
-      </figure>
-      <figure>
-        <img src="icons/classind/12.svg" width="72" height="72" alt="classind 12" />
-        <figcaption>12</figcaption>
-      </figure>
-      <figure>
-        <img src="icons/classind/14.svg" width="72" height="72" alt="classind 14" />
-        <figcaption>14</figcaption>
-      </figure>
-      <figure>
-        <img src="icons/classind/16.svg" width="72" height="72" alt="classind 16" />
-        <figcaption>16</figcaption>
-      </figure>
-      <figure>
-        <img src="icons/classind/18.svg" width="72" height="72" alt="classind 18" />
-        <figcaption>18</figcaption>
-      </figure>
+<body data-preview="both">
+  <a class="skip" href="#gallery">Skip to marks</a>
+  <header class="mast">
+    <div class="wrap mast-top">
+      <div>
+        <h1>age-rating-kit</h1>
+        <p class="lede">SVG age-rating marks for ClassInd, MPA, TV Parental Guidelines, PEGI, ESRB, and 12 more boards. 97 files, one per code. Find a system, check the mark on light and dark, and copy the path or CDN URL.</p>
+      </div>
+      <ul class="meta-links">
+        <li><a href="https://github.com/mrcanelas/age-rating-kit">Repository</a></li>
+        <li><a href="https://github.com/mrcanelas/age-rating-kit#readme">Documentation</a></li>
+        <li><a href="https://github.com/mrcanelas/age-rating-kit/blob/main/LICENSE">MIT license</a></li>
+      </ul>
+    </div>
+  </header>
+  <div class="toolbar">
+    <div class="wrap">
+      <div class="controls">
+        <label class="find">Find a system or code
+          <input id="find" type="search" placeholder="ClassInd, PG-13, Livre, PEGI 12" autocomplete="off" />
+        </label>
+        <fieldset class="preview">
+          <legend>Background</legend>
+          <div class="preview-options">
+            <label><input type="radio" name="preview" value="light" /> Light</label>
+            <label><input type="radio" name="preview" value="dark" /> Dark</label>
+            <label><input type="radio" name="preview" value="both" checked /> Both</label>
+          </div>
+        </fieldset>
+      </div>
+      <nav aria-label="Rating systems">
+        <ul class="systems">
+        <a href="#classind">ClassInd</a>
+        <a href="#mpa">MPA</a>
+        <a href="#tv-pg">TV Parental Guidelines</a>
+        <a href="#pegi">PEGI</a>
+        <a href="#esrb">ESRB</a>
+        <a href="#bbfc">BBFC</a>
+        <a href="#fsk">FSK</a>
+        <a href="#usk">USK</a>
+        <a href="#cero">CERO</a>
+        <a href="#acb">ACB</a>
+        <a href="#iarc">IARC</a>
+        <a href="#kijkwijzer">Kijkwijzer</a>
+        <a href="#eirin">Eirin</a>
+        <a href="#oflc">OFLC</a>
+        <a href="#rtc">RTC</a>
+        <a href="#gsrr">GSRR</a>
+        <a href="#krrit">KRRiT</a>
+        <a href="#usage">Usage</a>
+        </ul>
+      </nav>
+      <p class="status" id="status" aria-live="polite"></p>
+    </div>
+  </div>
+  <main class="wrap">
+    <div id="gallery">
+    <section class="system" id="classind" data-search="classind classind classind class-ind djctq br brazil classificacao indicativa classificacao indicativa">
+      <div class="system-head">
+        <h2>ClassInd</h2>
+        <p><code>icons/classind/</code> · 7 marks</p>
+      </div>
+      <div class="marks">
+        <figure class="mark" data-search="classind classind classind class-ind djctq br brazil classificacao indicativa classificacao indicativa l livre livre para todos os publicos l livre al g all">
+          <div class="window">
+            <div class="plate plate-light">
+              <img src="icons/classind/l.svg" width="72" height="72" alt="ClassInd Livre (l)" />
+            </div>
+            <div class="plate plate-dark" aria-hidden="true">
+              <img src="icons/classind/l.svg" width="72" height="72" alt="ClassInd Livre (l)" />
+            </div>
+          </div>
+          <figcaption>
+            <p class="identity"><code>l</code> <span class="label">Livre</span></p>
+            <p class="meaning">Livre para todos os públicos</p>
+            <div class="actions">
+              <button type="button" data-copy="icons/classind/l.svg" data-label="Copy path for ClassInd Livre (l)" aria-label="Copy path for ClassInd Livre (l)">Copy path</button>
+              <button type="button" data-copy="https://cdn.jsdelivr.net/gh/mrcanelas/age-rating-kit@latest/icons/classind/l.svg" data-label="Copy URL for ClassInd Livre (l)" aria-label="Copy URL for ClassInd Livre (l)">Copy URL</button>
+            </div>
+          </figcaption>
+        </figure>
+        <figure class="mark" data-search="classind classind classind class-ind djctq br brazil classificacao indicativa classificacao indicativa 6 6 nao recomendado para menores de 6 anos 6 6 anos a6">
+          <div class="window">
+            <div class="plate plate-light">
+              <img src="icons/classind/6.svg" width="72" height="72" alt="ClassInd 6 (6)" />
+            </div>
+            <div class="plate plate-dark" aria-hidden="true">
+              <img src="icons/classind/6.svg" width="72" height="72" alt="ClassInd 6 (6)" />
+            </div>
+          </div>
+          <figcaption>
+            <p class="identity"><code>6</code></p>
+            <p class="meaning">Não recomendado para menores de 6 anos</p>
+            <div class="actions">
+              <button type="button" data-copy="icons/classind/6.svg" data-label="Copy path for ClassInd 6 (6)" aria-label="Copy path for ClassInd 6 (6)">Copy path</button>
+              <button type="button" data-copy="https://cdn.jsdelivr.net/gh/mrcanelas/age-rating-kit@latest/icons/classind/6.svg" data-label="Copy URL for ClassInd 6 (6)" aria-label="Copy URL for ClassInd 6 (6)">Copy URL</button>
+            </div>
+          </figcaption>
+        </figure>
+        <figure class="mark" data-search="classind classind classind class-ind djctq br brazil classificacao indicativa classificacao indicativa 10 10 nao recomendado para menores de 10 anos 10 10 anos a10">
+          <div class="window">
+            <div class="plate plate-light">
+              <img src="icons/classind/10.svg" width="72" height="72" alt="ClassInd 10 (10)" />
+            </div>
+            <div class="plate plate-dark" aria-hidden="true">
+              <img src="icons/classind/10.svg" width="72" height="72" alt="ClassInd 10 (10)" />
+            </div>
+          </div>
+          <figcaption>
+            <p class="identity"><code>10</code></p>
+            <p class="meaning">Não recomendado para menores de 10 anos</p>
+            <div class="actions">
+              <button type="button" data-copy="icons/classind/10.svg" data-label="Copy path for ClassInd 10 (10)" aria-label="Copy path for ClassInd 10 (10)">Copy path</button>
+              <button type="button" data-copy="https://cdn.jsdelivr.net/gh/mrcanelas/age-rating-kit@latest/icons/classind/10.svg" data-label="Copy URL for ClassInd 10 (10)" aria-label="Copy URL for ClassInd 10 (10)">Copy URL</button>
+            </div>
+          </figcaption>
+        </figure>
+        <figure class="mark" data-search="classind classind classind class-ind djctq br brazil classificacao indicativa classificacao indicativa 12 12 nao recomendado para menores de 12 anos 12 12 anos a12">
+          <div class="window">
+            <div class="plate plate-light">
+              <img src="icons/classind/12.svg" width="72" height="72" alt="ClassInd 12 (12)" />
+            </div>
+            <div class="plate plate-dark" aria-hidden="true">
+              <img src="icons/classind/12.svg" width="72" height="72" alt="ClassInd 12 (12)" />
+            </div>
+          </div>
+          <figcaption>
+            <p class="identity"><code>12</code></p>
+            <p class="meaning">Não recomendado para menores de 12 anos</p>
+            <div class="actions">
+              <button type="button" data-copy="icons/classind/12.svg" data-label="Copy path for ClassInd 12 (12)" aria-label="Copy path for ClassInd 12 (12)">Copy path</button>
+              <button type="button" data-copy="https://cdn.jsdelivr.net/gh/mrcanelas/age-rating-kit@latest/icons/classind/12.svg" data-label="Copy URL for ClassInd 12 (12)" aria-label="Copy URL for ClassInd 12 (12)">Copy URL</button>
+            </div>
+          </figcaption>
+        </figure>
+        <figure class="mark" data-search="classind classind classind class-ind djctq br brazil classificacao indicativa classificacao indicativa 14 14 nao recomendado para menores de 14 anos 14 14 anos a14">
+          <div class="window">
+            <div class="plate plate-light">
+              <img src="icons/classind/14.svg" width="72" height="72" alt="ClassInd 14 (14)" />
+            </div>
+            <div class="plate plate-dark" aria-hidden="true">
+              <img src="icons/classind/14.svg" width="72" height="72" alt="ClassInd 14 (14)" />
+            </div>
+          </div>
+          <figcaption>
+            <p class="identity"><code>14</code></p>
+            <p class="meaning">Não recomendado para menores de 14 anos</p>
+            <div class="actions">
+              <button type="button" data-copy="icons/classind/14.svg" data-label="Copy path for ClassInd 14 (14)" aria-label="Copy path for ClassInd 14 (14)">Copy path</button>
+              <button type="button" data-copy="https://cdn.jsdelivr.net/gh/mrcanelas/age-rating-kit@latest/icons/classind/14.svg" data-label="Copy URL for ClassInd 14 (14)" aria-label="Copy URL for ClassInd 14 (14)">Copy URL</button>
+            </div>
+          </figcaption>
+        </figure>
+        <figure class="mark" data-search="classind classind classind class-ind djctq br brazil classificacao indicativa classificacao indicativa 16 16 nao recomendado para menores de 16 anos 16 16 anos a16">
+          <div class="window">
+            <div class="plate plate-light">
+              <img src="icons/classind/16.svg" width="72" height="72" alt="ClassInd 16 (16)" />
+            </div>
+            <div class="plate plate-dark" aria-hidden="true">
+              <img src="icons/classind/16.svg" width="72" height="72" alt="ClassInd 16 (16)" />
+            </div>
+          </div>
+          <figcaption>
+            <p class="identity"><code>16</code></p>
+            <p class="meaning">Não recomendado para menores de 16 anos</p>
+            <div class="actions">
+              <button type="button" data-copy="icons/classind/16.svg" data-label="Copy path for ClassInd 16 (16)" aria-label="Copy path for ClassInd 16 (16)">Copy path</button>
+              <button type="button" data-copy="https://cdn.jsdelivr.net/gh/mrcanelas/age-rating-kit@latest/icons/classind/16.svg" data-label="Copy URL for ClassInd 16 (16)" aria-label="Copy URL for ClassInd 16 (16)">Copy URL</button>
+            </div>
+          </figcaption>
+        </figure>
+        <figure class="mark" data-search="classind classind classind class-ind djctq br brazil classificacao indicativa classificacao indicativa 18 18 nao recomendado para menores de 18 anos 18 18 anos a18">
+          <div class="window">
+            <div class="plate plate-light">
+              <img src="icons/classind/18.svg" width="72" height="72" alt="ClassInd 18 (18)" />
+            </div>
+            <div class="plate plate-dark" aria-hidden="true">
+              <img src="icons/classind/18.svg" width="72" height="72" alt="ClassInd 18 (18)" />
+            </div>
+          </div>
+          <figcaption>
+            <p class="identity"><code>18</code></p>
+            <p class="meaning">Não recomendado para menores de 18 anos</p>
+            <div class="actions">
+              <button type="button" data-copy="icons/classind/18.svg" data-label="Copy path for ClassInd 18 (18)" aria-label="Copy path for ClassInd 18 (18)">Copy path</button>
+              <button type="button" data-copy="https://cdn.jsdelivr.net/gh/mrcanelas/age-rating-kit@latest/icons/classind/18.svg" data-label="Copy URL for ClassInd 18 (18)" aria-label="Copy URL for ClassInd 18 (18)">Copy URL</button>
+            </div>
+          </figcaption>
+        </figure>
       </div>
     </section>
-    <section>
-      <h2>MPA</h2>
-      <div class="row">
-      <figure>
-        <img src="icons/mpa/g.svg" width="72" height="72" alt="mpa g" />
-        <figcaption>g</figcaption>
-      </figure>
-      <figure>
-        <img src="icons/mpa/pg.svg" width="72" height="72" alt="mpa pg" />
-        <figcaption>pg</figcaption>
-      </figure>
-      <figure>
-        <img src="icons/mpa/pg-13.svg" width="72" height="72" alt="mpa pg-13" />
-        <figcaption>pg-13</figcaption>
-      </figure>
-      <figure>
-        <img src="icons/mpa/r.svg" width="72" height="72" alt="mpa r" />
-        <figcaption>r</figcaption>
-      </figure>
-      <figure>
-        <img src="icons/mpa/nc-17.svg" width="72" height="72" alt="mpa nc-17" />
-        <figcaption>nc-17</figcaption>
-      </figure>
+    <section class="system" id="mpa" data-search="mpa mpa mpa mpaa motion picture association us-movie us movie">
+      <div class="system-head">
+        <h2>MPA</h2>
+        <p><code>icons/mpa/</code> · 5 marks</p>
+      </div>
+      <div class="marks">
+        <figure class="mark" data-search="mpa mpa mpa mpaa motion picture association us-movie us movie g g general audiences g">
+          <div class="window">
+            <div class="plate plate-light">
+              <img src="icons/mpa/g.svg" width="72" height="72" alt="MPA G (g)" />
+            </div>
+            <div class="plate plate-dark" aria-hidden="true">
+              <img src="icons/mpa/g.svg" width="72" height="72" alt="MPA G (g)" />
+            </div>
+          </div>
+          <figcaption>
+            <p class="identity"><code>g</code></p>
+            <p class="meaning">General Audiences</p>
+            <div class="actions">
+              <button type="button" data-copy="icons/mpa/g.svg" data-label="Copy path for MPA G (g)" aria-label="Copy path for MPA G (g)">Copy path</button>
+              <button type="button" data-copy="https://cdn.jsdelivr.net/gh/mrcanelas/age-rating-kit@latest/icons/mpa/g.svg" data-label="Copy URL for MPA G (g)" aria-label="Copy URL for MPA G (g)">Copy URL</button>
+            </div>
+          </figcaption>
+        </figure>
+        <figure class="mark" data-search="mpa mpa mpa mpaa motion picture association us-movie us movie pg pg parental guidance suggested pg">
+          <div class="window">
+            <div class="plate plate-light">
+              <img src="icons/mpa/pg.svg" width="72" height="72" alt="MPA PG (pg)" />
+            </div>
+            <div class="plate plate-dark" aria-hidden="true">
+              <img src="icons/mpa/pg.svg" width="72" height="72" alt="MPA PG (pg)" />
+            </div>
+          </div>
+          <figcaption>
+            <p class="identity"><code>pg</code></p>
+            <p class="meaning">Parental Guidance Suggested</p>
+            <div class="actions">
+              <button type="button" data-copy="icons/mpa/pg.svg" data-label="Copy path for MPA PG (pg)" aria-label="Copy path for MPA PG (pg)">Copy path</button>
+              <button type="button" data-copy="https://cdn.jsdelivr.net/gh/mrcanelas/age-rating-kit@latest/icons/mpa/pg.svg" data-label="Copy URL for MPA PG (pg)" aria-label="Copy URL for MPA PG (pg)">Copy URL</button>
+            </div>
+          </figcaption>
+        </figure>
+        <figure class="mark" data-search="mpa mpa mpa mpaa motion picture association us-movie us movie pg-13 pg-13 parents strongly cautioned pg-13 pg13 pg 13">
+          <div class="window">
+            <div class="plate plate-light">
+              <img src="icons/mpa/pg-13.svg" width="72" height="72" alt="MPA PG-13 (pg-13)" />
+            </div>
+            <div class="plate plate-dark" aria-hidden="true">
+              <img src="icons/mpa/pg-13.svg" width="72" height="72" alt="MPA PG-13 (pg-13)" />
+            </div>
+          </div>
+          <figcaption>
+            <p class="identity"><code>pg-13</code></p>
+            <p class="meaning">Parents Strongly Cautioned</p>
+            <div class="actions">
+              <button type="button" data-copy="icons/mpa/pg-13.svg" data-label="Copy path for MPA PG-13 (pg-13)" aria-label="Copy path for MPA PG-13 (pg-13)">Copy path</button>
+              <button type="button" data-copy="https://cdn.jsdelivr.net/gh/mrcanelas/age-rating-kit@latest/icons/mpa/pg-13.svg" data-label="Copy URL for MPA PG-13 (pg-13)" aria-label="Copy URL for MPA PG-13 (pg-13)">Copy URL</button>
+            </div>
+          </figcaption>
+        </figure>
+        <figure class="mark" data-search="mpa mpa mpa mpaa motion picture association us-movie us movie r r restricted r">
+          <div class="window">
+            <div class="plate plate-light">
+              <img src="icons/mpa/r.svg" width="72" height="72" alt="MPA R (r)" />
+            </div>
+            <div class="plate plate-dark" aria-hidden="true">
+              <img src="icons/mpa/r.svg" width="72" height="72" alt="MPA R (r)" />
+            </div>
+          </div>
+          <figcaption>
+            <p class="identity"><code>r</code></p>
+            <p class="meaning">Restricted</p>
+            <div class="actions">
+              <button type="button" data-copy="icons/mpa/r.svg" data-label="Copy path for MPA R (r)" aria-label="Copy path for MPA R (r)">Copy path</button>
+              <button type="button" data-copy="https://cdn.jsdelivr.net/gh/mrcanelas/age-rating-kit@latest/icons/mpa/r.svg" data-label="Copy URL for MPA R (r)" aria-label="Copy URL for MPA R (r)">Copy URL</button>
+            </div>
+          </figcaption>
+        </figure>
+        <figure class="mark" data-search="mpa mpa mpa mpaa motion picture association us-movie us movie nc-17 nc-17 adults only nc-17 nc17 nc 17">
+          <div class="window">
+            <div class="plate plate-light">
+              <img src="icons/mpa/nc-17.svg" width="72" height="72" alt="MPA NC-17 (nc-17)" />
+            </div>
+            <div class="plate plate-dark" aria-hidden="true">
+              <img src="icons/mpa/nc-17.svg" width="72" height="72" alt="MPA NC-17 (nc-17)" />
+            </div>
+          </div>
+          <figcaption>
+            <p class="identity"><code>nc-17</code></p>
+            <p class="meaning">Adults Only</p>
+            <div class="actions">
+              <button type="button" data-copy="icons/mpa/nc-17.svg" data-label="Copy path for MPA NC-17 (nc-17)" aria-label="Copy path for MPA NC-17 (nc-17)">Copy path</button>
+              <button type="button" data-copy="https://cdn.jsdelivr.net/gh/mrcanelas/age-rating-kit@latest/icons/mpa/nc-17.svg" data-label="Copy URL for MPA NC-17 (nc-17)" aria-label="Copy URL for MPA NC-17 (nc-17)">Copy URL</button>
+            </div>
+          </figcaption>
+        </figure>
       </div>
     </section>
-    <section>
-      <h2>TV Parental Guidelines</h2>
-      <div class="row">
-      <figure>
-        <img src="icons/tv-pg/tv-y.svg" width="72" height="72" alt="tv-pg tv-y" />
-        <figcaption>tv-y</figcaption>
-      </figure>
-      <figure>
-        <img src="icons/tv-pg/tv-y7.svg" width="72" height="72" alt="tv-pg tv-y7" />
-        <figcaption>tv-y7</figcaption>
-      </figure>
-      <figure>
-        <img src="icons/tv-pg/tv-g.svg" width="72" height="72" alt="tv-pg tv-g" />
-        <figcaption>tv-g</figcaption>
-      </figure>
-      <figure>
-        <img src="icons/tv-pg/tv-pg.svg" width="72" height="72" alt="tv-pg tv-pg" />
-        <figcaption>tv-pg</figcaption>
-      </figure>
-      <figure>
-        <img src="icons/tv-pg/tv-14.svg" width="72" height="72" alt="tv-pg tv-14" />
-        <figcaption>tv-14</figcaption>
-      </figure>
-      <figure>
-        <img src="icons/tv-pg/tv-ma.svg" width="72" height="72" alt="tv-pg tv-ma" />
-        <figcaption>tv-ma</figcaption>
-      </figure>
+    <section class="system" id="tv-pg" data-search="tv-pg tv parental guidelines tv-pg tvpg tv parental guidelines us-tv us tv fcc">
+      <div class="system-head">
+        <h2>TV Parental Guidelines</h2>
+        <p><code>icons/tv-pg/</code> · 6 marks</p>
+      </div>
+      <div class="marks">
+        <figure class="mark" data-search="tv-pg tv parental guidelines tv-pg tvpg tv parental guidelines us-tv us tv fcc tv-y tv-y designed for all children tv-y tvy y">
+          <div class="window">
+            <div class="plate plate-light">
+              <img src="icons/tv-pg/tv-y.svg" width="72" height="72" alt="TV Parental Guidelines TV-Y (tv-y)" />
+            </div>
+            <div class="plate plate-dark" aria-hidden="true">
+              <img src="icons/tv-pg/tv-y.svg" width="72" height="72" alt="TV Parental Guidelines TV-Y (tv-y)" />
+            </div>
+          </div>
+          <figcaption>
+            <p class="identity"><code>tv-y</code></p>
+            <p class="meaning">Designed for all children</p>
+            <div class="actions">
+              <button type="button" data-copy="icons/tv-pg/tv-y.svg" data-label="Copy path for TV Parental Guidelines TV-Y (tv-y)" aria-label="Copy path for TV Parental Guidelines TV-Y (tv-y)">Copy path</button>
+              <button type="button" data-copy="https://cdn.jsdelivr.net/gh/mrcanelas/age-rating-kit@latest/icons/tv-pg/tv-y.svg" data-label="Copy URL for TV Parental Guidelines TV-Y (tv-y)" aria-label="Copy URL for TV Parental Guidelines TV-Y (tv-y)">Copy URL</button>
+            </div>
+          </figcaption>
+        </figure>
+        <figure class="mark" data-search="tv-pg tv parental guidelines tv-pg tvpg tv parental guidelines us-tv us tv fcc tv-y7 tv-y7 directed to older children tv-y7 tvy7 y7">
+          <div class="window">
+            <div class="plate plate-light">
+              <img src="icons/tv-pg/tv-y7.svg" width="72" height="72" alt="TV Parental Guidelines TV-Y7 (tv-y7)" />
+            </div>
+            <div class="plate plate-dark" aria-hidden="true">
+              <img src="icons/tv-pg/tv-y7.svg" width="72" height="72" alt="TV Parental Guidelines TV-Y7 (tv-y7)" />
+            </div>
+          </div>
+          <figcaption>
+            <p class="identity"><code>tv-y7</code></p>
+            <p class="meaning">Directed to older children</p>
+            <div class="actions">
+              <button type="button" data-copy="icons/tv-pg/tv-y7.svg" data-label="Copy path for TV Parental Guidelines TV-Y7 (tv-y7)" aria-label="Copy path for TV Parental Guidelines TV-Y7 (tv-y7)">Copy path</button>
+              <button type="button" data-copy="https://cdn.jsdelivr.net/gh/mrcanelas/age-rating-kit@latest/icons/tv-pg/tv-y7.svg" data-label="Copy URL for TV Parental Guidelines TV-Y7 (tv-y7)" aria-label="Copy URL for TV Parental Guidelines TV-Y7 (tv-y7)">Copy URL</button>
+            </div>
+          </figcaption>
+        </figure>
+        <figure class="mark" data-search="tv-pg tv parental guidelines tv-pg tvpg tv parental guidelines us-tv us tv fcc tv-g tv-g general audience tv-g tvg">
+          <div class="window">
+            <div class="plate plate-light">
+              <img src="icons/tv-pg/tv-g.svg" width="72" height="72" alt="TV Parental Guidelines TV-G (tv-g)" />
+            </div>
+            <div class="plate plate-dark" aria-hidden="true">
+              <img src="icons/tv-pg/tv-g.svg" width="72" height="72" alt="TV Parental Guidelines TV-G (tv-g)" />
+            </div>
+          </div>
+          <figcaption>
+            <p class="identity"><code>tv-g</code></p>
+            <p class="meaning">General audience</p>
+            <div class="actions">
+              <button type="button" data-copy="icons/tv-pg/tv-g.svg" data-label="Copy path for TV Parental Guidelines TV-G (tv-g)" aria-label="Copy path for TV Parental Guidelines TV-G (tv-g)">Copy path</button>
+              <button type="button" data-copy="https://cdn.jsdelivr.net/gh/mrcanelas/age-rating-kit@latest/icons/tv-pg/tv-g.svg" data-label="Copy URL for TV Parental Guidelines TV-G (tv-g)" aria-label="Copy URL for TV Parental Guidelines TV-G (tv-g)">Copy URL</button>
+            </div>
+          </figcaption>
+        </figure>
+        <figure class="mark" data-search="tv-pg tv parental guidelines tv-pg tvpg tv parental guidelines us-tv us tv fcc tv-pg tv-pg parental guidance suggested tv-pg tvpg">
+          <div class="window">
+            <div class="plate plate-light">
+              <img src="icons/tv-pg/tv-pg.svg" width="72" height="72" alt="TV Parental Guidelines TV-PG (tv-pg)" />
+            </div>
+            <div class="plate plate-dark" aria-hidden="true">
+              <img src="icons/tv-pg/tv-pg.svg" width="72" height="72" alt="TV Parental Guidelines TV-PG (tv-pg)" />
+            </div>
+          </div>
+          <figcaption>
+            <p class="identity"><code>tv-pg</code></p>
+            <p class="meaning">Parental guidance suggested</p>
+            <div class="actions">
+              <button type="button" data-copy="icons/tv-pg/tv-pg.svg" data-label="Copy path for TV Parental Guidelines TV-PG (tv-pg)" aria-label="Copy path for TV Parental Guidelines TV-PG (tv-pg)">Copy path</button>
+              <button type="button" data-copy="https://cdn.jsdelivr.net/gh/mrcanelas/age-rating-kit@latest/icons/tv-pg/tv-pg.svg" data-label="Copy URL for TV Parental Guidelines TV-PG (tv-pg)" aria-label="Copy URL for TV Parental Guidelines TV-PG (tv-pg)">Copy URL</button>
+            </div>
+          </figcaption>
+        </figure>
+        <figure class="mark" data-search="tv-pg tv parental guidelines tv-pg tvpg tv parental guidelines us-tv us tv fcc tv-14 tv-14 parents strongly cautioned tv-14 tv14">
+          <div class="window">
+            <div class="plate plate-light">
+              <img src="icons/tv-pg/tv-14.svg" width="72" height="72" alt="TV Parental Guidelines TV-14 (tv-14)" />
+            </div>
+            <div class="plate plate-dark" aria-hidden="true">
+              <img src="icons/tv-pg/tv-14.svg" width="72" height="72" alt="TV Parental Guidelines TV-14 (tv-14)" />
+            </div>
+          </div>
+          <figcaption>
+            <p class="identity"><code>tv-14</code></p>
+            <p class="meaning">Parents strongly cautioned</p>
+            <div class="actions">
+              <button type="button" data-copy="icons/tv-pg/tv-14.svg" data-label="Copy path for TV Parental Guidelines TV-14 (tv-14)" aria-label="Copy path for TV Parental Guidelines TV-14 (tv-14)">Copy path</button>
+              <button type="button" data-copy="https://cdn.jsdelivr.net/gh/mrcanelas/age-rating-kit@latest/icons/tv-pg/tv-14.svg" data-label="Copy URL for TV Parental Guidelines TV-14 (tv-14)" aria-label="Copy URL for TV Parental Guidelines TV-14 (tv-14)">Copy URL</button>
+            </div>
+          </figcaption>
+        </figure>
+        <figure class="mark" data-search="tv-pg tv parental guidelines tv-pg tvpg tv parental guidelines us-tv us tv fcc tv-ma tv-ma mature audience only tv-ma tvma">
+          <div class="window">
+            <div class="plate plate-light">
+              <img src="icons/tv-pg/tv-ma.svg" width="72" height="72" alt="TV Parental Guidelines TV-MA (tv-ma)" />
+            </div>
+            <div class="plate plate-dark" aria-hidden="true">
+              <img src="icons/tv-pg/tv-ma.svg" width="72" height="72" alt="TV Parental Guidelines TV-MA (tv-ma)" />
+            </div>
+          </div>
+          <figcaption>
+            <p class="identity"><code>tv-ma</code></p>
+            <p class="meaning">Mature audience only</p>
+            <div class="actions">
+              <button type="button" data-copy="icons/tv-pg/tv-ma.svg" data-label="Copy path for TV Parental Guidelines TV-MA (tv-ma)" aria-label="Copy path for TV Parental Guidelines TV-MA (tv-ma)">Copy path</button>
+              <button type="button" data-copy="https://cdn.jsdelivr.net/gh/mrcanelas/age-rating-kit@latest/icons/tv-pg/tv-ma.svg" data-label="Copy URL for TV Parental Guidelines TV-MA (tv-ma)" aria-label="Copy URL for TV Parental Guidelines TV-MA (tv-ma)">Copy URL</button>
+            </div>
+          </figcaption>
+        </figure>
       </div>
     </section>
-    <section>
-      <h2>PEGI</h2>
-      <div class="row">
-      <figure>
-        <img src="icons/pegi/3.svg" width="72" height="72" alt="pegi 3" />
-        <figcaption>3</figcaption>
-      </figure>
-      <figure>
-        <img src="icons/pegi/7.svg" width="72" height="72" alt="pegi 7" />
-        <figcaption>7</figcaption>
-      </figure>
-      <figure>
-        <img src="icons/pegi/12.svg" width="72" height="72" alt="pegi 12" />
-        <figcaption>12</figcaption>
-      </figure>
-      <figure>
-        <img src="icons/pegi/16.svg" width="72" height="72" alt="pegi 16" />
-        <figcaption>16</figcaption>
-      </figure>
-      <figure>
-        <img src="icons/pegi/18.svg" width="72" height="72" alt="pegi 18" />
-        <figcaption>18</figcaption>
-      </figure>
+    <section class="system" id="pegi" data-search="pegi pegi pegi pan european game information">
+      <div class="system-head">
+        <h2>PEGI</h2>
+        <p><code>icons/pegi/</code> · 5 marks</p>
+      </div>
+      <div class="marks">
+        <figure class="mark" data-search="pegi pegi pegi pan european game information 3 pegi 3 suitable for all ages 3 pegi 3">
+          <div class="window">
+            <div class="plate plate-light">
+              <img src="icons/pegi/3.svg" width="72" height="72" alt="PEGI PEGI 3 (3)" />
+            </div>
+            <div class="plate plate-dark" aria-hidden="true">
+              <img src="icons/pegi/3.svg" width="72" height="72" alt="PEGI PEGI 3 (3)" />
+            </div>
+          </div>
+          <figcaption>
+            <p class="identity"><code>3</code> <span class="label">PEGI 3</span></p>
+            <p class="meaning">Suitable for all ages</p>
+            <div class="actions">
+              <button type="button" data-copy="icons/pegi/3.svg" data-label="Copy path for PEGI PEGI 3 (3)" aria-label="Copy path for PEGI PEGI 3 (3)">Copy path</button>
+              <button type="button" data-copy="https://cdn.jsdelivr.net/gh/mrcanelas/age-rating-kit@latest/icons/pegi/3.svg" data-label="Copy URL for PEGI PEGI 3 (3)" aria-label="Copy URL for PEGI PEGI 3 (3)">Copy URL</button>
+            </div>
+          </figcaption>
+        </figure>
+        <figure class="mark" data-search="pegi pegi pegi pan european game information 7 pegi 7 not suitable for children under 7 7 pegi 7">
+          <div class="window">
+            <div class="plate plate-light">
+              <img src="icons/pegi/7.svg" width="72" height="72" alt="PEGI PEGI 7 (7)" />
+            </div>
+            <div class="plate plate-dark" aria-hidden="true">
+              <img src="icons/pegi/7.svg" width="72" height="72" alt="PEGI PEGI 7 (7)" />
+            </div>
+          </div>
+          <figcaption>
+            <p class="identity"><code>7</code> <span class="label">PEGI 7</span></p>
+            <p class="meaning">Not suitable for children under 7</p>
+            <div class="actions">
+              <button type="button" data-copy="icons/pegi/7.svg" data-label="Copy path for PEGI PEGI 7 (7)" aria-label="Copy path for PEGI PEGI 7 (7)">Copy path</button>
+              <button type="button" data-copy="https://cdn.jsdelivr.net/gh/mrcanelas/age-rating-kit@latest/icons/pegi/7.svg" data-label="Copy URL for PEGI PEGI 7 (7)" aria-label="Copy URL for PEGI PEGI 7 (7)">Copy URL</button>
+            </div>
+          </figcaption>
+        </figure>
+        <figure class="mark" data-search="pegi pegi pegi pan european game information 12 pegi 12 not suitable for children under 12 12 pegi 12">
+          <div class="window">
+            <div class="plate plate-light">
+              <img src="icons/pegi/12.svg" width="72" height="72" alt="PEGI PEGI 12 (12)" />
+            </div>
+            <div class="plate plate-dark" aria-hidden="true">
+              <img src="icons/pegi/12.svg" width="72" height="72" alt="PEGI PEGI 12 (12)" />
+            </div>
+          </div>
+          <figcaption>
+            <p class="identity"><code>12</code> <span class="label">PEGI 12</span></p>
+            <p class="meaning">Not suitable for children under 12</p>
+            <div class="actions">
+              <button type="button" data-copy="icons/pegi/12.svg" data-label="Copy path for PEGI PEGI 12 (12)" aria-label="Copy path for PEGI PEGI 12 (12)">Copy path</button>
+              <button type="button" data-copy="https://cdn.jsdelivr.net/gh/mrcanelas/age-rating-kit@latest/icons/pegi/12.svg" data-label="Copy URL for PEGI PEGI 12 (12)" aria-label="Copy URL for PEGI PEGI 12 (12)">Copy URL</button>
+            </div>
+          </figcaption>
+        </figure>
+        <figure class="mark" data-search="pegi pegi pegi pan european game information 16 pegi 16 not suitable for children under 16 16 pegi 16">
+          <div class="window">
+            <div class="plate plate-light">
+              <img src="icons/pegi/16.svg" width="72" height="72" alt="PEGI PEGI 16 (16)" />
+            </div>
+            <div class="plate plate-dark" aria-hidden="true">
+              <img src="icons/pegi/16.svg" width="72" height="72" alt="PEGI PEGI 16 (16)" />
+            </div>
+          </div>
+          <figcaption>
+            <p class="identity"><code>16</code> <span class="label">PEGI 16</span></p>
+            <p class="meaning">Not suitable for children under 16</p>
+            <div class="actions">
+              <button type="button" data-copy="icons/pegi/16.svg" data-label="Copy path for PEGI PEGI 16 (16)" aria-label="Copy path for PEGI PEGI 16 (16)">Copy path</button>
+              <button type="button" data-copy="https://cdn.jsdelivr.net/gh/mrcanelas/age-rating-kit@latest/icons/pegi/16.svg" data-label="Copy URL for PEGI PEGI 16 (16)" aria-label="Copy URL for PEGI PEGI 16 (16)">Copy URL</button>
+            </div>
+          </figcaption>
+        </figure>
+        <figure class="mark" data-search="pegi pegi pegi pan european game information 18 pegi 18 not suitable for children under 18 18 pegi 18">
+          <div class="window">
+            <div class="plate plate-light">
+              <img src="icons/pegi/18.svg" width="72" height="72" alt="PEGI PEGI 18 (18)" />
+            </div>
+            <div class="plate plate-dark" aria-hidden="true">
+              <img src="icons/pegi/18.svg" width="72" height="72" alt="PEGI PEGI 18 (18)" />
+            </div>
+          </div>
+          <figcaption>
+            <p class="identity"><code>18</code> <span class="label">PEGI 18</span></p>
+            <p class="meaning">Not suitable for children under 18</p>
+            <div class="actions">
+              <button type="button" data-copy="icons/pegi/18.svg" data-label="Copy path for PEGI PEGI 18 (18)" aria-label="Copy path for PEGI PEGI 18 (18)">Copy path</button>
+              <button type="button" data-copy="https://cdn.jsdelivr.net/gh/mrcanelas/age-rating-kit@latest/icons/pegi/18.svg" data-label="Copy URL for PEGI PEGI 18 (18)" aria-label="Copy URL for PEGI PEGI 18 (18)">Copy URL</button>
+            </div>
+          </figcaption>
+        </figure>
       </div>
     </section>
-    <section>
-      <h2>ESRB</h2>
-      <div class="row">
-      <figure>
-        <img src="icons/esrb/e.svg" width="72" height="72" alt="esrb e" />
-        <figcaption>e</figcaption>
-      </figure>
-      <figure>
-        <img src="icons/esrb/e10-plus.svg" width="72" height="72" alt="esrb e10-plus" />
-        <figcaption>e10-plus</figcaption>
-      </figure>
-      <figure>
-        <img src="icons/esrb/t.svg" width="72" height="72" alt="esrb t" />
-        <figcaption>t</figcaption>
-      </figure>
-      <figure>
-        <img src="icons/esrb/m.svg" width="72" height="72" alt="esrb m" />
-        <figcaption>m</figcaption>
-      </figure>
-      <figure>
-        <img src="icons/esrb/ao.svg" width="72" height="72" alt="esrb ao" />
-        <figcaption>ao</figcaption>
-      </figure>
+    <section class="system" id="esrb" data-search="esrb esrb esrb entertainment software rating board">
+      <div class="system-head">
+        <h2>ESRB</h2>
+        <p><code>icons/esrb/</code> · 5 marks</p>
+      </div>
+      <div class="marks">
+        <figure class="mark" data-search="esrb esrb esrb entertainment software rating board e e everyone e everyone">
+          <div class="window">
+            <div class="plate plate-light">
+              <img src="icons/esrb/e.svg" width="72" height="72" alt="ESRB E (e)" />
+            </div>
+            <div class="plate plate-dark" aria-hidden="true">
+              <img src="icons/esrb/e.svg" width="72" height="72" alt="ESRB E (e)" />
+            </div>
+          </div>
+          <figcaption>
+            <p class="identity"><code>e</code></p>
+            <p class="meaning">Everyone</p>
+            <div class="actions">
+              <button type="button" data-copy="icons/esrb/e.svg" data-label="Copy path for ESRB E (e)" aria-label="Copy path for ESRB E (e)">Copy path</button>
+              <button type="button" data-copy="https://cdn.jsdelivr.net/gh/mrcanelas/age-rating-kit@latest/icons/esrb/e.svg" data-label="Copy URL for ESRB E (e)" aria-label="Copy URL for ESRB E (e)">Copy URL</button>
+            </div>
+          </figcaption>
+        </figure>
+        <figure class="mark" data-search="esrb esrb esrb entertainment software rating board e10-plus e10+ everyone 10 and older e10-plus e10+ e10 everyone 10+ e10plus">
+          <div class="window">
+            <div class="plate plate-light">
+              <img src="icons/esrb/e10-plus.svg" width="72" height="72" alt="ESRB E10+ (e10-plus)" />
+            </div>
+            <div class="plate plate-dark" aria-hidden="true">
+              <img src="icons/esrb/e10-plus.svg" width="72" height="72" alt="ESRB E10+ (e10-plus)" />
+            </div>
+          </div>
+          <figcaption>
+            <p class="identity"><code>e10-plus</code> <span class="label">E10+</span></p>
+            <p class="meaning">Everyone 10 and older</p>
+            <div class="actions">
+              <button type="button" data-copy="icons/esrb/e10-plus.svg" data-label="Copy path for ESRB E10+ (e10-plus)" aria-label="Copy path for ESRB E10+ (e10-plus)">Copy path</button>
+              <button type="button" data-copy="https://cdn.jsdelivr.net/gh/mrcanelas/age-rating-kit@latest/icons/esrb/e10-plus.svg" data-label="Copy URL for ESRB E10+ (e10-plus)" aria-label="Copy URL for ESRB E10+ (e10-plus)">Copy URL</button>
+            </div>
+          </figcaption>
+        </figure>
+        <figure class="mark" data-search="esrb esrb esrb entertainment software rating board t t teen t teen">
+          <div class="window">
+            <div class="plate plate-light">
+              <img src="icons/esrb/t.svg" width="72" height="72" alt="ESRB T (t)" />
+            </div>
+            <div class="plate plate-dark" aria-hidden="true">
+              <img src="icons/esrb/t.svg" width="72" height="72" alt="ESRB T (t)" />
+            </div>
+          </div>
+          <figcaption>
+            <p class="identity"><code>t</code></p>
+            <p class="meaning">Teen</p>
+            <div class="actions">
+              <button type="button" data-copy="icons/esrb/t.svg" data-label="Copy path for ESRB T (t)" aria-label="Copy path for ESRB T (t)">Copy path</button>
+              <button type="button" data-copy="https://cdn.jsdelivr.net/gh/mrcanelas/age-rating-kit@latest/icons/esrb/t.svg" data-label="Copy URL for ESRB T (t)" aria-label="Copy URL for ESRB T (t)">Copy URL</button>
+            </div>
+          </figcaption>
+        </figure>
+        <figure class="mark" data-search="esrb esrb esrb entertainment software rating board m m mature 17+ m mature">
+          <div class="window">
+            <div class="plate plate-light">
+              <img src="icons/esrb/m.svg" width="72" height="72" alt="ESRB M (m)" />
+            </div>
+            <div class="plate plate-dark" aria-hidden="true">
+              <img src="icons/esrb/m.svg" width="72" height="72" alt="ESRB M (m)" />
+            </div>
+          </div>
+          <figcaption>
+            <p class="identity"><code>m</code></p>
+            <p class="meaning">Mature 17+</p>
+            <div class="actions">
+              <button type="button" data-copy="icons/esrb/m.svg" data-label="Copy path for ESRB M (m)" aria-label="Copy path for ESRB M (m)">Copy path</button>
+              <button type="button" data-copy="https://cdn.jsdelivr.net/gh/mrcanelas/age-rating-kit@latest/icons/esrb/m.svg" data-label="Copy URL for ESRB M (m)" aria-label="Copy URL for ESRB M (m)">Copy URL</button>
+            </div>
+          </figcaption>
+        </figure>
+        <figure class="mark" data-search="esrb esrb esrb entertainment software rating board ao ao adults only 18+ ao adults only">
+          <div class="window">
+            <div class="plate plate-light">
+              <img src="icons/esrb/ao.svg" width="72" height="72" alt="ESRB AO (ao)" />
+            </div>
+            <div class="plate plate-dark" aria-hidden="true">
+              <img src="icons/esrb/ao.svg" width="72" height="72" alt="ESRB AO (ao)" />
+            </div>
+          </div>
+          <figcaption>
+            <p class="identity"><code>ao</code></p>
+            <p class="meaning">Adults Only 18+</p>
+            <div class="actions">
+              <button type="button" data-copy="icons/esrb/ao.svg" data-label="Copy path for ESRB AO (ao)" aria-label="Copy path for ESRB AO (ao)">Copy path</button>
+              <button type="button" data-copy="https://cdn.jsdelivr.net/gh/mrcanelas/age-rating-kit@latest/icons/esrb/ao.svg" data-label="Copy URL for ESRB AO (ao)" aria-label="Copy URL for ESRB AO (ao)">Copy URL</button>
+            </div>
+          </figcaption>
+        </figure>
       </div>
     </section>
-    <section>
-      <h2>BBFC</h2>
-      <div class="row">
-      <figure>
-        <img src="icons/bbfc/u.svg" width="72" height="72" alt="bbfc u" />
-        <figcaption>u</figcaption>
-      </figure>
-      <figure>
-        <img src="icons/bbfc/pg.svg" width="72" height="72" alt="bbfc pg" />
-        <figcaption>pg</figcaption>
-      </figure>
-      <figure>
-        <img src="icons/bbfc/12a.svg" width="72" height="72" alt="bbfc 12a" />
-        <figcaption>12a</figcaption>
-      </figure>
-      <figure>
-        <img src="icons/bbfc/12.svg" width="72" height="72" alt="bbfc 12" />
-        <figcaption>12</figcaption>
-      </figure>
-      <figure>
-        <img src="icons/bbfc/15.svg" width="72" height="72" alt="bbfc 15" />
-        <figcaption>15</figcaption>
-      </figure>
-      <figure>
-        <img src="icons/bbfc/18.svg" width="72" height="72" alt="bbfc 18" />
-        <figcaption>18</figcaption>
-      </figure>
-      <figure>
-        <img src="icons/bbfc/r18.svg" width="72" height="72" alt="bbfc r18" />
-        <figcaption>r18</figcaption>
-      </figure>
+    <section class="system" id="bbfc" data-search="bbfc bbfc bbfc british board of film classification">
+      <div class="system-head">
+        <h2>BBFC</h2>
+        <p><code>icons/bbfc/</code> · 7 marks</p>
+      </div>
+      <div class="marks">
+        <figure class="mark" data-search="bbfc bbfc bbfc british board of film classification u u universal, suitable for all u universal">
+          <div class="window">
+            <div class="plate plate-light">
+              <img src="icons/bbfc/u.svg" width="72" height="72" alt="BBFC U (u)" />
+            </div>
+            <div class="plate plate-dark" aria-hidden="true">
+              <img src="icons/bbfc/u.svg" width="72" height="72" alt="BBFC U (u)" />
+            </div>
+          </div>
+          <figcaption>
+            <p class="identity"><code>u</code></p>
+            <p class="meaning">Universal, suitable for all</p>
+            <div class="actions">
+              <button type="button" data-copy="icons/bbfc/u.svg" data-label="Copy path for BBFC U (u)" aria-label="Copy path for BBFC U (u)">Copy path</button>
+              <button type="button" data-copy="https://cdn.jsdelivr.net/gh/mrcanelas/age-rating-kit@latest/icons/bbfc/u.svg" data-label="Copy URL for BBFC U (u)" aria-label="Copy URL for BBFC U (u)">Copy URL</button>
+            </div>
+          </figcaption>
+        </figure>
+        <figure class="mark" data-search="bbfc bbfc bbfc british board of film classification pg pg parental guidance pg parental guidance">
+          <div class="window">
+            <div class="plate plate-light">
+              <img src="icons/bbfc/pg.svg" width="72" height="72" alt="BBFC PG (pg)" />
+            </div>
+            <div class="plate plate-dark" aria-hidden="true">
+              <img src="icons/bbfc/pg.svg" width="72" height="72" alt="BBFC PG (pg)" />
+            </div>
+          </div>
+          <figcaption>
+            <p class="identity"><code>pg</code></p>
+            <p class="meaning">Parental Guidance</p>
+            <div class="actions">
+              <button type="button" data-copy="icons/bbfc/pg.svg" data-label="Copy path for BBFC PG (pg)" aria-label="Copy path for BBFC PG (pg)">Copy path</button>
+              <button type="button" data-copy="https://cdn.jsdelivr.net/gh/mrcanelas/age-rating-kit@latest/icons/bbfc/pg.svg" data-label="Copy URL for BBFC PG (pg)" aria-label="Copy URL for BBFC PG (pg)">Copy URL</button>
+            </div>
+          </figcaption>
+        </figure>
+        <figure class="mark" data-search="bbfc bbfc bbfc british board of film classification 12a 12a suitable for 12 years and over, under 12s with an adult 12a 12-a">
+          <div class="window">
+            <div class="plate plate-light">
+              <img src="icons/bbfc/12a.svg" width="72" height="72" alt="BBFC 12A (12a)" />
+            </div>
+            <div class="plate plate-dark" aria-hidden="true">
+              <img src="icons/bbfc/12a.svg" width="72" height="72" alt="BBFC 12A (12a)" />
+            </div>
+          </div>
+          <figcaption>
+            <p class="identity"><code>12a</code></p>
+            <p class="meaning">Suitable for 12 years and over, under 12s with an adult</p>
+            <div class="actions">
+              <button type="button" data-copy="icons/bbfc/12a.svg" data-label="Copy path for BBFC 12A (12a)" aria-label="Copy path for BBFC 12A (12a)">Copy path</button>
+              <button type="button" data-copy="https://cdn.jsdelivr.net/gh/mrcanelas/age-rating-kit@latest/icons/bbfc/12a.svg" data-label="Copy URL for BBFC 12A (12a)" aria-label="Copy URL for BBFC 12A (12a)">Copy URL</button>
+            </div>
+          </figcaption>
+        </figure>
+        <figure class="mark" data-search="bbfc bbfc bbfc british board of film classification 12 12 suitable only for 12 years and over 12">
+          <div class="window">
+            <div class="plate plate-light">
+              <img src="icons/bbfc/12.svg" width="72" height="72" alt="BBFC 12 (12)" />
+            </div>
+            <div class="plate plate-dark" aria-hidden="true">
+              <img src="icons/bbfc/12.svg" width="72" height="72" alt="BBFC 12 (12)" />
+            </div>
+          </div>
+          <figcaption>
+            <p class="identity"><code>12</code></p>
+            <p class="meaning">Suitable only for 12 years and over</p>
+            <div class="actions">
+              <button type="button" data-copy="icons/bbfc/12.svg" data-label="Copy path for BBFC 12 (12)" aria-label="Copy path for BBFC 12 (12)">Copy path</button>
+              <button type="button" data-copy="https://cdn.jsdelivr.net/gh/mrcanelas/age-rating-kit@latest/icons/bbfc/12.svg" data-label="Copy URL for BBFC 12 (12)" aria-label="Copy URL for BBFC 12 (12)">Copy URL</button>
+            </div>
+          </figcaption>
+        </figure>
+        <figure class="mark" data-search="bbfc bbfc bbfc british board of film classification 15 15 suitable only for 15 years and over 15">
+          <div class="window">
+            <div class="plate plate-light">
+              <img src="icons/bbfc/15.svg" width="72" height="72" alt="BBFC 15 (15)" />
+            </div>
+            <div class="plate plate-dark" aria-hidden="true">
+              <img src="icons/bbfc/15.svg" width="72" height="72" alt="BBFC 15 (15)" />
+            </div>
+          </div>
+          <figcaption>
+            <p class="identity"><code>15</code></p>
+            <p class="meaning">Suitable only for 15 years and over</p>
+            <div class="actions">
+              <button type="button" data-copy="icons/bbfc/15.svg" data-label="Copy path for BBFC 15 (15)" aria-label="Copy path for BBFC 15 (15)">Copy path</button>
+              <button type="button" data-copy="https://cdn.jsdelivr.net/gh/mrcanelas/age-rating-kit@latest/icons/bbfc/15.svg" data-label="Copy URL for BBFC 15 (15)" aria-label="Copy URL for BBFC 15 (15)">Copy URL</button>
+            </div>
+          </figcaption>
+        </figure>
+        <figure class="mark" data-search="bbfc bbfc bbfc british board of film classification 18 18 suitable only for adults 18">
+          <div class="window">
+            <div class="plate plate-light">
+              <img src="icons/bbfc/18.svg" width="72" height="72" alt="BBFC 18 (18)" />
+            </div>
+            <div class="plate plate-dark" aria-hidden="true">
+              <img src="icons/bbfc/18.svg" width="72" height="72" alt="BBFC 18 (18)" />
+            </div>
+          </div>
+          <figcaption>
+            <p class="identity"><code>18</code></p>
+            <p class="meaning">Suitable only for adults</p>
+            <div class="actions">
+              <button type="button" data-copy="icons/bbfc/18.svg" data-label="Copy path for BBFC 18 (18)" aria-label="Copy path for BBFC 18 (18)">Copy path</button>
+              <button type="button" data-copy="https://cdn.jsdelivr.net/gh/mrcanelas/age-rating-kit@latest/icons/bbfc/18.svg" data-label="Copy URL for BBFC 18 (18)" aria-label="Copy URL for BBFC 18 (18)">Copy URL</button>
+            </div>
+          </figcaption>
+        </figure>
+        <figure class="mark" data-search="bbfc bbfc bbfc british board of film classification r18 r18 adults only, licensed cinemas and sex shops r18 r-18">
+          <div class="window">
+            <div class="plate plate-light">
+              <img src="icons/bbfc/r18.svg" width="72" height="72" alt="BBFC R18 (r18)" />
+            </div>
+            <div class="plate plate-dark" aria-hidden="true">
+              <img src="icons/bbfc/r18.svg" width="72" height="72" alt="BBFC R18 (r18)" />
+            </div>
+          </div>
+          <figcaption>
+            <p class="identity"><code>r18</code></p>
+            <p class="meaning">Adults only, licensed cinemas and sex shops</p>
+            <div class="actions">
+              <button type="button" data-copy="icons/bbfc/r18.svg" data-label="Copy path for BBFC R18 (r18)" aria-label="Copy path for BBFC R18 (r18)">Copy path</button>
+              <button type="button" data-copy="https://cdn.jsdelivr.net/gh/mrcanelas/age-rating-kit@latest/icons/bbfc/r18.svg" data-label="Copy URL for BBFC R18 (r18)" aria-label="Copy URL for BBFC R18 (r18)">Copy URL</button>
+            </div>
+          </figcaption>
+        </figure>
       </div>
     </section>
-    <section>
-      <h2>FSK</h2>
-      <div class="row">
-      <figure>
-        <img src="icons/fsk/0.svg" width="72" height="72" alt="fsk 0" />
-        <figcaption>0</figcaption>
-      </figure>
-      <figure>
-        <img src="icons/fsk/6.svg" width="72" height="72" alt="fsk 6" />
-        <figcaption>6</figcaption>
-      </figure>
-      <figure>
-        <img src="icons/fsk/12.svg" width="72" height="72" alt="fsk 12" />
-        <figcaption>12</figcaption>
-      </figure>
-      <figure>
-        <img src="icons/fsk/16.svg" width="72" height="72" alt="fsk 16" />
-        <figcaption>16</figcaption>
-      </figure>
-      <figure>
-        <img src="icons/fsk/18.svg" width="72" height="72" alt="fsk 18" />
-        <figcaption>18</figcaption>
-      </figure>
+    <section class="system" id="fsk" data-search="fsk fsk fsk freiwillige selbstkontrolle der filmwirtschaft">
+      <div class="system-head">
+        <h2>FSK</h2>
+        <p><code>icons/fsk/</code> · 5 marks</p>
+      </div>
+      <div class="marks">
+        <figure class="mark" data-search="fsk fsk fsk freiwillige selbstkontrolle der filmwirtschaft 0 0 freigegeben ohne altersbeschrankung 0 fsk 0 ohne altersbeschrankung ohne altersbeschrankung">
+          <div class="window">
+            <div class="plate plate-light">
+              <img src="icons/fsk/0.svg" width="72" height="72" alt="FSK 0 (0)" />
+            </div>
+            <div class="plate plate-dark" aria-hidden="true">
+              <img src="icons/fsk/0.svg" width="72" height="72" alt="FSK 0 (0)" />
+            </div>
+          </div>
+          <figcaption>
+            <p class="identity"><code>0</code></p>
+            <p class="meaning">Freigegeben ohne Altersbeschränkung</p>
+            <div class="actions">
+              <button type="button" data-copy="icons/fsk/0.svg" data-label="Copy path for FSK 0 (0)" aria-label="Copy path for FSK 0 (0)">Copy path</button>
+              <button type="button" data-copy="https://cdn.jsdelivr.net/gh/mrcanelas/age-rating-kit@latest/icons/fsk/0.svg" data-label="Copy URL for FSK 0 (0)" aria-label="Copy URL for FSK 0 (0)">Copy URL</button>
+            </div>
+          </figcaption>
+        </figure>
+        <figure class="mark" data-search="fsk fsk fsk freiwillige selbstkontrolle der filmwirtschaft 6 6 freigegeben ab 6 jahren 6 fsk 6 ab 6">
+          <div class="window">
+            <div class="plate plate-light">
+              <img src="icons/fsk/6.svg" width="72" height="72" alt="FSK 6 (6)" />
+            </div>
+            <div class="plate plate-dark" aria-hidden="true">
+              <img src="icons/fsk/6.svg" width="72" height="72" alt="FSK 6 (6)" />
+            </div>
+          </div>
+          <figcaption>
+            <p class="identity"><code>6</code></p>
+            <p class="meaning">Freigegeben ab 6 Jahren</p>
+            <div class="actions">
+              <button type="button" data-copy="icons/fsk/6.svg" data-label="Copy path for FSK 6 (6)" aria-label="Copy path for FSK 6 (6)">Copy path</button>
+              <button type="button" data-copy="https://cdn.jsdelivr.net/gh/mrcanelas/age-rating-kit@latest/icons/fsk/6.svg" data-label="Copy URL for FSK 6 (6)" aria-label="Copy URL for FSK 6 (6)">Copy URL</button>
+            </div>
+          </figcaption>
+        </figure>
+        <figure class="mark" data-search="fsk fsk fsk freiwillige selbstkontrolle der filmwirtschaft 12 12 freigegeben ab 12 jahren 12 fsk 12 ab 12">
+          <div class="window">
+            <div class="plate plate-light">
+              <img src="icons/fsk/12.svg" width="72" height="72" alt="FSK 12 (12)" />
+            </div>
+            <div class="plate plate-dark" aria-hidden="true">
+              <img src="icons/fsk/12.svg" width="72" height="72" alt="FSK 12 (12)" />
+            </div>
+          </div>
+          <figcaption>
+            <p class="identity"><code>12</code></p>
+            <p class="meaning">Freigegeben ab 12 Jahren</p>
+            <div class="actions">
+              <button type="button" data-copy="icons/fsk/12.svg" data-label="Copy path for FSK 12 (12)" aria-label="Copy path for FSK 12 (12)">Copy path</button>
+              <button type="button" data-copy="https://cdn.jsdelivr.net/gh/mrcanelas/age-rating-kit@latest/icons/fsk/12.svg" data-label="Copy URL for FSK 12 (12)" aria-label="Copy URL for FSK 12 (12)">Copy URL</button>
+            </div>
+          </figcaption>
+        </figure>
+        <figure class="mark" data-search="fsk fsk fsk freiwillige selbstkontrolle der filmwirtschaft 16 16 freigegeben ab 16 jahren 16 fsk 16 ab 16">
+          <div class="window">
+            <div class="plate plate-light">
+              <img src="icons/fsk/16.svg" width="72" height="72" alt="FSK 16 (16)" />
+            </div>
+            <div class="plate plate-dark" aria-hidden="true">
+              <img src="icons/fsk/16.svg" width="72" height="72" alt="FSK 16 (16)" />
+            </div>
+          </div>
+          <figcaption>
+            <p class="identity"><code>16</code></p>
+            <p class="meaning">Freigegeben ab 16 Jahren</p>
+            <div class="actions">
+              <button type="button" data-copy="icons/fsk/16.svg" data-label="Copy path for FSK 16 (16)" aria-label="Copy path for FSK 16 (16)">Copy path</button>
+              <button type="button" data-copy="https://cdn.jsdelivr.net/gh/mrcanelas/age-rating-kit@latest/icons/fsk/16.svg" data-label="Copy URL for FSK 16 (16)" aria-label="Copy URL for FSK 16 (16)">Copy URL</button>
+            </div>
+          </figcaption>
+        </figure>
+        <figure class="mark" data-search="fsk fsk fsk freiwillige selbstkontrolle der filmwirtschaft 18 18 keine jugendfreigabe 18 fsk 18 keine jugendfreigabe">
+          <div class="window">
+            <div class="plate plate-light">
+              <img src="icons/fsk/18.svg" width="72" height="72" alt="FSK 18 (18)" />
+            </div>
+            <div class="plate plate-dark" aria-hidden="true">
+              <img src="icons/fsk/18.svg" width="72" height="72" alt="FSK 18 (18)" />
+            </div>
+          </div>
+          <figcaption>
+            <p class="identity"><code>18</code></p>
+            <p class="meaning">Keine Jugendfreigabe</p>
+            <div class="actions">
+              <button type="button" data-copy="icons/fsk/18.svg" data-label="Copy path for FSK 18 (18)" aria-label="Copy path for FSK 18 (18)">Copy path</button>
+              <button type="button" data-copy="https://cdn.jsdelivr.net/gh/mrcanelas/age-rating-kit@latest/icons/fsk/18.svg" data-label="Copy URL for FSK 18 (18)" aria-label="Copy URL for FSK 18 (18)">Copy URL</button>
+            </div>
+          </figcaption>
+        </figure>
       </div>
     </section>
-    <section>
-      <h2>USK</h2>
-      <div class="row">
-      <figure>
-        <img src="icons/usk/0.svg" width="72" height="72" alt="usk 0" />
-        <figcaption>0</figcaption>
-      </figure>
-      <figure>
-        <img src="icons/usk/6.svg" width="72" height="72" alt="usk 6" />
-        <figcaption>6</figcaption>
-      </figure>
-      <figure>
-        <img src="icons/usk/12.svg" width="72" height="72" alt="usk 12" />
-        <figcaption>12</figcaption>
-      </figure>
-      <figure>
-        <img src="icons/usk/16.svg" width="72" height="72" alt="usk 16" />
-        <figcaption>16</figcaption>
-      </figure>
-      <figure>
-        <img src="icons/usk/18.svg" width="72" height="72" alt="usk 18" />
-        <figcaption>18</figcaption>
-      </figure>
+    <section class="system" id="usk" data-search="usk usk usk unterhaltungssoftware selbstkontrolle">
+      <div class="system-head">
+        <h2>USK</h2>
+        <p><code>icons/usk/</code> · 5 marks</p>
+      </div>
+      <div class="marks">
+        <figure class="mark" data-search="usk usk usk unterhaltungssoftware selbstkontrolle 0 0 approved without age restriction 0 usk 0">
+          <div class="window">
+            <div class="plate plate-light">
+              <img src="icons/usk/0.svg" width="72" height="72" alt="USK 0 (0)" />
+            </div>
+            <div class="plate plate-dark" aria-hidden="true">
+              <img src="icons/usk/0.svg" width="72" height="72" alt="USK 0 (0)" />
+            </div>
+          </div>
+          <figcaption>
+            <p class="identity"><code>0</code></p>
+            <p class="meaning">Approved without age restriction</p>
+            <div class="actions">
+              <button type="button" data-copy="icons/usk/0.svg" data-label="Copy path for USK 0 (0)" aria-label="Copy path for USK 0 (0)">Copy path</button>
+              <button type="button" data-copy="https://cdn.jsdelivr.net/gh/mrcanelas/age-rating-kit@latest/icons/usk/0.svg" data-label="Copy URL for USK 0 (0)" aria-label="Copy URL for USK 0 (0)">Copy URL</button>
+            </div>
+          </figcaption>
+        </figure>
+        <figure class="mark" data-search="usk usk usk unterhaltungssoftware selbstkontrolle 6 6 approved for ages 6 and above 6 usk 6">
+          <div class="window">
+            <div class="plate plate-light">
+              <img src="icons/usk/6.svg" width="72" height="72" alt="USK 6 (6)" />
+            </div>
+            <div class="plate plate-dark" aria-hidden="true">
+              <img src="icons/usk/6.svg" width="72" height="72" alt="USK 6 (6)" />
+            </div>
+          </div>
+          <figcaption>
+            <p class="identity"><code>6</code></p>
+            <p class="meaning">Approved for ages 6 and above</p>
+            <div class="actions">
+              <button type="button" data-copy="icons/usk/6.svg" data-label="Copy path for USK 6 (6)" aria-label="Copy path for USK 6 (6)">Copy path</button>
+              <button type="button" data-copy="https://cdn.jsdelivr.net/gh/mrcanelas/age-rating-kit@latest/icons/usk/6.svg" data-label="Copy URL for USK 6 (6)" aria-label="Copy URL for USK 6 (6)">Copy URL</button>
+            </div>
+          </figcaption>
+        </figure>
+        <figure class="mark" data-search="usk usk usk unterhaltungssoftware selbstkontrolle 12 12 approved for ages 12 and above 12 usk 12">
+          <div class="window">
+            <div class="plate plate-light">
+              <img src="icons/usk/12.svg" width="72" height="72" alt="USK 12 (12)" />
+            </div>
+            <div class="plate plate-dark" aria-hidden="true">
+              <img src="icons/usk/12.svg" width="72" height="72" alt="USK 12 (12)" />
+            </div>
+          </div>
+          <figcaption>
+            <p class="identity"><code>12</code></p>
+            <p class="meaning">Approved for ages 12 and above</p>
+            <div class="actions">
+              <button type="button" data-copy="icons/usk/12.svg" data-label="Copy path for USK 12 (12)" aria-label="Copy path for USK 12 (12)">Copy path</button>
+              <button type="button" data-copy="https://cdn.jsdelivr.net/gh/mrcanelas/age-rating-kit@latest/icons/usk/12.svg" data-label="Copy URL for USK 12 (12)" aria-label="Copy URL for USK 12 (12)">Copy URL</button>
+            </div>
+          </figcaption>
+        </figure>
+        <figure class="mark" data-search="usk usk usk unterhaltungssoftware selbstkontrolle 16 16 approved for ages 16 and above 16 usk 16">
+          <div class="window">
+            <div class="plate plate-light">
+              <img src="icons/usk/16.svg" width="72" height="72" alt="USK 16 (16)" />
+            </div>
+            <div class="plate plate-dark" aria-hidden="true">
+              <img src="icons/usk/16.svg" width="72" height="72" alt="USK 16 (16)" />
+            </div>
+          </div>
+          <figcaption>
+            <p class="identity"><code>16</code></p>
+            <p class="meaning">Approved for ages 16 and above</p>
+            <div class="actions">
+              <button type="button" data-copy="icons/usk/16.svg" data-label="Copy path for USK 16 (16)" aria-label="Copy path for USK 16 (16)">Copy path</button>
+              <button type="button" data-copy="https://cdn.jsdelivr.net/gh/mrcanelas/age-rating-kit@latest/icons/usk/16.svg" data-label="Copy URL for USK 16 (16)" aria-label="Copy URL for USK 16 (16)">Copy URL</button>
+            </div>
+          </figcaption>
+        </figure>
+        <figure class="mark" data-search="usk usk usk unterhaltungssoftware selbstkontrolle 18 18 not approved for young persons 18 usk 18">
+          <div class="window">
+            <div class="plate plate-light">
+              <img src="icons/usk/18.svg" width="72" height="72" alt="USK 18 (18)" />
+            </div>
+            <div class="plate plate-dark" aria-hidden="true">
+              <img src="icons/usk/18.svg" width="72" height="72" alt="USK 18 (18)" />
+            </div>
+          </div>
+          <figcaption>
+            <p class="identity"><code>18</code></p>
+            <p class="meaning">Not approved for young persons</p>
+            <div class="actions">
+              <button type="button" data-copy="icons/usk/18.svg" data-label="Copy path for USK 18 (18)" aria-label="Copy path for USK 18 (18)">Copy path</button>
+              <button type="button" data-copy="https://cdn.jsdelivr.net/gh/mrcanelas/age-rating-kit@latest/icons/usk/18.svg" data-label="Copy URL for USK 18 (18)" aria-label="Copy URL for USK 18 (18)">Copy URL</button>
+            </div>
+          </figcaption>
+        </figure>
       </div>
     </section>
-    <section>
-      <h2>CERO</h2>
-      <div class="row">
-      <figure>
-        <img src="icons/cero/a.svg" width="72" height="72" alt="cero a" />
-        <figcaption>a</figcaption>
-      </figure>
-      <figure>
-        <img src="icons/cero/b.svg" width="72" height="72" alt="cero b" />
-        <figcaption>b</figcaption>
-      </figure>
-      <figure>
-        <img src="icons/cero/c.svg" width="72" height="72" alt="cero c" />
-        <figcaption>c</figcaption>
-      </figure>
-      <figure>
-        <img src="icons/cero/d.svg" width="72" height="72" alt="cero d" />
-        <figcaption>d</figcaption>
-      </figure>
-      <figure>
-        <img src="icons/cero/z.svg" width="72" height="72" alt="cero z" />
-        <figcaption>z</figcaption>
-      </figure>
+    <section class="system" id="cero" data-search="cero cero cero computer entertainment rating organization">
+      <div class="system-head">
+        <h2>CERO</h2>
+        <p><code>icons/cero/</code> · 5 marks</p>
+      </div>
+      <div class="marks">
+        <figure class="mark" data-search="cero cero cero computer entertainment rating organization a a all ages a all ages">
+          <div class="window">
+            <div class="plate plate-light">
+              <img src="icons/cero/a.svg" width="72" height="72" alt="CERO A (a)" />
+            </div>
+            <div class="plate plate-dark" aria-hidden="true">
+              <img src="icons/cero/a.svg" width="72" height="72" alt="CERO A (a)" />
+            </div>
+          </div>
+          <figcaption>
+            <p class="identity"><code>a</code></p>
+            <p class="meaning">All ages</p>
+            <div class="actions">
+              <button type="button" data-copy="icons/cero/a.svg" data-label="Copy path for CERO A (a)" aria-label="Copy path for CERO A (a)">Copy path</button>
+              <button type="button" data-copy="https://cdn.jsdelivr.net/gh/mrcanelas/age-rating-kit@latest/icons/cero/a.svg" data-label="Copy URL for CERO A (a)" aria-label="Copy URL for CERO A (a)">Copy URL</button>
+            </div>
+          </figcaption>
+        </figure>
+        <figure class="mark" data-search="cero cero cero computer entertainment rating organization b b ages 12 and up b 12">
+          <div class="window">
+            <div class="plate plate-light">
+              <img src="icons/cero/b.svg" width="72" height="72" alt="CERO B (b)" />
+            </div>
+            <div class="plate plate-dark" aria-hidden="true">
+              <img src="icons/cero/b.svg" width="72" height="72" alt="CERO B (b)" />
+            </div>
+          </div>
+          <figcaption>
+            <p class="identity"><code>b</code></p>
+            <p class="meaning">Ages 12 and up</p>
+            <div class="actions">
+              <button type="button" data-copy="icons/cero/b.svg" data-label="Copy path for CERO B (b)" aria-label="Copy path for CERO B (b)">Copy path</button>
+              <button type="button" data-copy="https://cdn.jsdelivr.net/gh/mrcanelas/age-rating-kit@latest/icons/cero/b.svg" data-label="Copy URL for CERO B (b)" aria-label="Copy URL for CERO B (b)">Copy URL</button>
+            </div>
+          </figcaption>
+        </figure>
+        <figure class="mark" data-search="cero cero cero computer entertainment rating organization c c ages 15 and up c 15">
+          <div class="window">
+            <div class="plate plate-light">
+              <img src="icons/cero/c.svg" width="72" height="72" alt="CERO C (c)" />
+            </div>
+            <div class="plate plate-dark" aria-hidden="true">
+              <img src="icons/cero/c.svg" width="72" height="72" alt="CERO C (c)" />
+            </div>
+          </div>
+          <figcaption>
+            <p class="identity"><code>c</code></p>
+            <p class="meaning">Ages 15 and up</p>
+            <div class="actions">
+              <button type="button" data-copy="icons/cero/c.svg" data-label="Copy path for CERO C (c)" aria-label="Copy path for CERO C (c)">Copy path</button>
+              <button type="button" data-copy="https://cdn.jsdelivr.net/gh/mrcanelas/age-rating-kit@latest/icons/cero/c.svg" data-label="Copy URL for CERO C (c)" aria-label="Copy URL for CERO C (c)">Copy URL</button>
+            </div>
+          </figcaption>
+        </figure>
+        <figure class="mark" data-search="cero cero cero computer entertainment rating organization d d ages 17 and up d 17">
+          <div class="window">
+            <div class="plate plate-light">
+              <img src="icons/cero/d.svg" width="72" height="72" alt="CERO D (d)" />
+            </div>
+            <div class="plate plate-dark" aria-hidden="true">
+              <img src="icons/cero/d.svg" width="72" height="72" alt="CERO D (d)" />
+            </div>
+          </div>
+          <figcaption>
+            <p class="identity"><code>d</code></p>
+            <p class="meaning">Ages 17 and up</p>
+            <div class="actions">
+              <button type="button" data-copy="icons/cero/d.svg" data-label="Copy path for CERO D (d)" aria-label="Copy path for CERO D (d)">Copy path</button>
+              <button type="button" data-copy="https://cdn.jsdelivr.net/gh/mrcanelas/age-rating-kit@latest/icons/cero/d.svg" data-label="Copy URL for CERO D (d)" aria-label="Copy URL for CERO D (d)">Copy URL</button>
+            </div>
+          </figcaption>
+        </figure>
+        <figure class="mark" data-search="cero cero cero computer entertainment rating organization z z ages 18 and up only z 18">
+          <div class="window">
+            <div class="plate plate-light">
+              <img src="icons/cero/z.svg" width="72" height="72" alt="CERO Z (z)" />
+            </div>
+            <div class="plate plate-dark" aria-hidden="true">
+              <img src="icons/cero/z.svg" width="72" height="72" alt="CERO Z (z)" />
+            </div>
+          </div>
+          <figcaption>
+            <p class="identity"><code>z</code></p>
+            <p class="meaning">Ages 18 and up only</p>
+            <div class="actions">
+              <button type="button" data-copy="icons/cero/z.svg" data-label="Copy path for CERO Z (z)" aria-label="Copy path for CERO Z (z)">Copy path</button>
+              <button type="button" data-copy="https://cdn.jsdelivr.net/gh/mrcanelas/age-rating-kit@latest/icons/cero/z.svg" data-label="Copy URL for CERO Z (z)" aria-label="Copy URL for CERO Z (z)">Copy URL</button>
+            </div>
+          </figcaption>
+        </figure>
       </div>
     </section>
-    <section>
-      <h2>ACB</h2>
-      <div class="row">
-      <figure>
-        <img src="icons/acb/g.svg" width="72" height="72" alt="acb g" />
-        <figcaption>g</figcaption>
-      </figure>
-      <figure>
-        <img src="icons/acb/pg.svg" width="72" height="72" alt="acb pg" />
-        <figcaption>pg</figcaption>
-      </figure>
-      <figure>
-        <img src="icons/acb/m.svg" width="72" height="72" alt="acb m" />
-        <figcaption>m</figcaption>
-      </figure>
-      <figure>
-        <img src="icons/acb/ma15-plus.svg" width="72" height="72" alt="acb ma15-plus" />
-        <figcaption>ma15-plus</figcaption>
-      </figure>
-      <figure>
-        <img src="icons/acb/r18-plus.svg" width="72" height="72" alt="acb r18-plus" />
-        <figcaption>r18-plus</figcaption>
-      </figure>
-      <figure>
-        <img src="icons/acb/x18-plus.svg" width="72" height="72" alt="acb x18-plus" />
-        <figcaption>x18-plus</figcaption>
-      </figure>
+    <section class="system" id="acb" data-search="acb acb acb australian classification board australia">
+      <div class="system-head">
+        <h2>ACB</h2>
+        <p><code>icons/acb/</code> · 6 marks</p>
+      </div>
+      <div class="marks">
+        <figure class="mark" data-search="acb acb acb australian classification board australia g g general g general">
+          <div class="window">
+            <div class="plate plate-light">
+              <img src="icons/acb/g.svg" width="72" height="72" alt="ACB G (g)" />
+            </div>
+            <div class="plate plate-dark" aria-hidden="true">
+              <img src="icons/acb/g.svg" width="72" height="72" alt="ACB G (g)" />
+            </div>
+          </div>
+          <figcaption>
+            <p class="identity"><code>g</code></p>
+            <p class="meaning">General</p>
+            <div class="actions">
+              <button type="button" data-copy="icons/acb/g.svg" data-label="Copy path for ACB G (g)" aria-label="Copy path for ACB G (g)">Copy path</button>
+              <button type="button" data-copy="https://cdn.jsdelivr.net/gh/mrcanelas/age-rating-kit@latest/icons/acb/g.svg" data-label="Copy URL for ACB G (g)" aria-label="Copy URL for ACB G (g)">Copy URL</button>
+            </div>
+          </figcaption>
+        </figure>
+        <figure class="mark" data-search="acb acb acb australian classification board australia pg pg parental guidance recommended pg parental guidance">
+          <div class="window">
+            <div class="plate plate-light">
+              <img src="icons/acb/pg.svg" width="72" height="72" alt="ACB PG (pg)" />
+            </div>
+            <div class="plate plate-dark" aria-hidden="true">
+              <img src="icons/acb/pg.svg" width="72" height="72" alt="ACB PG (pg)" />
+            </div>
+          </div>
+          <figcaption>
+            <p class="identity"><code>pg</code></p>
+            <p class="meaning">Parental guidance recommended</p>
+            <div class="actions">
+              <button type="button" data-copy="icons/acb/pg.svg" data-label="Copy path for ACB PG (pg)" aria-label="Copy path for ACB PG (pg)">Copy path</button>
+              <button type="button" data-copy="https://cdn.jsdelivr.net/gh/mrcanelas/age-rating-kit@latest/icons/acb/pg.svg" data-label="Copy URL for ACB PG (pg)" aria-label="Copy URL for ACB PG (pg)">Copy URL</button>
+            </div>
+          </figcaption>
+        </figure>
+        <figure class="mark" data-search="acb acb acb australian classification board australia m m recommended for mature audiences m mature">
+          <div class="window">
+            <div class="plate plate-light">
+              <img src="icons/acb/m.svg" width="72" height="72" alt="ACB M (m)" />
+            </div>
+            <div class="plate plate-dark" aria-hidden="true">
+              <img src="icons/acb/m.svg" width="72" height="72" alt="ACB M (m)" />
+            </div>
+          </div>
+          <figcaption>
+            <p class="identity"><code>m</code></p>
+            <p class="meaning">Recommended for mature audiences</p>
+            <div class="actions">
+              <button type="button" data-copy="icons/acb/m.svg" data-label="Copy path for ACB M (m)" aria-label="Copy path for ACB M (m)">Copy path</button>
+              <button type="button" data-copy="https://cdn.jsdelivr.net/gh/mrcanelas/age-rating-kit@latest/icons/acb/m.svg" data-label="Copy URL for ACB M (m)" aria-label="Copy URL for ACB M (m)">Copy URL</button>
+            </div>
+          </figcaption>
+        </figure>
+        <figure class="mark" data-search="acb acb acb australian classification board australia ma15-plus ma 15+ not suitable for people under 15 ma15-plus ma15+ ma 15+ ma15">
+          <div class="window">
+            <div class="plate plate-light">
+              <img src="icons/acb/ma15-plus.svg" width="72" height="72" alt="ACB MA 15+ (ma15-plus)" />
+            </div>
+            <div class="plate plate-dark" aria-hidden="true">
+              <img src="icons/acb/ma15-plus.svg" width="72" height="72" alt="ACB MA 15+ (ma15-plus)" />
+            </div>
+          </div>
+          <figcaption>
+            <p class="identity"><code>ma15-plus</code> <span class="label">MA 15+</span></p>
+            <p class="meaning">Not suitable for people under 15</p>
+            <div class="actions">
+              <button type="button" data-copy="icons/acb/ma15-plus.svg" data-label="Copy path for ACB MA 15+ (ma15-plus)" aria-label="Copy path for ACB MA 15+ (ma15-plus)">Copy path</button>
+              <button type="button" data-copy="https://cdn.jsdelivr.net/gh/mrcanelas/age-rating-kit@latest/icons/acb/ma15-plus.svg" data-label="Copy URL for ACB MA 15+ (ma15-plus)" aria-label="Copy URL for ACB MA 15+ (ma15-plus)">Copy URL</button>
+            </div>
+          </figcaption>
+        </figure>
+        <figure class="mark" data-search="acb acb acb australian classification board australia r18-plus r 18+ restricted to adults 18 and over r18-plus r18+ r 18+ r18">
+          <div class="window">
+            <div class="plate plate-light">
+              <img src="icons/acb/r18-plus.svg" width="72" height="72" alt="ACB R 18+ (r18-plus)" />
+            </div>
+            <div class="plate plate-dark" aria-hidden="true">
+              <img src="icons/acb/r18-plus.svg" width="72" height="72" alt="ACB R 18+ (r18-plus)" />
+            </div>
+          </div>
+          <figcaption>
+            <p class="identity"><code>r18-plus</code> <span class="label">R 18+</span></p>
+            <p class="meaning">Restricted to adults 18 and over</p>
+            <div class="actions">
+              <button type="button" data-copy="icons/acb/r18-plus.svg" data-label="Copy path for ACB R 18+ (r18-plus)" aria-label="Copy path for ACB R 18+ (r18-plus)">Copy path</button>
+              <button type="button" data-copy="https://cdn.jsdelivr.net/gh/mrcanelas/age-rating-kit@latest/icons/acb/r18-plus.svg" data-label="Copy URL for ACB R 18+ (r18-plus)" aria-label="Copy URL for ACB R 18+ (r18-plus)">Copy URL</button>
+            </div>
+          </figcaption>
+        </figure>
+        <figure class="mark" data-search="acb acb acb australian classification board australia x18-plus x 18+ restricted to adults 18 and over, sexually explicit x18-plus x18+ x 18+ x18">
+          <div class="window">
+            <div class="plate plate-light">
+              <img src="icons/acb/x18-plus.svg" width="72" height="72" alt="ACB X 18+ (x18-plus)" />
+            </div>
+            <div class="plate plate-dark" aria-hidden="true">
+              <img src="icons/acb/x18-plus.svg" width="72" height="72" alt="ACB X 18+ (x18-plus)" />
+            </div>
+          </div>
+          <figcaption>
+            <p class="identity"><code>x18-plus</code> <span class="label">X 18+</span></p>
+            <p class="meaning">Restricted to adults 18 and over, sexually explicit</p>
+            <div class="actions">
+              <button type="button" data-copy="icons/acb/x18-plus.svg" data-label="Copy path for ACB X 18+ (x18-plus)" aria-label="Copy path for ACB X 18+ (x18-plus)">Copy path</button>
+              <button type="button" data-copy="https://cdn.jsdelivr.net/gh/mrcanelas/age-rating-kit@latest/icons/acb/x18-plus.svg" data-label="Copy URL for ACB X 18+ (x18-plus)" aria-label="Copy URL for ACB X 18+ (x18-plus)">Copy URL</button>
+            </div>
+          </figcaption>
+        </figure>
       </div>
     </section>
-    <section>
-      <h2>IARC</h2>
-      <div class="row">
-      <figure>
-        <img src="icons/iarc/3-plus.svg" width="72" height="72" alt="iarc 3-plus" />
-        <figcaption>3-plus</figcaption>
-      </figure>
-      <figure>
-        <img src="icons/iarc/7-plus.svg" width="72" height="72" alt="iarc 7-plus" />
-        <figcaption>7-plus</figcaption>
-      </figure>
-      <figure>
-        <img src="icons/iarc/12-plus.svg" width="72" height="72" alt="iarc 12-plus" />
-        <figcaption>12-plus</figcaption>
-      </figure>
-      <figure>
-        <img src="icons/iarc/16-plus.svg" width="72" height="72" alt="iarc 16-plus" />
-        <figcaption>16-plus</figcaption>
-      </figure>
-      <figure>
-        <img src="icons/iarc/18-plus.svg" width="72" height="72" alt="iarc 18-plus" />
-        <figcaption>18-plus</figcaption>
-      </figure>
+    <section class="system" id="iarc" data-search="iarc iarc iarc international age rating coalition">
+      <div class="system-head">
+        <h2>IARC</h2>
+        <p><code>icons/iarc/</code> · 5 marks</p>
+      </div>
+      <div class="marks">
+        <figure class="mark" data-search="iarc iarc iarc international age rating coalition 3-plus 3+ ages 3 and over 3-plus 3+ 3">
+          <div class="window">
+            <div class="plate plate-light">
+              <img src="icons/iarc/3-plus.svg" width="72" height="72" alt="IARC 3+ (3-plus)" />
+            </div>
+            <div class="plate plate-dark" aria-hidden="true">
+              <img src="icons/iarc/3-plus.svg" width="72" height="72" alt="IARC 3+ (3-plus)" />
+            </div>
+          </div>
+          <figcaption>
+            <p class="identity"><code>3-plus</code> <span class="label">3+</span></p>
+            <p class="meaning">Ages 3 and over</p>
+            <div class="actions">
+              <button type="button" data-copy="icons/iarc/3-plus.svg" data-label="Copy path for IARC 3+ (3-plus)" aria-label="Copy path for IARC 3+ (3-plus)">Copy path</button>
+              <button type="button" data-copy="https://cdn.jsdelivr.net/gh/mrcanelas/age-rating-kit@latest/icons/iarc/3-plus.svg" data-label="Copy URL for IARC 3+ (3-plus)" aria-label="Copy URL for IARC 3+ (3-plus)">Copy URL</button>
+            </div>
+          </figcaption>
+        </figure>
+        <figure class="mark" data-search="iarc iarc iarc international age rating coalition 7-plus 7+ ages 7 and over 7-plus 7+ 7">
+          <div class="window">
+            <div class="plate plate-light">
+              <img src="icons/iarc/7-plus.svg" width="72" height="72" alt="IARC 7+ (7-plus)" />
+            </div>
+            <div class="plate plate-dark" aria-hidden="true">
+              <img src="icons/iarc/7-plus.svg" width="72" height="72" alt="IARC 7+ (7-plus)" />
+            </div>
+          </div>
+          <figcaption>
+            <p class="identity"><code>7-plus</code> <span class="label">7+</span></p>
+            <p class="meaning">Ages 7 and over</p>
+            <div class="actions">
+              <button type="button" data-copy="icons/iarc/7-plus.svg" data-label="Copy path for IARC 7+ (7-plus)" aria-label="Copy path for IARC 7+ (7-plus)">Copy path</button>
+              <button type="button" data-copy="https://cdn.jsdelivr.net/gh/mrcanelas/age-rating-kit@latest/icons/iarc/7-plus.svg" data-label="Copy URL for IARC 7+ (7-plus)" aria-label="Copy URL for IARC 7+ (7-plus)">Copy URL</button>
+            </div>
+          </figcaption>
+        </figure>
+        <figure class="mark" data-search="iarc iarc iarc international age rating coalition 12-plus 12+ ages 12 and over 12-plus 12+ 12">
+          <div class="window">
+            <div class="plate plate-light">
+              <img src="icons/iarc/12-plus.svg" width="72" height="72" alt="IARC 12+ (12-plus)" />
+            </div>
+            <div class="plate plate-dark" aria-hidden="true">
+              <img src="icons/iarc/12-plus.svg" width="72" height="72" alt="IARC 12+ (12-plus)" />
+            </div>
+          </div>
+          <figcaption>
+            <p class="identity"><code>12-plus</code> <span class="label">12+</span></p>
+            <p class="meaning">Ages 12 and over</p>
+            <div class="actions">
+              <button type="button" data-copy="icons/iarc/12-plus.svg" data-label="Copy path for IARC 12+ (12-plus)" aria-label="Copy path for IARC 12+ (12-plus)">Copy path</button>
+              <button type="button" data-copy="https://cdn.jsdelivr.net/gh/mrcanelas/age-rating-kit@latest/icons/iarc/12-plus.svg" data-label="Copy URL for IARC 12+ (12-plus)" aria-label="Copy URL for IARC 12+ (12-plus)">Copy URL</button>
+            </div>
+          </figcaption>
+        </figure>
+        <figure class="mark" data-search="iarc iarc iarc international age rating coalition 16-plus 16+ ages 16 and over 16-plus 16+ 16">
+          <div class="window">
+            <div class="plate plate-light">
+              <img src="icons/iarc/16-plus.svg" width="72" height="72" alt="IARC 16+ (16-plus)" />
+            </div>
+            <div class="plate plate-dark" aria-hidden="true">
+              <img src="icons/iarc/16-plus.svg" width="72" height="72" alt="IARC 16+ (16-plus)" />
+            </div>
+          </div>
+          <figcaption>
+            <p class="identity"><code>16-plus</code> <span class="label">16+</span></p>
+            <p class="meaning">Ages 16 and over</p>
+            <div class="actions">
+              <button type="button" data-copy="icons/iarc/16-plus.svg" data-label="Copy path for IARC 16+ (16-plus)" aria-label="Copy path for IARC 16+ (16-plus)">Copy path</button>
+              <button type="button" data-copy="https://cdn.jsdelivr.net/gh/mrcanelas/age-rating-kit@latest/icons/iarc/16-plus.svg" data-label="Copy URL for IARC 16+ (16-plus)" aria-label="Copy URL for IARC 16+ (16-plus)">Copy URL</button>
+            </div>
+          </figcaption>
+        </figure>
+        <figure class="mark" data-search="iarc iarc iarc international age rating coalition 18-plus 18+ ages 18 and over 18-plus 18+ 18">
+          <div class="window">
+            <div class="plate plate-light">
+              <img src="icons/iarc/18-plus.svg" width="72" height="72" alt="IARC 18+ (18-plus)" />
+            </div>
+            <div class="plate plate-dark" aria-hidden="true">
+              <img src="icons/iarc/18-plus.svg" width="72" height="72" alt="IARC 18+ (18-plus)" />
+            </div>
+          </div>
+          <figcaption>
+            <p class="identity"><code>18-plus</code> <span class="label">18+</span></p>
+            <p class="meaning">Ages 18 and over</p>
+            <div class="actions">
+              <button type="button" data-copy="icons/iarc/18-plus.svg" data-label="Copy path for IARC 18+ (18-plus)" aria-label="Copy path for IARC 18+ (18-plus)">Copy path</button>
+              <button type="button" data-copy="https://cdn.jsdelivr.net/gh/mrcanelas/age-rating-kit@latest/icons/iarc/18-plus.svg" data-label="Copy URL for IARC 18+ (18-plus)" aria-label="Copy URL for IARC 18+ (18-plus)">Copy URL</button>
+            </div>
+          </figcaption>
+        </figure>
       </div>
     </section>
-    <section>
-      <h2>Kijkwijzer</h2>
-      <div class="row">
-      <figure>
-        <img src="icons/kijkwijzer/al.svg" width="72" height="72" alt="kijkwijzer al" />
-        <figcaption>al</figcaption>
-      </figure>
-      <figure>
-        <img src="icons/kijkwijzer/6.svg" width="72" height="72" alt="kijkwijzer 6" />
-        <figcaption>6</figcaption>
-      </figure>
-      <figure>
-        <img src="icons/kijkwijzer/9.svg" width="72" height="72" alt="kijkwijzer 9" />
-        <figcaption>9</figcaption>
-      </figure>
-      <figure>
-        <img src="icons/kijkwijzer/12.svg" width="72" height="72" alt="kijkwijzer 12" />
-        <figcaption>12</figcaption>
-      </figure>
-      <figure>
-        <img src="icons/kijkwijzer/14.svg" width="72" height="72" alt="kijkwijzer 14" />
-        <figcaption>14</figcaption>
-      </figure>
-      <figure>
-        <img src="icons/kijkwijzer/16.svg" width="72" height="72" alt="kijkwijzer 16" />
-        <figcaption>16</figcaption>
-      </figure>
-      <figure>
-        <img src="icons/kijkwijzer/18.svg" width="72" height="72" alt="kijkwijzer 18" />
-        <figcaption>18</figcaption>
-      </figure>
+    <section class="system" id="kijkwijzer" data-search="kijkwijzer kijkwijzer kijkwijzer netherlands nederland">
+      <div class="system-head">
+        <h2>Kijkwijzer</h2>
+        <p><code>icons/kijkwijzer/</code> · 7 marks</p>
+      </div>
+      <div class="marks">
+        <figure class="mark" data-search="kijkwijzer kijkwijzer kijkwijzer netherlands nederland al al alle leeftijden al alle leeftijden all ages">
+          <div class="window">
+            <div class="plate plate-light">
+              <img src="icons/kijkwijzer/al.svg" width="72" height="72" alt="Kijkwijzer AL (al)" />
+            </div>
+            <div class="plate plate-dark" aria-hidden="true">
+              <img src="icons/kijkwijzer/al.svg" width="72" height="72" alt="Kijkwijzer AL (al)" />
+            </div>
+          </div>
+          <figcaption>
+            <p class="identity"><code>al</code></p>
+            <p class="meaning">Alle leeftijden</p>
+            <div class="actions">
+              <button type="button" data-copy="icons/kijkwijzer/al.svg" data-label="Copy path for Kijkwijzer AL (al)" aria-label="Copy path for Kijkwijzer AL (al)">Copy path</button>
+              <button type="button" data-copy="https://cdn.jsdelivr.net/gh/mrcanelas/age-rating-kit@latest/icons/kijkwijzer/al.svg" data-label="Copy URL for Kijkwijzer AL (al)" aria-label="Copy URL for Kijkwijzer AL (al)">Copy URL</button>
+            </div>
+          </figcaption>
+        </figure>
+        <figure class="mark" data-search="kijkwijzer kijkwijzer kijkwijzer netherlands nederland 6 6 niet geschikt voor kinderen jonger dan 6 jaar 6">
+          <div class="window">
+            <div class="plate plate-light">
+              <img src="icons/kijkwijzer/6.svg" width="72" height="72" alt="Kijkwijzer 6 (6)" />
+            </div>
+            <div class="plate plate-dark" aria-hidden="true">
+              <img src="icons/kijkwijzer/6.svg" width="72" height="72" alt="Kijkwijzer 6 (6)" />
+            </div>
+          </div>
+          <figcaption>
+            <p class="identity"><code>6</code></p>
+            <p class="meaning">Niet geschikt voor kinderen jonger dan 6 jaar</p>
+            <div class="actions">
+              <button type="button" data-copy="icons/kijkwijzer/6.svg" data-label="Copy path for Kijkwijzer 6 (6)" aria-label="Copy path for Kijkwijzer 6 (6)">Copy path</button>
+              <button type="button" data-copy="https://cdn.jsdelivr.net/gh/mrcanelas/age-rating-kit@latest/icons/kijkwijzer/6.svg" data-label="Copy URL for Kijkwijzer 6 (6)" aria-label="Copy URL for Kijkwijzer 6 (6)">Copy URL</button>
+            </div>
+          </figcaption>
+        </figure>
+        <figure class="mark" data-search="kijkwijzer kijkwijzer kijkwijzer netherlands nederland 9 9 niet geschikt voor kinderen jonger dan 9 jaar 9">
+          <div class="window">
+            <div class="plate plate-light">
+              <img src="icons/kijkwijzer/9.svg" width="72" height="72" alt="Kijkwijzer 9 (9)" />
+            </div>
+            <div class="plate plate-dark" aria-hidden="true">
+              <img src="icons/kijkwijzer/9.svg" width="72" height="72" alt="Kijkwijzer 9 (9)" />
+            </div>
+          </div>
+          <figcaption>
+            <p class="identity"><code>9</code></p>
+            <p class="meaning">Niet geschikt voor kinderen jonger dan 9 jaar</p>
+            <div class="actions">
+              <button type="button" data-copy="icons/kijkwijzer/9.svg" data-label="Copy path for Kijkwijzer 9 (9)" aria-label="Copy path for Kijkwijzer 9 (9)">Copy path</button>
+              <button type="button" data-copy="https://cdn.jsdelivr.net/gh/mrcanelas/age-rating-kit@latest/icons/kijkwijzer/9.svg" data-label="Copy URL for Kijkwijzer 9 (9)" aria-label="Copy URL for Kijkwijzer 9 (9)">Copy URL</button>
+            </div>
+          </figcaption>
+        </figure>
+        <figure class="mark" data-search="kijkwijzer kijkwijzer kijkwijzer netherlands nederland 12 12 niet geschikt voor kinderen jonger dan 12 jaar 12">
+          <div class="window">
+            <div class="plate plate-light">
+              <img src="icons/kijkwijzer/12.svg" width="72" height="72" alt="Kijkwijzer 12 (12)" />
+            </div>
+            <div class="plate plate-dark" aria-hidden="true">
+              <img src="icons/kijkwijzer/12.svg" width="72" height="72" alt="Kijkwijzer 12 (12)" />
+            </div>
+          </div>
+          <figcaption>
+            <p class="identity"><code>12</code></p>
+            <p class="meaning">Niet geschikt voor kinderen jonger dan 12 jaar</p>
+            <div class="actions">
+              <button type="button" data-copy="icons/kijkwijzer/12.svg" data-label="Copy path for Kijkwijzer 12 (12)" aria-label="Copy path for Kijkwijzer 12 (12)">Copy path</button>
+              <button type="button" data-copy="https://cdn.jsdelivr.net/gh/mrcanelas/age-rating-kit@latest/icons/kijkwijzer/12.svg" data-label="Copy URL for Kijkwijzer 12 (12)" aria-label="Copy URL for Kijkwijzer 12 (12)">Copy URL</button>
+            </div>
+          </figcaption>
+        </figure>
+        <figure class="mark" data-search="kijkwijzer kijkwijzer kijkwijzer netherlands nederland 14 14 niet geschikt voor kinderen jonger dan 14 jaar 14">
+          <div class="window">
+            <div class="plate plate-light">
+              <img src="icons/kijkwijzer/14.svg" width="72" height="72" alt="Kijkwijzer 14 (14)" />
+            </div>
+            <div class="plate plate-dark" aria-hidden="true">
+              <img src="icons/kijkwijzer/14.svg" width="72" height="72" alt="Kijkwijzer 14 (14)" />
+            </div>
+          </div>
+          <figcaption>
+            <p class="identity"><code>14</code></p>
+            <p class="meaning">Niet geschikt voor kinderen jonger dan 14 jaar</p>
+            <div class="actions">
+              <button type="button" data-copy="icons/kijkwijzer/14.svg" data-label="Copy path for Kijkwijzer 14 (14)" aria-label="Copy path for Kijkwijzer 14 (14)">Copy path</button>
+              <button type="button" data-copy="https://cdn.jsdelivr.net/gh/mrcanelas/age-rating-kit@latest/icons/kijkwijzer/14.svg" data-label="Copy URL for Kijkwijzer 14 (14)" aria-label="Copy URL for Kijkwijzer 14 (14)">Copy URL</button>
+            </div>
+          </figcaption>
+        </figure>
+        <figure class="mark" data-search="kijkwijzer kijkwijzer kijkwijzer netherlands nederland 16 16 niet geschikt voor kinderen jonger dan 16 jaar 16">
+          <div class="window">
+            <div class="plate plate-light">
+              <img src="icons/kijkwijzer/16.svg" width="72" height="72" alt="Kijkwijzer 16 (16)" />
+            </div>
+            <div class="plate plate-dark" aria-hidden="true">
+              <img src="icons/kijkwijzer/16.svg" width="72" height="72" alt="Kijkwijzer 16 (16)" />
+            </div>
+          </div>
+          <figcaption>
+            <p class="identity"><code>16</code></p>
+            <p class="meaning">Niet geschikt voor kinderen jonger dan 16 jaar</p>
+            <div class="actions">
+              <button type="button" data-copy="icons/kijkwijzer/16.svg" data-label="Copy path for Kijkwijzer 16 (16)" aria-label="Copy path for Kijkwijzer 16 (16)">Copy path</button>
+              <button type="button" data-copy="https://cdn.jsdelivr.net/gh/mrcanelas/age-rating-kit@latest/icons/kijkwijzer/16.svg" data-label="Copy URL for Kijkwijzer 16 (16)" aria-label="Copy URL for Kijkwijzer 16 (16)">Copy URL</button>
+            </div>
+          </figcaption>
+        </figure>
+        <figure class="mark" data-search="kijkwijzer kijkwijzer kijkwijzer netherlands nederland 18 18 niet geschikt voor personen jonger dan 18 jaar 18">
+          <div class="window">
+            <div class="plate plate-light">
+              <img src="icons/kijkwijzer/18.svg" width="72" height="72" alt="Kijkwijzer 18 (18)" />
+            </div>
+            <div class="plate plate-dark" aria-hidden="true">
+              <img src="icons/kijkwijzer/18.svg" width="72" height="72" alt="Kijkwijzer 18 (18)" />
+            </div>
+          </div>
+          <figcaption>
+            <p class="identity"><code>18</code></p>
+            <p class="meaning">Niet geschikt voor personen jonger dan 18 jaar</p>
+            <div class="actions">
+              <button type="button" data-copy="icons/kijkwijzer/18.svg" data-label="Copy path for Kijkwijzer 18 (18)" aria-label="Copy path for Kijkwijzer 18 (18)">Copy path</button>
+              <button type="button" data-copy="https://cdn.jsdelivr.net/gh/mrcanelas/age-rating-kit@latest/icons/kijkwijzer/18.svg" data-label="Copy URL for Kijkwijzer 18 (18)" aria-label="Copy URL for Kijkwijzer 18 (18)">Copy URL</button>
+            </div>
+          </figcaption>
+        </figure>
       </div>
     </section>
-    <section>
-      <h2>Eirin</h2>
-      <div class="row">
-      <figure>
-        <img src="icons/eirin/g.svg" width="72" height="72" alt="eirin g" />
-        <figcaption>g</figcaption>
-      </figure>
-      <figure>
-        <img src="icons/eirin/pg12.svg" width="72" height="72" alt="eirin pg12" />
-        <figcaption>pg12</figcaption>
-      </figure>
-      <figure>
-        <img src="icons/eirin/r15-plus.svg" width="72" height="72" alt="eirin r15-plus" />
-        <figcaption>r15-plus</figcaption>
-      </figure>
-      <figure>
-        <img src="icons/eirin/r18-plus.svg" width="72" height="72" alt="eirin r18-plus" />
-        <figcaption>r18-plus</figcaption>
-      </figure>
+    <section class="system" id="eirin" data-search="eirin eirin eirin film classification and rating organization">
+      <div class="system-head">
+        <h2>Eirin</h2>
+        <p><code>icons/eirin/</code> · 4 marks</p>
+      </div>
+      <div class="marks">
+        <figure class="mark" data-search="eirin eirin eirin film classification and rating organization g g general, suitable for all ages g general">
+          <div class="window">
+            <div class="plate plate-light">
+              <img src="icons/eirin/g.svg" width="72" height="72" alt="Eirin G (g)" />
+            </div>
+            <div class="plate plate-dark" aria-hidden="true">
+              <img src="icons/eirin/g.svg" width="72" height="72" alt="Eirin G (g)" />
+            </div>
+          </div>
+          <figcaption>
+            <p class="identity"><code>g</code></p>
+            <p class="meaning">General, suitable for all ages</p>
+            <div class="actions">
+              <button type="button" data-copy="icons/eirin/g.svg" data-label="Copy path for Eirin G (g)" aria-label="Copy path for Eirin G (g)">Copy path</button>
+              <button type="button" data-copy="https://cdn.jsdelivr.net/gh/mrcanelas/age-rating-kit@latest/icons/eirin/g.svg" data-label="Copy URL for Eirin G (g)" aria-label="Copy URL for Eirin G (g)">Copy URL</button>
+            </div>
+          </figcaption>
+        </figure>
+        <figure class="mark" data-search="eirin eirin eirin film classification and rating organization pg12 pg12 parental guidance for under 12s pg12 pg-12 pg 12">
+          <div class="window">
+            <div class="plate plate-light">
+              <img src="icons/eirin/pg12.svg" width="72" height="72" alt="Eirin PG12 (pg12)" />
+            </div>
+            <div class="plate plate-dark" aria-hidden="true">
+              <img src="icons/eirin/pg12.svg" width="72" height="72" alt="Eirin PG12 (pg12)" />
+            </div>
+          </div>
+          <figcaption>
+            <p class="identity"><code>pg12</code></p>
+            <p class="meaning">Parental guidance for under 12s</p>
+            <div class="actions">
+              <button type="button" data-copy="icons/eirin/pg12.svg" data-label="Copy path for Eirin PG12 (pg12)" aria-label="Copy path for Eirin PG12 (pg12)">Copy path</button>
+              <button type="button" data-copy="https://cdn.jsdelivr.net/gh/mrcanelas/age-rating-kit@latest/icons/eirin/pg12.svg" data-label="Copy URL for Eirin PG12 (pg12)" aria-label="Copy URL for Eirin PG12 (pg12)">Copy URL</button>
+            </div>
+          </figcaption>
+        </figure>
+        <figure class="mark" data-search="eirin eirin eirin film classification and rating organization r15-plus r15+ restricted to ages 15 and over r15-plus r15+ r15">
+          <div class="window">
+            <div class="plate plate-light">
+              <img src="icons/eirin/r15-plus.svg" width="72" height="72" alt="Eirin R15+ (r15-plus)" />
+            </div>
+            <div class="plate plate-dark" aria-hidden="true">
+              <img src="icons/eirin/r15-plus.svg" width="72" height="72" alt="Eirin R15+ (r15-plus)" />
+            </div>
+          </div>
+          <figcaption>
+            <p class="identity"><code>r15-plus</code> <span class="label">R15+</span></p>
+            <p class="meaning">Restricted to ages 15 and over</p>
+            <div class="actions">
+              <button type="button" data-copy="icons/eirin/r15-plus.svg" data-label="Copy path for Eirin R15+ (r15-plus)" aria-label="Copy path for Eirin R15+ (r15-plus)">Copy path</button>
+              <button type="button" data-copy="https://cdn.jsdelivr.net/gh/mrcanelas/age-rating-kit@latest/icons/eirin/r15-plus.svg" data-label="Copy URL for Eirin R15+ (r15-plus)" aria-label="Copy URL for Eirin R15+ (r15-plus)">Copy URL</button>
+            </div>
+          </figcaption>
+        </figure>
+        <figure class="mark" data-search="eirin eirin eirin film classification and rating organization r18-plus r18+ restricted to ages 18 and over r18-plus r18+ r18">
+          <div class="window">
+            <div class="plate plate-light">
+              <img src="icons/eirin/r18-plus.svg" width="72" height="72" alt="Eirin R18+ (r18-plus)" />
+            </div>
+            <div class="plate plate-dark" aria-hidden="true">
+              <img src="icons/eirin/r18-plus.svg" width="72" height="72" alt="Eirin R18+ (r18-plus)" />
+            </div>
+          </div>
+          <figcaption>
+            <p class="identity"><code>r18-plus</code> <span class="label">R18+</span></p>
+            <p class="meaning">Restricted to ages 18 and over</p>
+            <div class="actions">
+              <button type="button" data-copy="icons/eirin/r18-plus.svg" data-label="Copy path for Eirin R18+ (r18-plus)" aria-label="Copy path for Eirin R18+ (r18-plus)">Copy path</button>
+              <button type="button" data-copy="https://cdn.jsdelivr.net/gh/mrcanelas/age-rating-kit@latest/icons/eirin/r18-plus.svg" data-label="Copy URL for Eirin R18+ (r18-plus)" aria-label="Copy URL for Eirin R18+ (r18-plus)">Copy URL</button>
+            </div>
+          </figcaption>
+        </figure>
       </div>
     </section>
-    <section>
-      <h2>OFLC</h2>
-      <div class="row">
-      <figure>
-        <img src="icons/oflc/g.svg" width="72" height="72" alt="oflc g" />
-        <figcaption>g</figcaption>
-      </figure>
-      <figure>
-        <img src="icons/oflc/pg.svg" width="72" height="72" alt="oflc pg" />
-        <figcaption>pg</figcaption>
-      </figure>
-      <figure>
-        <img src="icons/oflc/m.svg" width="72" height="72" alt="oflc m" />
-        <figcaption>m</figcaption>
-      </figure>
-      <figure>
-        <img src="icons/oflc/r13.svg" width="72" height="72" alt="oflc r13" />
-        <figcaption>r13</figcaption>
-      </figure>
-      <figure>
-        <img src="icons/oflc/r15.svg" width="72" height="72" alt="oflc r15" />
-        <figcaption>r15</figcaption>
-      </figure>
-      <figure>
-        <img src="icons/oflc/r16.svg" width="72" height="72" alt="oflc r16" />
-        <figcaption>r16</figcaption>
-      </figure>
-      <figure>
-        <img src="icons/oflc/r18.svg" width="72" height="72" alt="oflc r18" />
-        <figcaption>r18</figcaption>
-      </figure>
-      <figure>
-        <img src="icons/oflc/rp13.svg" width="72" height="72" alt="oflc rp13" />
-        <figcaption>rp13</figcaption>
-      </figure>
-      <figure>
-        <img src="icons/oflc/rp16.svg" width="72" height="72" alt="oflc rp16" />
-        <figcaption>rp16</figcaption>
-      </figure>
-      <figure>
-        <img src="icons/oflc/rp18.svg" width="72" height="72" alt="oflc rp18" />
-        <figcaption>rp18</figcaption>
-      </figure>
+    <section class="system" id="oflc" data-search="oflc oflc oflc new zealand new-zealand">
+      <div class="system-head">
+        <h2>OFLC</h2>
+        <p><code>icons/oflc/</code> · 10 marks</p>
+      </div>
+      <div class="marks">
+        <figure class="mark" data-search="oflc oflc oflc new zealand new-zealand g g suitable for general audiences g general">
+          <div class="window">
+            <div class="plate plate-light">
+              <img src="icons/oflc/g.svg" width="72" height="72" alt="OFLC G (g)" />
+            </div>
+            <div class="plate plate-dark" aria-hidden="true">
+              <img src="icons/oflc/g.svg" width="72" height="72" alt="OFLC G (g)" />
+            </div>
+          </div>
+          <figcaption>
+            <p class="identity"><code>g</code></p>
+            <p class="meaning">Suitable for general audiences</p>
+            <div class="actions">
+              <button type="button" data-copy="icons/oflc/g.svg" data-label="Copy path for OFLC G (g)" aria-label="Copy path for OFLC G (g)">Copy path</button>
+              <button type="button" data-copy="https://cdn.jsdelivr.net/gh/mrcanelas/age-rating-kit@latest/icons/oflc/g.svg" data-label="Copy URL for OFLC G (g)" aria-label="Copy URL for OFLC G (g)">Copy URL</button>
+            </div>
+          </figcaption>
+        </figure>
+        <figure class="mark" data-search="oflc oflc oflc new zealand new-zealand pg pg parental guidance recommended pg parental guidance">
+          <div class="window">
+            <div class="plate plate-light">
+              <img src="icons/oflc/pg.svg" width="72" height="72" alt="OFLC PG (pg)" />
+            </div>
+            <div class="plate plate-dark" aria-hidden="true">
+              <img src="icons/oflc/pg.svg" width="72" height="72" alt="OFLC PG (pg)" />
+            </div>
+          </div>
+          <figcaption>
+            <p class="identity"><code>pg</code></p>
+            <p class="meaning">Parental guidance recommended</p>
+            <div class="actions">
+              <button type="button" data-copy="icons/oflc/pg.svg" data-label="Copy path for OFLC PG (pg)" aria-label="Copy path for OFLC PG (pg)">Copy path</button>
+              <button type="button" data-copy="https://cdn.jsdelivr.net/gh/mrcanelas/age-rating-kit@latest/icons/oflc/pg.svg" data-label="Copy URL for OFLC PG (pg)" aria-label="Copy URL for OFLC PG (pg)">Copy URL</button>
+            </div>
+          </figcaption>
+        </figure>
+        <figure class="mark" data-search="oflc oflc oflc new zealand new-zealand m m suitable for mature audiences 16 and over m mature">
+          <div class="window">
+            <div class="plate plate-light">
+              <img src="icons/oflc/m.svg" width="72" height="72" alt="OFLC M (m)" />
+            </div>
+            <div class="plate plate-dark" aria-hidden="true">
+              <img src="icons/oflc/m.svg" width="72" height="72" alt="OFLC M (m)" />
+            </div>
+          </div>
+          <figcaption>
+            <p class="identity"><code>m</code></p>
+            <p class="meaning">Suitable for mature audiences 16 and over</p>
+            <div class="actions">
+              <button type="button" data-copy="icons/oflc/m.svg" data-label="Copy path for OFLC M (m)" aria-label="Copy path for OFLC M (m)">Copy path</button>
+              <button type="button" data-copy="https://cdn.jsdelivr.net/gh/mrcanelas/age-rating-kit@latest/icons/oflc/m.svg" data-label="Copy URL for OFLC M (m)" aria-label="Copy URL for OFLC M (m)">Copy URL</button>
+            </div>
+          </figcaption>
+        </figure>
+        <figure class="mark" data-search="oflc oflc oflc new zealand new-zealand r13 r13 restricted to persons 13 and over r13 r 13">
+          <div class="window">
+            <div class="plate plate-light">
+              <img src="icons/oflc/r13.svg" width="72" height="72" alt="OFLC R13 (r13)" />
+            </div>
+            <div class="plate plate-dark" aria-hidden="true">
+              <img src="icons/oflc/r13.svg" width="72" height="72" alt="OFLC R13 (r13)" />
+            </div>
+          </div>
+          <figcaption>
+            <p class="identity"><code>r13</code></p>
+            <p class="meaning">Restricted to persons 13 and over</p>
+            <div class="actions">
+              <button type="button" data-copy="icons/oflc/r13.svg" data-label="Copy path for OFLC R13 (r13)" aria-label="Copy path for OFLC R13 (r13)">Copy path</button>
+              <button type="button" data-copy="https://cdn.jsdelivr.net/gh/mrcanelas/age-rating-kit@latest/icons/oflc/r13.svg" data-label="Copy URL for OFLC R13 (r13)" aria-label="Copy URL for OFLC R13 (r13)">Copy URL</button>
+            </div>
+          </figcaption>
+        </figure>
+        <figure class="mark" data-search="oflc oflc oflc new zealand new-zealand r15 r15 restricted to persons 15 and over r15 r 15">
+          <div class="window">
+            <div class="plate plate-light">
+              <img src="icons/oflc/r15.svg" width="72" height="72" alt="OFLC R15 (r15)" />
+            </div>
+            <div class="plate plate-dark" aria-hidden="true">
+              <img src="icons/oflc/r15.svg" width="72" height="72" alt="OFLC R15 (r15)" />
+            </div>
+          </div>
+          <figcaption>
+            <p class="identity"><code>r15</code></p>
+            <p class="meaning">Restricted to persons 15 and over</p>
+            <div class="actions">
+              <button type="button" data-copy="icons/oflc/r15.svg" data-label="Copy path for OFLC R15 (r15)" aria-label="Copy path for OFLC R15 (r15)">Copy path</button>
+              <button type="button" data-copy="https://cdn.jsdelivr.net/gh/mrcanelas/age-rating-kit@latest/icons/oflc/r15.svg" data-label="Copy URL for OFLC R15 (r15)" aria-label="Copy URL for OFLC R15 (r15)">Copy URL</button>
+            </div>
+          </figcaption>
+        </figure>
+        <figure class="mark" data-search="oflc oflc oflc new zealand new-zealand r16 r16 restricted to persons 16 and over r16 r 16">
+          <div class="window">
+            <div class="plate plate-light">
+              <img src="icons/oflc/r16.svg" width="72" height="72" alt="OFLC R16 (r16)" />
+            </div>
+            <div class="plate plate-dark" aria-hidden="true">
+              <img src="icons/oflc/r16.svg" width="72" height="72" alt="OFLC R16 (r16)" />
+            </div>
+          </div>
+          <figcaption>
+            <p class="identity"><code>r16</code></p>
+            <p class="meaning">Restricted to persons 16 and over</p>
+            <div class="actions">
+              <button type="button" data-copy="icons/oflc/r16.svg" data-label="Copy path for OFLC R16 (r16)" aria-label="Copy path for OFLC R16 (r16)">Copy path</button>
+              <button type="button" data-copy="https://cdn.jsdelivr.net/gh/mrcanelas/age-rating-kit@latest/icons/oflc/r16.svg" data-label="Copy URL for OFLC R16 (r16)" aria-label="Copy URL for OFLC R16 (r16)">Copy URL</button>
+            </div>
+          </figcaption>
+        </figure>
+        <figure class="mark" data-search="oflc oflc oflc new zealand new-zealand r18 r18 restricted to persons 18 and over r18 r 18">
+          <div class="window">
+            <div class="plate plate-light">
+              <img src="icons/oflc/r18.svg" width="72" height="72" alt="OFLC R18 (r18)" />
+            </div>
+            <div class="plate plate-dark" aria-hidden="true">
+              <img src="icons/oflc/r18.svg" width="72" height="72" alt="OFLC R18 (r18)" />
+            </div>
+          </div>
+          <figcaption>
+            <p class="identity"><code>r18</code></p>
+            <p class="meaning">Restricted to persons 18 and over</p>
+            <div class="actions">
+              <button type="button" data-copy="icons/oflc/r18.svg" data-label="Copy path for OFLC R18 (r18)" aria-label="Copy path for OFLC R18 (r18)">Copy path</button>
+              <button type="button" data-copy="https://cdn.jsdelivr.net/gh/mrcanelas/age-rating-kit@latest/icons/oflc/r18.svg" data-label="Copy URL for OFLC R18 (r18)" aria-label="Copy URL for OFLC R18 (r18)">Copy URL</button>
+            </div>
+          </figcaption>
+        </figure>
+        <figure class="mark" data-search="oflc oflc oflc new zealand new-zealand rp13 rp13 restricted under 13 unless with a parent or guardian rp13 rp 13">
+          <div class="window">
+            <div class="plate plate-light">
+              <img src="icons/oflc/rp13.svg" width="72" height="72" alt="OFLC RP13 (rp13)" />
+            </div>
+            <div class="plate plate-dark" aria-hidden="true">
+              <img src="icons/oflc/rp13.svg" width="72" height="72" alt="OFLC RP13 (rp13)" />
+            </div>
+          </div>
+          <figcaption>
+            <p class="identity"><code>rp13</code></p>
+            <p class="meaning">Restricted under 13 unless with a parent or guardian</p>
+            <div class="actions">
+              <button type="button" data-copy="icons/oflc/rp13.svg" data-label="Copy path for OFLC RP13 (rp13)" aria-label="Copy path for OFLC RP13 (rp13)">Copy path</button>
+              <button type="button" data-copy="https://cdn.jsdelivr.net/gh/mrcanelas/age-rating-kit@latest/icons/oflc/rp13.svg" data-label="Copy URL for OFLC RP13 (rp13)" aria-label="Copy URL for OFLC RP13 (rp13)">Copy URL</button>
+            </div>
+          </figcaption>
+        </figure>
+        <figure class="mark" data-search="oflc oflc oflc new zealand new-zealand rp16 rp16 restricted under 16 unless with a parent or guardian rp16 rp 16">
+          <div class="window">
+            <div class="plate plate-light">
+              <img src="icons/oflc/rp16.svg" width="72" height="72" alt="OFLC RP16 (rp16)" />
+            </div>
+            <div class="plate plate-dark" aria-hidden="true">
+              <img src="icons/oflc/rp16.svg" width="72" height="72" alt="OFLC RP16 (rp16)" />
+            </div>
+          </div>
+          <figcaption>
+            <p class="identity"><code>rp16</code></p>
+            <p class="meaning">Restricted under 16 unless with a parent or guardian</p>
+            <div class="actions">
+              <button type="button" data-copy="icons/oflc/rp16.svg" data-label="Copy path for OFLC RP16 (rp16)" aria-label="Copy path for OFLC RP16 (rp16)">Copy path</button>
+              <button type="button" data-copy="https://cdn.jsdelivr.net/gh/mrcanelas/age-rating-kit@latest/icons/oflc/rp16.svg" data-label="Copy URL for OFLC RP16 (rp16)" aria-label="Copy URL for OFLC RP16 (rp16)">Copy URL</button>
+            </div>
+          </figcaption>
+        </figure>
+        <figure class="mark" data-search="oflc oflc oflc new zealand new-zealand rp18 rp18 restricted under 18 unless with a parent or guardian rp18 rp 18">
+          <div class="window">
+            <div class="plate plate-light">
+              <img src="icons/oflc/rp18.svg" width="72" height="72" alt="OFLC RP18 (rp18)" />
+            </div>
+            <div class="plate plate-dark" aria-hidden="true">
+              <img src="icons/oflc/rp18.svg" width="72" height="72" alt="OFLC RP18 (rp18)" />
+            </div>
+          </div>
+          <figcaption>
+            <p class="identity"><code>rp18</code></p>
+            <p class="meaning">Restricted under 18 unless with a parent or guardian</p>
+            <div class="actions">
+              <button type="button" data-copy="icons/oflc/rp18.svg" data-label="Copy path for OFLC RP18 (rp18)" aria-label="Copy path for OFLC RP18 (rp18)">Copy path</button>
+              <button type="button" data-copy="https://cdn.jsdelivr.net/gh/mrcanelas/age-rating-kit@latest/icons/oflc/rp18.svg" data-label="Copy URL for OFLC RP18 (rp18)" aria-label="Copy URL for OFLC RP18 (rp18)">Copy URL</button>
+            </div>
+          </figcaption>
+        </figure>
       </div>
     </section>
-    <section>
-      <h2>RTC</h2>
-      <div class="row">
-      <figure>
-        <img src="icons/rtc/aa.svg" width="72" height="72" alt="rtc aa" />
-        <figcaption>aa</figcaption>
-      </figure>
-      <figure>
-        <img src="icons/rtc/a.svg" width="72" height="72" alt="rtc a" />
-        <figcaption>a</figcaption>
-      </figure>
-      <figure>
-        <img src="icons/rtc/b.svg" width="72" height="72" alt="rtc b" />
-        <figcaption>b</figcaption>
-      </figure>
-      <figure>
-        <img src="icons/rtc/c.svg" width="72" height="72" alt="rtc c" />
-        <figcaption>c</figcaption>
-      </figure>
-      <figure>
-        <img src="icons/rtc/d.svg" width="72" height="72" alt="rtc d" />
-        <figcaption>d</figcaption>
-      </figure>
+    <section class="system" id="rtc" data-search="rtc rtc rtc mexico mexico">
+      <div class="system-head">
+        <h2>RTC</h2>
+        <p><code>icons/rtc/</code> · 5 marks</p>
+      </div>
+      <div class="marks">
+        <figure class="mark" data-search="rtc rtc rtc mexico mexico aa aa infantil aa">
+          <div class="window">
+            <div class="plate plate-light">
+              <img src="icons/rtc/aa.svg" width="72" height="72" alt="RTC AA (aa)" />
+            </div>
+            <div class="plate plate-dark" aria-hidden="true">
+              <img src="icons/rtc/aa.svg" width="72" height="72" alt="RTC AA (aa)" />
+            </div>
+          </div>
+          <figcaption>
+            <p class="identity"><code>aa</code></p>
+            <p class="meaning">Infantil</p>
+            <div class="actions">
+              <button type="button" data-copy="icons/rtc/aa.svg" data-label="Copy path for RTC AA (aa)" aria-label="Copy path for RTC AA (aa)">Copy path</button>
+              <button type="button" data-copy="https://cdn.jsdelivr.net/gh/mrcanelas/age-rating-kit@latest/icons/rtc/aa.svg" data-label="Copy URL for RTC AA (aa)" aria-label="Copy URL for RTC AA (aa)">Copy URL</button>
+            </div>
+          </figcaption>
+        </figure>
+        <figure class="mark" data-search="rtc rtc rtc mexico mexico a a todo publico a">
+          <div class="window">
+            <div class="plate plate-light">
+              <img src="icons/rtc/a.svg" width="72" height="72" alt="RTC A (a)" />
+            </div>
+            <div class="plate plate-dark" aria-hidden="true">
+              <img src="icons/rtc/a.svg" width="72" height="72" alt="RTC A (a)" />
+            </div>
+          </div>
+          <figcaption>
+            <p class="identity"><code>a</code></p>
+            <p class="meaning">Todo público</p>
+            <div class="actions">
+              <button type="button" data-copy="icons/rtc/a.svg" data-label="Copy path for RTC A (a)" aria-label="Copy path for RTC A (a)">Copy path</button>
+              <button type="button" data-copy="https://cdn.jsdelivr.net/gh/mrcanelas/age-rating-kit@latest/icons/rtc/a.svg" data-label="Copy URL for RTC A (a)" aria-label="Copy URL for RTC A (a)">Copy URL</button>
+            </div>
+          </figcaption>
+        </figure>
+        <figure class="mark" data-search="rtc rtc rtc mexico mexico b b adolescentes de 12 anos en adelante b">
+          <div class="window">
+            <div class="plate plate-light">
+              <img src="icons/rtc/b.svg" width="72" height="72" alt="RTC B (b)" />
+            </div>
+            <div class="plate plate-dark" aria-hidden="true">
+              <img src="icons/rtc/b.svg" width="72" height="72" alt="RTC B (b)" />
+            </div>
+          </div>
+          <figcaption>
+            <p class="identity"><code>b</code></p>
+            <p class="meaning">Adolescentes de 12 años en adelante</p>
+            <div class="actions">
+              <button type="button" data-copy="icons/rtc/b.svg" data-label="Copy path for RTC B (b)" aria-label="Copy path for RTC B (b)">Copy path</button>
+              <button type="button" data-copy="https://cdn.jsdelivr.net/gh/mrcanelas/age-rating-kit@latest/icons/rtc/b.svg" data-label="Copy URL for RTC B (b)" aria-label="Copy URL for RTC B (b)">Copy URL</button>
+            </div>
+          </figcaption>
+        </figure>
+        <figure class="mark" data-search="rtc rtc rtc mexico mexico c c adultos de 18 anos en adelante c">
+          <div class="window">
+            <div class="plate plate-light">
+              <img src="icons/rtc/c.svg" width="72" height="72" alt="RTC C (c)" />
+            </div>
+            <div class="plate plate-dark" aria-hidden="true">
+              <img src="icons/rtc/c.svg" width="72" height="72" alt="RTC C (c)" />
+            </div>
+          </div>
+          <figcaption>
+            <p class="identity"><code>c</code></p>
+            <p class="meaning">Adultos de 18 años en adelante</p>
+            <div class="actions">
+              <button type="button" data-copy="icons/rtc/c.svg" data-label="Copy path for RTC C (c)" aria-label="Copy path for RTC C (c)">Copy path</button>
+              <button type="button" data-copy="https://cdn.jsdelivr.net/gh/mrcanelas/age-rating-kit@latest/icons/rtc/c.svg" data-label="Copy URL for RTC C (c)" aria-label="Copy URL for RTC C (c)">Copy URL</button>
+            </div>
+          </figcaption>
+        </figure>
+        <figure class="mark" data-search="rtc rtc rtc mexico mexico d d adultos, contenido explicito d">
+          <div class="window">
+            <div class="plate plate-light">
+              <img src="icons/rtc/d.svg" width="72" height="72" alt="RTC D (d)" />
+            </div>
+            <div class="plate plate-dark" aria-hidden="true">
+              <img src="icons/rtc/d.svg" width="72" height="72" alt="RTC D (d)" />
+            </div>
+          </div>
+          <figcaption>
+            <p class="identity"><code>d</code></p>
+            <p class="meaning">Adultos, contenido explícito</p>
+            <div class="actions">
+              <button type="button" data-copy="icons/rtc/d.svg" data-label="Copy path for RTC D (d)" aria-label="Copy path for RTC D (d)">Copy path</button>
+              <button type="button" data-copy="https://cdn.jsdelivr.net/gh/mrcanelas/age-rating-kit@latest/icons/rtc/d.svg" data-label="Copy URL for RTC D (d)" aria-label="Copy URL for RTC D (d)">Copy URL</button>
+            </div>
+          </figcaption>
+        </figure>
       </div>
     </section>
-    <section>
-      <h2>GSRR</h2>
-      <div class="row">
-      <figure>
-        <img src="icons/gsrr/g.svg" width="72" height="72" alt="gsrr g" />
-        <figcaption>g</figcaption>
-      </figure>
-      <figure>
-        <img src="icons/gsrr/p.svg" width="72" height="72" alt="gsrr p" />
-        <figcaption>p</figcaption>
-      </figure>
-      <figure>
-        <img src="icons/gsrr/pg12.svg" width="72" height="72" alt="gsrr pg12" />
-        <figcaption>pg12</figcaption>
-      </figure>
-      <figure>
-        <img src="icons/gsrr/pg15.svg" width="72" height="72" alt="gsrr pg15" />
-        <figcaption>pg15</figcaption>
-      </figure>
-      <figure>
-        <img src="icons/gsrr/r.svg" width="72" height="72" alt="gsrr r" />
-        <figcaption>r</figcaption>
-      </figure>
+    <section class="system" id="gsrr" data-search="gsrr gsrr gsrr taiwan">
+      <div class="system-head">
+        <h2>GSRR</h2>
+        <p><code>icons/gsrr/</code> · 5 marks</p>
+      </div>
+      <div class="marks">
+        <figure class="mark" data-search="gsrr gsrr gsrr taiwan g g general audiences g general">
+          <div class="window">
+            <div class="plate plate-light">
+              <img src="icons/gsrr/g.svg" width="72" height="72" alt="GSRR G (g)" />
+            </div>
+            <div class="plate plate-dark" aria-hidden="true">
+              <img src="icons/gsrr/g.svg" width="72" height="72" alt="GSRR G (g)" />
+            </div>
+          </div>
+          <figcaption>
+            <p class="identity"><code>g</code></p>
+            <p class="meaning">General audiences</p>
+            <div class="actions">
+              <button type="button" data-copy="icons/gsrr/g.svg" data-label="Copy path for GSRR G (g)" aria-label="Copy path for GSRR G (g)">Copy path</button>
+              <button type="button" data-copy="https://cdn.jsdelivr.net/gh/mrcanelas/age-rating-kit@latest/icons/gsrr/g.svg" data-label="Copy URL for GSRR G (g)" aria-label="Copy URL for GSRR G (g)">Copy URL</button>
+            </div>
+          </figcaption>
+        </figure>
+        <figure class="mark" data-search="gsrr gsrr gsrr taiwan p p protected, not suitable for children under 6 p protected">
+          <div class="window">
+            <div class="plate plate-light">
+              <img src="icons/gsrr/p.svg" width="72" height="72" alt="GSRR P (p)" />
+            </div>
+            <div class="plate plate-dark" aria-hidden="true">
+              <img src="icons/gsrr/p.svg" width="72" height="72" alt="GSRR P (p)" />
+            </div>
+          </div>
+          <figcaption>
+            <p class="identity"><code>p</code></p>
+            <p class="meaning">Protected, not suitable for children under 6</p>
+            <div class="actions">
+              <button type="button" data-copy="icons/gsrr/p.svg" data-label="Copy path for GSRR P (p)" aria-label="Copy path for GSRR P (p)">Copy path</button>
+              <button type="button" data-copy="https://cdn.jsdelivr.net/gh/mrcanelas/age-rating-kit@latest/icons/gsrr/p.svg" data-label="Copy URL for GSRR P (p)" aria-label="Copy URL for GSRR P (p)">Copy URL</button>
+            </div>
+          </figcaption>
+        </figure>
+        <figure class="mark" data-search="gsrr gsrr gsrr taiwan pg12 pg 12 parental guidance for under 12s pg12 pg-12 pg 12">
+          <div class="window">
+            <div class="plate plate-light">
+              <img src="icons/gsrr/pg12.svg" width="72" height="72" alt="GSRR PG 12 (pg12)" />
+            </div>
+            <div class="plate plate-dark" aria-hidden="true">
+              <img src="icons/gsrr/pg12.svg" width="72" height="72" alt="GSRR PG 12 (pg12)" />
+            </div>
+          </div>
+          <figcaption>
+            <p class="identity"><code>pg12</code> <span class="label">PG 12</span></p>
+            <p class="meaning">Parental guidance for under 12s</p>
+            <div class="actions">
+              <button type="button" data-copy="icons/gsrr/pg12.svg" data-label="Copy path for GSRR PG 12 (pg12)" aria-label="Copy path for GSRR PG 12 (pg12)">Copy path</button>
+              <button type="button" data-copy="https://cdn.jsdelivr.net/gh/mrcanelas/age-rating-kit@latest/icons/gsrr/pg12.svg" data-label="Copy URL for GSRR PG 12 (pg12)" aria-label="Copy URL for GSRR PG 12 (pg12)">Copy URL</button>
+            </div>
+          </figcaption>
+        </figure>
+        <figure class="mark" data-search="gsrr gsrr gsrr taiwan pg15 pg 15 parental guidance for under 15s pg15 pg-15 pg 15">
+          <div class="window">
+            <div class="plate plate-light">
+              <img src="icons/gsrr/pg15.svg" width="72" height="72" alt="GSRR PG 15 (pg15)" />
+            </div>
+            <div class="plate plate-dark" aria-hidden="true">
+              <img src="icons/gsrr/pg15.svg" width="72" height="72" alt="GSRR PG 15 (pg15)" />
+            </div>
+          </div>
+          <figcaption>
+            <p class="identity"><code>pg15</code> <span class="label">PG 15</span></p>
+            <p class="meaning">Parental guidance for under 15s</p>
+            <div class="actions">
+              <button type="button" data-copy="icons/gsrr/pg15.svg" data-label="Copy path for GSRR PG 15 (pg15)" aria-label="Copy path for GSRR PG 15 (pg15)">Copy path</button>
+              <button type="button" data-copy="https://cdn.jsdelivr.net/gh/mrcanelas/age-rating-kit@latest/icons/gsrr/pg15.svg" data-label="Copy URL for GSRR PG 15 (pg15)" aria-label="Copy URL for GSRR PG 15 (pg15)">Copy URL</button>
+            </div>
+          </figcaption>
+        </figure>
+        <figure class="mark" data-search="gsrr gsrr gsrr taiwan r r restricted to ages 18 and over r restricted">
+          <div class="window">
+            <div class="plate plate-light">
+              <img src="icons/gsrr/r.svg" width="72" height="72" alt="GSRR R (r)" />
+            </div>
+            <div class="plate plate-dark" aria-hidden="true">
+              <img src="icons/gsrr/r.svg" width="72" height="72" alt="GSRR R (r)" />
+            </div>
+          </div>
+          <figcaption>
+            <p class="identity"><code>r</code></p>
+            <p class="meaning">Restricted to ages 18 and over</p>
+            <div class="actions">
+              <button type="button" data-copy="icons/gsrr/r.svg" data-label="Copy path for GSRR R (r)" aria-label="Copy path for GSRR R (r)">Copy path</button>
+              <button type="button" data-copy="https://cdn.jsdelivr.net/gh/mrcanelas/age-rating-kit@latest/icons/gsrr/r.svg" data-label="Copy URL for GSRR R (r)" aria-label="Copy URL for GSRR R (r)">Copy URL</button>
+            </div>
+          </figcaption>
+        </figure>
       </div>
     </section>
-    <section>
-      <h2>KRRiT</h2>
-      <div class="row">
-      <figure>
-        <img src="icons/krrit/bo.svg" width="72" height="72" alt="krrit bo" />
-        <figcaption>bo</figcaption>
-      </figure>
-      <figure>
-        <img src="icons/krrit/7.svg" width="72" height="72" alt="krrit 7" />
-        <figcaption>7</figcaption>
-      </figure>
-      <figure>
-        <img src="icons/krrit/12.svg" width="72" height="72" alt="krrit 12" />
-        <figcaption>12</figcaption>
-      </figure>
-      <figure>
-        <img src="icons/krrit/16.svg" width="72" height="72" alt="krrit 16" />
-        <figcaption>16</figcaption>
-      </figure>
-      <figure>
-        <img src="icons/krrit/18.svg" width="72" height="72" alt="krrit 18" />
-        <figcaption>18</figcaption>
-      </figure>
+    <section class="system" id="krrit" data-search="krrit krrit krrit polish tv poland krajowa rada radiofonii i telewizji">
+      <div class="system-head">
+        <h2>KRRiT</h2>
+        <p><code>icons/krrit/</code> · 5 marks</p>
+      </div>
+      <div class="marks">
+        <figure class="mark" data-search="krrit krrit krrit polish tv poland krajowa rada radiofonii i telewizji bo bo bez ograniczen wiekowych bo bez ograniczen bez ograniczen 0 all">
+          <div class="window">
+            <div class="plate plate-light">
+              <img src="icons/krrit/bo.svg" width="72" height="72" alt="KRRiT BO (bo)" />
+            </div>
+            <div class="plate plate-dark" aria-hidden="true">
+              <img src="icons/krrit/bo.svg" width="72" height="72" alt="KRRiT BO (bo)" />
+            </div>
+          </div>
+          <figcaption>
+            <p class="identity"><code>bo</code></p>
+            <p class="meaning">Bez ograniczeń wiekowych</p>
+            <div class="actions">
+              <button type="button" data-copy="icons/krrit/bo.svg" data-label="Copy path for KRRiT BO (bo)" aria-label="Copy path for KRRiT BO (bo)">Copy path</button>
+              <button type="button" data-copy="https://cdn.jsdelivr.net/gh/mrcanelas/age-rating-kit@latest/icons/krrit/bo.svg" data-label="Copy URL for KRRiT BO (bo)" aria-label="Copy URL for KRRiT BO (bo)">Copy URL</button>
+            </div>
+          </figcaption>
+        </figure>
+        <figure class="mark" data-search="krrit krrit krrit polish tv poland krajowa rada radiofonii i telewizji 7 7 od lat 7 7 od 7 od lat 7">
+          <div class="window">
+            <div class="plate plate-light">
+              <img src="icons/krrit/7.svg" width="72" height="72" alt="KRRiT 7 (7)" />
+            </div>
+            <div class="plate plate-dark" aria-hidden="true">
+              <img src="icons/krrit/7.svg" width="72" height="72" alt="KRRiT 7 (7)" />
+            </div>
+          </div>
+          <figcaption>
+            <p class="identity"><code>7</code></p>
+            <p class="meaning">Od lat 7</p>
+            <div class="actions">
+              <button type="button" data-copy="icons/krrit/7.svg" data-label="Copy path for KRRiT 7 (7)" aria-label="Copy path for KRRiT 7 (7)">Copy path</button>
+              <button type="button" data-copy="https://cdn.jsdelivr.net/gh/mrcanelas/age-rating-kit@latest/icons/krrit/7.svg" data-label="Copy URL for KRRiT 7 (7)" aria-label="Copy URL for KRRiT 7 (7)">Copy URL</button>
+            </div>
+          </figcaption>
+        </figure>
+        <figure class="mark" data-search="krrit krrit krrit polish tv poland krajowa rada radiofonii i telewizji 12 12 od lat 12 12 od 12 od lat 12">
+          <div class="window">
+            <div class="plate plate-light">
+              <img src="icons/krrit/12.svg" width="72" height="72" alt="KRRiT 12 (12)" />
+            </div>
+            <div class="plate plate-dark" aria-hidden="true">
+              <img src="icons/krrit/12.svg" width="72" height="72" alt="KRRiT 12 (12)" />
+            </div>
+          </div>
+          <figcaption>
+            <p class="identity"><code>12</code></p>
+            <p class="meaning">Od lat 12</p>
+            <div class="actions">
+              <button type="button" data-copy="icons/krrit/12.svg" data-label="Copy path for KRRiT 12 (12)" aria-label="Copy path for KRRiT 12 (12)">Copy path</button>
+              <button type="button" data-copy="https://cdn.jsdelivr.net/gh/mrcanelas/age-rating-kit@latest/icons/krrit/12.svg" data-label="Copy URL for KRRiT 12 (12)" aria-label="Copy URL for KRRiT 12 (12)">Copy URL</button>
+            </div>
+          </figcaption>
+        </figure>
+        <figure class="mark" data-search="krrit krrit krrit polish tv poland krajowa rada radiofonii i telewizji 16 16 od lat 16, tylko 20:00–6:00 16 od 16 od lat 16">
+          <div class="window">
+            <div class="plate plate-light">
+              <img src="icons/krrit/16.svg" width="72" height="72" alt="KRRiT 16 (16)" />
+            </div>
+            <div class="plate plate-dark" aria-hidden="true">
+              <img src="icons/krrit/16.svg" width="72" height="72" alt="KRRiT 16 (16)" />
+            </div>
+          </div>
+          <figcaption>
+            <p class="identity"><code>16</code></p>
+            <p class="meaning">Od lat 16, tylko 20:00–6:00</p>
+            <div class="actions">
+              <button type="button" data-copy="icons/krrit/16.svg" data-label="Copy path for KRRiT 16 (16)" aria-label="Copy path for KRRiT 16 (16)">Copy path</button>
+              <button type="button" data-copy="https://cdn.jsdelivr.net/gh/mrcanelas/age-rating-kit@latest/icons/krrit/16.svg" data-label="Copy URL for KRRiT 16 (16)" aria-label="Copy URL for KRRiT 16 (16)">Copy URL</button>
+            </div>
+          </figcaption>
+        </figure>
+        <figure class="mark" data-search="krrit krrit krrit polish tv poland krajowa rada radiofonii i telewizji 18 18 od lat 18, tylko 23:00–6:00 18 od 18 od lat 18">
+          <div class="window">
+            <div class="plate plate-light">
+              <img src="icons/krrit/18.svg" width="72" height="72" alt="KRRiT 18 (18)" />
+            </div>
+            <div class="plate plate-dark" aria-hidden="true">
+              <img src="icons/krrit/18.svg" width="72" height="72" alt="KRRiT 18 (18)" />
+            </div>
+          </div>
+          <figcaption>
+            <p class="identity"><code>18</code></p>
+            <p class="meaning">Od lat 18, tylko 23:00–6:00</p>
+            <div class="actions">
+              <button type="button" data-copy="icons/krrit/18.svg" data-label="Copy path for KRRiT 18 (18)" aria-label="Copy path for KRRiT 18 (18)">Copy path</button>
+              <button type="button" data-copy="https://cdn.jsdelivr.net/gh/mrcanelas/age-rating-kit@latest/icons/krrit/18.svg" data-label="Copy URL for KRRiT 18 (18)" aria-label="Copy URL for KRRiT 18 (18)">Copy URL</button>
+            </div>
+          </figcaption>
+        </figure>
       </div>
     </section>
+    </div>
+    <p class="empty" id="empty" hidden>No marks match this search.</p>
+    <section class="usage" id="usage">
+      <h2>Use a mark</h2>
+      <p><code>react</code> is an optional peer. The root entry does not import React.</p>
+      <div class="example">
+        <div class="example-bar">
+          <h3>CDN</h3>
+          <button type="button" data-copy="https://cdn.jsdelivr.net/gh/mrcanelas/age-rating-kit@latest/icons/{system}/{code}.svg
+https://mrcanelas.github.io/age-rating-kit/icons/classind/12.svg">Copy</button>
+        </div>
+        <pre><code>https://cdn.jsdelivr.net/gh/mrcanelas/age-rating-kit@latest/icons/{system}/{code}.svg
+https://mrcanelas.github.io/age-rating-kit/icons/classind/12.svg</code></pre>
+      </div>
+      <div class="example">
+        <div class="example-bar">
+          <h3>JavaScript and TypeScript</h3>
+          <button type="button" id="copy-ts">Copy</button>
+        </div>
+        <pre id="snippet-ts"><code>import { getIconUrl, normalizeRating } from 'age-rating-kit'
+
+normalizeRating('ClassInd', 'Livre')
+// { system: 'classind', code: 'l' }
+
+getIconUrl('classind', '14')
+// https://cdn.jsdelivr.net/gh/mrcanelas/age-rating-kit@latest/icons/classind/14.svg</code></pre>
+      </div>
+      <div class="example">
+        <div class="example-bar">
+          <h3>React</h3>
+          <button type="button" id="copy-react">Copy</button>
+        </div>
+        <pre id="snippet-react"><code>import { AgeRating } from 'age-rating-kit/react'
+
+&lt;AgeRating system="classind" rating="14" /&gt;
+&lt;AgeRating system="mpa" rating="PG-13" /&gt;
+&lt;AgeRating system="DJCTQ" rating="Livre" /&gt;</code></pre>
+      </div>
+    </section>
+  </main>
+  <footer>
+    <div class="wrap">
+      <p>These marks belong to the rating bodies. This project is not affiliated with them. Use the icons to identify a rating, and credit ClassInd / SNJ–DJCTQ when showing Brazilian ratings.</p>
+      <p>MIT for the kit source. The SVG marks are trademarks of the rating bodies and keep the license of their <a href="https://commons.wikimedia.org/">Wikimedia Commons</a> files.</p>
+    </div>
+  </footer>
+  <script>
+    const body = document.body;
+    const find = document.getElementById('find');
+    const status = document.getElementById('status');
+    const empty = document.getElementById('empty');
+    const marks = [...document.querySelectorAll('.mark')];
+    const systems = [...document.querySelectorAll('.system')];
+    const navLinks = [...document.querySelectorAll('.systems a')];
+    const copyLive = status;
+
+    function normalize(value) {
+      return value.normalize('NFD').replace(/\p{M}/gu, '').toLowerCase().trim();
+    }
+
+    function applyFilter() {
+      const query = normalize(find.value);
+      let shown = 0;
+      for (const mark of marks) {
+        const hit = !query || mark.dataset.search.includes(query);
+        mark.hidden = !hit;
+        if (hit) shown += 1;
+      }
+      for (const section of systems) {
+        section.hidden = !section.querySelector('.mark:not([hidden])');
+      }
+      empty.hidden = shown !== 0;
+      const current = navLinks.find((link) => link.getAttribute('href') === '#' + (location.hash || '').slice(1));
+      for (const link of navLinks) link.removeAttribute('aria-current');
+      if (current && !document.getElementById(current.getAttribute('href').slice(1))?.hidden) {
+        current.setAttribute('aria-current', 'true');
+      }
+      if (!query) {
+        status.textContent = '';
+        return;
+      }
+      status.textContent = shown === 1 ? '1 mark' : shown + ' marks';
+    }
+
+    find.addEventListener('input', applyFilter);
+    navLinks.forEach((link) => {
+      link.addEventListener('click', () => {
+        if (find.value) {
+          find.value = '';
+          applyFilter();
+        }
+      });
+    });
+
+    function syncPreview() {
+      const darkOnly = body.dataset.preview === 'dark';
+      for (const plate of document.querySelectorAll('.plate-light')) {
+        plate.toggleAttribute('aria-hidden', darkOnly);
+      }
+      for (const plate of document.querySelectorAll('.plate-dark')) {
+        plate.toggleAttribute('aria-hidden', !darkOnly);
+      }
+    }
+
+    function setPreview(value) {
+      body.dataset.preview = value;
+      try { localStorage.setItem('ark-preview', value); } catch { /* ignore */ }
+      syncPreview();
+    }
+
+    for (const input of document.querySelectorAll('input[name="preview"]')) {
+      input.addEventListener('change', () => {
+        if (input.checked) setPreview(input.value);
+      });
+    }
+
+    try {
+      const saved = localStorage.getItem('ark-preview');
+      if (saved === 'light' || saved === 'dark' || saved === 'both') {
+        body.dataset.preview = saved;
+        const input = document.querySelector('input[name="preview"][value="' + saved + '"]');
+        if (input) input.checked = true;
+      }
+    } catch { /* ignore */ }
+
+    async function copyText(text, button) {
+      let ok = false;
+      try {
+        await navigator.clipboard.writeText(text);
+        ok = true;
+      } catch {
+        const area = document.createElement('textarea');
+        area.value = text;
+        area.setAttribute('readonly', '');
+        area.style.position = 'fixed';
+        area.style.left = '-999px';
+        document.body.append(area);
+        area.select();
+        ok = document.execCommand('copy');
+        area.remove();
+      }
+      const previous = button.textContent;
+      button.dataset.state = ok ? 'copied' : 'failed';
+      button.textContent = ok ? 'Copied' : 'Copy failed';
+      if (button.dataset.label) button.setAttribute('aria-label', ok ? 'Copied' : 'Copy failed');
+      copyLive.textContent = ok ? 'Copied ' + text : 'Could not copy';
+      window.setTimeout(() => {
+        button.textContent = previous;
+        if (button.dataset.label) button.setAttribute('aria-label', button.dataset.label);
+        delete button.dataset.state;
+      }, 1600);
+    }
+
+    document.addEventListener('click', (event) => {
+      const button = event.target.closest('button[data-copy]');
+      if (!button) return;
+      copyText(button.dataset.copy, button);
+    });
+
+    document.getElementById('copy-ts').addEventListener('click', (event) => {
+      copyText(document.querySelector('#snippet-ts code').innerText, event.currentTarget);
+    });
+    document.getElementById('copy-react').addEventListener('click', (event) => {
+      copyText(document.querySelector('#snippet-react code').innerText, event.currentTarget);
+    });
+
+    applyFilter();
+    syncPreview();
+  </script>
 </body>
 </html>
