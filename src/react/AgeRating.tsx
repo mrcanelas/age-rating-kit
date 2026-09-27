@@ -20,10 +20,7 @@ export function AgeRating({
   if (!svg) return null;
 
   const label = title ?? meta?.description ?? meta?.label ?? `${system} ${rating}`;
-  const markup = svg.replace(
-    '<svg ',
-    `<svg width="${size}" height="${size}" role="presentation" `
-  );
+  const { width, height } = iconDimensions(svg, size);
 
   return (
     <span
@@ -33,11 +30,30 @@ export function AgeRating({
       title={label}
       style={{
         display: 'inline-flex',
-        width: size,
-        height: size,
+        width,
+        height,
         lineHeight: 0,
       }}
-      dangerouslySetInnerHTML={{ __html: markup }}
+      dangerouslySetInnerHTML={{ __html: sizedSvg(svg, width, height) }}
     />
   );
+}
+
+function iconDimensions(svg: string, size: number) {
+  const viewBox = svg.match(/viewBox="([^"]+)"/);
+  const parts = viewBox?.[1].trim().split(/[\s,]+/).map(Number);
+  const vbWidth = parts?.[2];
+  const vbHeight = parts?.[3];
+  if (!vbWidth || !vbHeight) return { width: size, height: size };
+  return {
+    width: Math.max(1, Math.round((size * vbWidth) / vbHeight)),
+    height: size,
+  };
+}
+
+function sizedSvg(svg: string, width: number, height: number) {
+  return svg.replace(/<svg\b([^>]*)>/, (_match, attrs: string) => {
+    const cleaned = attrs.replace(/\s(?:width|height)="[^"]*"/g, '');
+    return `<svg width="${width}" height="${height}" role="presentation"${cleaned}>`;
+  });
 }

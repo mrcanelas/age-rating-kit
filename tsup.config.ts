@@ -11,4 +11,10 @@ export default defineConfig({
   sourcemap: true,
   clean: true,
   external: ['react'],
+  esbuildOptions(options) {
+    options.loader = {
+      ...options.loader,
+      '.svg': 'text',
+    };
+  },
 });

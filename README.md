@@ -2,7 +2,7 @@
 
 SVG age-rating icons and helpers for ClassInd, MPA, TV Parental Guidelines, PEGI and ESRB.
 
-Icons are original redraws of the official shapes (same idea as [circle-flags](https://github.com/HatScripts/circle-flags)): one file per code, `viewBox="0 0 512 512"`, no external fonts. Wikimedia Commons and each board’s style guide were used only as visual reference.
+Each rating is one SVG file from [Wikimedia Commons](https://commons.wikimedia.org/): Classificação Indicativa, MPA rating marks, TV Parental Guidelines icons, current PEGI marks, and ESRB 2013 marks.
 
 These marks belong to the rating bodies. This project is not affiliated with SNJ/DJCTQ, MPA, the FCC, PEGI or ESRB. Use the icons to identify a rating, and credit ClassInd / SNJ–DJCTQ when showing Brazilian ratings.
 
@@ -51,4 +51,4 @@ Gallery: <https://mrcanelas.github.io/age-rating-kit/>
 
 ## License
 
-MIT for the kit source and generated SVGs.
+MIT for the kit source. The SVG marks are trademarks of the rating bodies and keep the license of their Wikimedia Commons files.

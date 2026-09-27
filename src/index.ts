@@ -1,4 +1,4 @@
-import { ICON_SVGS } from './generated/svgs.js';
+import { ICON_SVGS } from './icon-svgs.js';
 import { getRatingMeta, listCodes, listSystems } from './metadata/index.js';
 import { normalizeRating, normalizeSystem } from './normalize/index.js';
 import { RATING_SYSTEMS } from './ratings/index.js';
