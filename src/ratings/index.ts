@@ -15,6 +15,7 @@ export { eirinSystem } from './eirin.js';
 export { oflcSystem } from './oflc.js';
 export { rtcSystem } from './rtc.js';
 export { gsrrSystem } from './gsrr.js';
+export { krritSystem } from './krrit.js';
 
 import { classindSystem } from './classind.js';
 import { mpaSystem } from './mpa.js';
@@ -32,6 +33,7 @@ import { eirinSystem } from './eirin.js';
 import { oflcSystem } from './oflc.js';
 import { rtcSystem } from './rtc.js';
 import { gsrrSystem } from './gsrr.js';
+import { krritSystem } from './krrit.js';
 
 export const RATING_SYSTEMS = [
   classindSystem,
@@ -50,4 +52,5 @@ export const RATING_SYSTEMS = [
   oflcSystem,
   rtcSystem,
   gsrrSystem,
+  krritSystem,
 ] as const;

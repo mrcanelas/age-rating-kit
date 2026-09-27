@@ -90,6 +90,11 @@ import gsrrP from '../icons/gsrr/p.svg';
 import gsrrPg12 from '../icons/gsrr/pg12.svg';
 import gsrrPg15 from '../icons/gsrr/pg15.svg';
 import gsrrR from '../icons/gsrr/r.svg';
+import krritBo from '../icons/krrit/bo.svg';
+import krrit7 from '../icons/krrit/7.svg';
+import krrit12 from '../icons/krrit/12.svg';
+import krrit16 from '../icons/krrit/16.svg';
+import krrit18 from '../icons/krrit/18.svg';
 
 export const ICON_SVGS: Record<string, Record<string, string>> = {
   classind: {
@@ -215,5 +220,12 @@ export const ICON_SVGS: Record<string, Record<string, string>> = {
     pg12: gsrrPg12,
     pg15: gsrrPg15,
     r: gsrrR,
+  },
+  krrit: {
+    bo: krritBo,
+    '7': krrit7,
+    '12': krrit12,
+    '16': krrit16,
+    '18': krrit18,
   },
 };

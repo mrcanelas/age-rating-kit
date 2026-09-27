@@ -88,6 +88,12 @@ describe('age-rating-kit', () => {
     expect(normalizeRating('Mexico', 'AA')).toEqual({ system: 'rtc', code: 'aa' });
     expect(normalizeRating('GSRR', 'PG 15')).toEqual({ system: 'gsrr', code: 'pg15' });
     expect(getIconPath('iarc', '3+')).toBe('icons/iarc/3-plus.svg');
+    expect(normalizeRating('Polish TV', 'bez ograniczeń')).toEqual({
+      system: 'krrit',
+      code: 'bo',
+    });
+    expect(getIconPath('krrit', '18')).toBe('icons/krrit/18.svg');
+    expect(getIconSvg('krrit', '7')?.startsWith('<svg ')).toBe(true);
   });
 
   it('returns undefined for unknown ratings', () => {
