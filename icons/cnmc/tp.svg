@@ -1,0 +1,66 @@
+<svg width="95.187103mm"
+   height="95.184998mm"
+   viewBox="0 0 95.187105 95.184997"
+   version="1.1"
+   id="svg5"
+   sodipodi:docname="PNG TP.svg"
+   inkscape:version="1.1.1 (c3084ef, 2021-09-22)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:zoom="0.49798681"
+     inkscape:cx="406.63728"
+     inkscape:cy="434.75047"
+     inkscape:window-width="1440"
+     inkscape:window-height="781"
+     inkscape:window-x="216"
+     inkscape:window-y="28"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="text26356"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0" />
+  <defs
+     id="defs2" />
+  <g
+     inkscape:label="Calque 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-30.810752,-40.223527)">
+    <g
+       id="g25824"
+       transform="matrix(2.0986661,0,0,2.0986661,28.116065,37.062936)"
+       style="fill:#00eb00;fill-opacity:1">
+      <path
+         fill="#ff0000"
+         d="M 44.12,1.506 H 3.804 c -1.393,0 -2.52,1.128 -2.52,2.52 V 44.34 c 0,1.392 1.127,2.521 2.52,2.521 H 44.12 c 1.389,0 2.52,-1.129 2.52,-2.521 V 4.026 C 46.639,2.634 45.508,1.506 44.12,1.506"
+         id="path25804"
+         style="fill:#00eb00;fill-opacity:1" />
+    </g>
+    <g
+       aria-label="TP"
+       id="text26356"
+       style="font-size:64.857px;line-height:1.25;letter-spacing:-2.85761px;word-spacing:0px;fill:#ffffff;stroke-width:1.62143">
+      <path
+         d="m 43.776684,72.898907 h 12.582258 v 37.617063 h 8.431411 V 72.898907 h 12.582258 v -7.78284 H 43.776684 Z"
+         style="font-weight:bold;font-family:'Apercu Pro';-inkscape-font-specification:'Apercu Pro Bold';fill:#000000"
+         id="path1279" />
+      <path
+         d="m 98.828271,92.74515 c 9.598839,0 14.203679,-5.901988 14.203679,-13.814542 0,-7.912554 -4.60484,-13.814541 -14.203679,-13.814541 H 81.706023 v 45.399903 h 8.43141 V 92.74515 Z M 98.503986,84.962309 H 90.137433 V 72.898907 h 8.366553 c 3.696854,0 5.966844,1.880853 5.966844,6.031701 0,4.150848 -2.26999,6.031701 -5.966844,6.031701 z"
+         style="font-weight:bold;font-family:'Apercu Pro';-inkscape-font-specification:'Apercu Pro Bold';fill:#000000"
+         id="path1281" />
+    </g>
+  </g>
+</svg>

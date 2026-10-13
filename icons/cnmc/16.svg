@@ -1,0 +1,66 @@
+<svg width="95.187103mm"
+   height="95.184998mm"
+   viewBox="0 0 95.187105 95.184997"
+   version="1.1"
+   id="svg5"
+   sodipodi:docname="Calf-16.svg"
+   inkscape:version="1.1.1 (c3084ef, 2021-09-22)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:zoom="0.49798681"
+     inkscape:cx="294.1845"
+     inkscape:cy="326.31386"
+     inkscape:window-width="1440"
+     inkscape:window-height="781"
+     inkscape:window-x="133"
+     inkscape:window-y="25"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="text26356"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0" />
+  <defs
+     id="defs2" />
+  <g
+     inkscape:label="Calque 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-25.876292,-40.223527)">
+    <g
+       id="g25824"
+       transform="matrix(2.0986661,0,0,2.0986661,23.181605,37.062936)"
+       style="fill:#ff8200;fill-opacity:1">
+      <path
+         fill="#ff0000"
+         d="M 44.12,1.506 H 3.804 c -1.393,0 -2.52,1.128 -2.52,2.52 V 44.34 c 0,1.392 1.127,2.521 2.52,2.521 H 44.12 c 1.389,0 2.52,-1.129 2.52,-2.521 V 4.026 C 46.639,2.634 45.508,1.506 44.12,1.506"
+         id="path25804"
+         style="fill:#ff8200;fill-opacity:1" />
+    </g>
+    <g
+       aria-label="16"
+       id="text26356"
+       style="font-size:64.857px;line-height:1.25;letter-spacing:-2.85761px;word-spacing:0px;fill:#ffffff;stroke-width:1.62143">
+      <path
+         d="m 59.968882,65.116067 -13.295685,7.78284 v 8.820552 l 8.690838,-5.18856 v 33.985071 h 8.171982 V 65.116067 Z"
+         style="font-weight:bold;font-family:'Apercu Pro';-inkscape-font-specification:'Apercu Pro Bold';fill:#000000"
+         id="path1657" />
+      <path
+         d="m 84.571118,81.460031 9.858265,-16.86282 H 85.349402 L 72.118574,88.270017 c -1.29714,2.269995 -2.205138,5.253417 -2.205138,7.977411 0,8.496272 6.615414,14.787392 15.176538,14.787392 8.690838,0 15.176536,-6.35598 15.176536,-14.787392 0,-8.820552 -6.355983,-14.787397 -14.65768,-14.787397 z m 0.518856,7.523413 c 3.89142,0 7.004556,2.59428 7.004556,7.263984 0,4.410272 -3.113136,7.263982 -7.004556,7.263982 -3.826563,0 -7.004556,-2.85371 -7.004556,-7.263982 0,-4.669704 3.113136,-7.263984 7.004556,-7.263984 z"
+         style="font-weight:bold;font-family:'Apercu Pro';-inkscape-font-specification:'Apercu Pro Bold';fill:#000000"
+         id="path1659" />
+    </g>
+  </g>
+</svg>

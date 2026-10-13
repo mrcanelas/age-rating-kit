@@ -1,6 +1,6 @@
 # age-rating-kit
 
-SVG age-rating icons and helpers for ClassInd, MPA, TV Parental Guidelines, PEGI, ESRB, BBFC, FSK, USK, CERO, the Australian Classification Board, IARC, Kijkwijzer, Eirin, OFLC, RTC, GSRR and KRRiT.
+SVG age-rating icons and helpers for ClassInd, MPA, TV Parental Guidelines, PEGI, ESRB, BBFC, FSK, USK, CERO, the Australian Classification Board, IARC, Kijkwijzer, Eirin, OFLC, RTC, GSRR, KRRiT and CNMC.
 
 Each rating is one SVG file from [Wikimedia Commons](https://commons.wikimedia.org/).
 
@@ -58,6 +58,7 @@ https://mrcanelas.github.io/age-rating-kit/icons/classind/12.svg
 | `rtc` | `icons/rtc/` | RTC, Mexico | `aa`, `a`, `b`, `c`, `d` |
 | `gsrr` | `icons/gsrr/` | GSRR, Taiwan | `g`, `p`, `pg12`, `pg15`, `r` |
 | `krrit` | `icons/krrit/` | Polish TV, Poland | `bo`, `7`, `12`, `16`, `18` |
+| `cnmc` | `icons/cnmc/` | Spanish TV, Spain | `eri`, `tp`, `7`, `12`, `16`, `18`, `x` |
 
 Gallery: <https://mrcanelas.github.io/age-rating-kit/>
 

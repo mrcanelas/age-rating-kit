@@ -95,6 +95,13 @@ import krrit7 from '../icons/krrit/7.svg';
 import krrit12 from '../icons/krrit/12.svg';
 import krrit16 from '../icons/krrit/16.svg';
 import krrit18 from '../icons/krrit/18.svg';
+import cnmcEri from '../icons/cnmc/eri.svg';
+import cnmcTp from '../icons/cnmc/tp.svg';
+import cnmc7 from '../icons/cnmc/7.svg';
+import cnmc12 from '../icons/cnmc/12.svg';
+import cnmc16 from '../icons/cnmc/16.svg';
+import cnmc18 from '../icons/cnmc/18.svg';
+import cnmcX from '../icons/cnmc/x.svg';
 
 export const ICON_SVGS: Record<string, Record<string, string>> = {
   classind: {
@@ -227,5 +234,14 @@ export const ICON_SVGS: Record<string, Record<string, string>> = {
     '12': krrit12,
     '16': krrit16,
     '18': krrit18,
+  },
+  cnmc: {
+    eri: cnmcEri,
+    tp: cnmcTp,
+    '7': cnmc7,
+    '12': cnmc12,
+    '16': cnmc16,
+    '18': cnmc18,
+    x: cnmcX,
   },
 };

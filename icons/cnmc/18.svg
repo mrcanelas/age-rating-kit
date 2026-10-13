@@ -1,0 +1,64 @@
+<svg width="95.187103mm"
+   height="95.184998mm"
+   viewBox="0 0 95.187105 95.184997"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.1.1 (c3084ef, 2021-09-22)"
+   sodipodi:docname="Calf-18.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:document-units="mm"
+     showgrid="false"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0"
+     inkscape:zoom="0.49798681"
+     inkscape:cx="280.1279"
+     inkscape:cy="398.60493"
+     inkscape:window-width="1440"
+     inkscape:window-height="781"
+     inkscape:window-x="86"
+     inkscape:window-y="25"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs2" />
+  <g
+     inkscape:label="Calque 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-25.876292,-40.223527)">
+    <g
+       id="g25824"
+       transform="matrix(2.0986661,0,0,2.0986661,23.181605,37.062936)">
+      <path
+         fill="#ff0000"
+         d="M 44.12,1.506 H 3.804 c -1.393,0 -2.52,1.128 -2.52,2.52 V 44.34 c 0,1.392 1.127,2.521 2.52,2.521 H 44.12 c 1.389,0 2.52,-1.129 2.52,-2.521 V 4.026 C 46.639,2.634 45.508,1.506 44.12,1.506"
+         id="path25804" />
+    </g>
+    <g
+       aria-label="18"
+       id="text26356"
+       style="font-size:64.857px;line-height:1.25;letter-spacing:-2.85761px;word-spacing:0px;fill:#ffffff;stroke-width:1.62143">
+      <path
+         d="m 60.137103,65.116067 -13.295686,7.78284 v 8.820552 l 8.690838,-5.18856 v 33.985071 h 8.171983 V 65.116067 Z"
+         style="font-weight:bold;font-family:'Apercu Pro';-inkscape-font-specification:'Apercu Pro Bold'"
+         id="path1456" />
+      <path
+         d="m 85.31089,64.597211 c -7.717983,0 -13.036257,5.642559 -13.036257,12.387687 0,3.696849 1.491711,6.939699 4.215705,9.07998 -3.696849,2.075425 -5.966844,5.772274 -5.966844,10.895977 0,8.820555 6.874842,14.073965 14.787396,14.073965 7.912555,0 14.7874,-5.25341 14.7874,-14.073965 0,-5.123703 -2.334855,-8.820552 -6.031704,-10.895977 2.723994,-2.140281 4.280562,-5.383131 4.280562,-9.07998 0,-6.745128 -5.318274,-12.387687 -13.036258,-12.387687 z m 0,25.813087 c 3.69685,0 6.615415,2.334852 6.615415,6.550557 0,4.215705 -2.918565,6.550555 -6.615415,6.550555 -3.696849,0 -6.615414,-2.33485 -6.615414,-6.550555 0,-4.215705 2.918565,-6.550557 6.615414,-6.550557 z m 0,-18.938245 c 3.307708,0 5.447989,2.269995 5.447989,5.642559 0,3.437421 -2.140281,5.772273 -5.447989,5.772273 -3.307707,0 -5.447988,-2.334852 -5.447988,-5.772273 0,-3.372564 2.140281,-5.642559 5.447988,-5.642559 z"
+         style="font-weight:bold;font-family:'Apercu Pro';-inkscape-font-specification:'Apercu Pro Bold'"
+         id="path1458" />
+    </g>
+  </g>
+</svg>

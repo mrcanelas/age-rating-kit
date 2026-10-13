@@ -94,6 +94,13 @@ describe('age-rating-kit', () => {
     });
     expect(getIconPath('krrit', '18')).toBe('icons/krrit/18.svg');
     expect(getIconSvg('krrit', '7')?.startsWith('<svg ')).toBe(true);
+    expect(normalizeRating('Spanish TV', 'TP')).toEqual({ system: 'cnmc', code: 'tp' });
+    expect(normalizeRating('Spain', 'todos los públicos')).toEqual({
+      system: 'cnmc',
+      code: 'tp',
+    });
+    expect(getIconPath('cnmc', 'X')).toBe('icons/cnmc/x.svg');
+    expect(getIconSvg('cnmc', 'ERI')?.startsWith('<svg ')).toBe(true);
   });
 
   it('returns undefined for unknown ratings', () => {

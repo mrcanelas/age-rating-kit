@@ -1,0 +1,72 @@
+import type { RatingSystem } from './classind.js';
+
+export const cnmcSystem: RatingSystem = {
+  id: 'cnmc',
+  aliases: [
+    'cnmc',
+    'spanish tv',
+    'spain',
+    'spain tv',
+    'comision nacional de los mercados y la competencia',
+    'comisión nacional de los mercados y la competencia',
+  ],
+  name: 'CNMC',
+  codes: [
+    {
+      code: 'eri',
+      aliases: ['eri', 'especialmente recomendada para la infancia'],
+      label: 'ERI',
+      description: 'Especialmente recomendada para la infancia',
+      color: '#75147C',
+      textColor: '#ffffff',
+    },
+    {
+      code: 'tp',
+      aliases: ['tp', 'todos los publicos', 'todos los públicos', 'all'],
+      label: 'TP',
+      description: 'Todos los públicos',
+      color: '#00EB00',
+      textColor: '#000000',
+    },
+    {
+      code: '7',
+      aliases: ['7'],
+      label: '7',
+      description: 'No recomendado para menores de 7 años',
+      color: '#00E1E1',
+      textColor: '#000000',
+    },
+    {
+      code: '12',
+      aliases: ['12'],
+      label: '12',
+      description: 'No recomendado para menores de 12 años',
+      color: '#E9DC00',
+      textColor: '#000000',
+    },
+    {
+      code: '16',
+      aliases: ['16'],
+      label: '16',
+      description: 'No recomendado para menores de 16 años',
+      color: '#FF8200',
+      textColor: '#000000',
+    },
+    {
+      code: '18',
+      aliases: ['18'],
+      label: '18',
+      description: 'No recomendado para menores de 18 años, solo 21:00–6:00',
+      color: '#FF0000',
+      textColor: '#ffffff',
+    },
+    {
+      code: 'x',
+      aliases: ['x'],
+      label: 'X',
+      description: 'Pornografía o violencia explícita',
+      color: '#C8003C',
+      textColor: '#ffffff',
+    },
+  ],
+};
